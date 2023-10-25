@@ -9,12 +9,7 @@
   margin: 0px;
 }
 
-#root {
-  width: 100%;
-}
 body {
-  min-height: 100vh;
-
   -ms-overflow-style: none;
 }
 
