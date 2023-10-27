@@ -32,7 +32,7 @@ a {
 }
 
 .button > p {
-    font-size: small;
+    font-size: x-small;
     font-weight: 400;
 }
 
@@ -85,16 +85,21 @@ a {
     justify-content: center;
     align-items: center;
     gap: 10px;
+    transition: 0.2s all ease-in-out;
 }
 
 .delivery > img {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
 }
 
 .delivery p {
     font-size: small;
     font-weight: 500;
+}
+
+.delivery:hover {
+    transform: scale(1.02);
 }
 
 .logo {
@@ -103,6 +108,10 @@ a {
 }
 
 @media (max-width: 950px) {
+    .header {
+        padding: 0px;
+    }
+
     .header .desktop {
         display: none;
     }
@@ -116,7 +125,12 @@ a {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 10px;
+        padding: 10px 20px;
+    }
+
+    .header .mobile .elements {
+        border-top: 1px solid rgba(0, 0, 0, 0.2);
+        width: 100%;
     }
 
     .header .mobile .elements > ul {
