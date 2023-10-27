@@ -5,7 +5,7 @@ import appleIcon from '../../assets/appleIcon.png';
 import exclamationIcon from '../../assets/exclamationIcon.png';
 
 //Dependencies
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 import app from '../../config/firebase.js';
 
@@ -93,6 +93,33 @@ export default function Register() {
         });
     };
 
+    const handleSignInWithGoogle = () => {
+        const auth = getAuth();
+        const provider = new GoogleAuthProvider();
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                const token = credential.accessToken;
+                const user = result.user;
+                console.log(`token: ${token}`)
+
+                for (const clave in user) {
+                    const valor = user[clave];
+                    console.log(`Clave: ${clave}, Valor: ${valor}`);
+                }
+
+                // Redirige al usuario a la pantalla de inicio
+                navigator('/')
+
+            }).catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                const email = error.customData.email;
+                const credential = GoogleAuthProvider.credentialFromError(error);
+                console.log(`errorCode: ${errorCode}, errorMessage: ${errorMessage}, email: ${email}, credential: ${credential}`)
+            });
+    };
+
     return (
         <main className='main'>
             <div className="register">
@@ -155,7 +182,7 @@ export default function Register() {
                 <hr />
 
                 <div className='loginSocial'>
-                    <span>
+                    <span onClick={handleSignInWithGoogle}>
                         <img src={googleIcon} alt="Imagen para iniciar sesión con Google" />
                     </span>
                     <span>
