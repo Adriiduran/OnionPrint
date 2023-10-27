@@ -1,0 +1,144 @@
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 50px;
+    gap: 20px;
+    width: 33vw;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.title > h1 {
+    font-size: 30px;
+    font-weight: 300;
+}
+
+.title > span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #4285F4;
+    border-radius: 50px;
+    padding: 12px;
+}
+
+.title > span > img {
+    width: 20px;
+    height: 20px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 6px;
+}
+
+.inputGroup > label {
+    font-size: small;
+    font-weight: 300;
+}
+
+.inputGroup > input {
+    width: 100%;
+    padding: 15px;
+}
+
+.inputGroup > input:focus {
+    box-shadow: 0 0 10px #4285F4;
+}
+
+.inputSubmit {
+    background-color: #4285F4;
+    border: 0px solid black;
+    padding: 15px;
+    color: white;
+    border-radius: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: small;
+    font-weight: 400;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.6);
+    transition: all 0.3s;
+}
+
+.inputSubmit:hover {
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
+    scale: 1.02;
+}
+
+hr {
+    width: 100%;
+}
+
+.loginSocial {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 30px;
+    transition: 0.5 all ease-in-out;
+}
+
+.loginSocial > span {
+    padding: 10px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.6);
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.loginSocial > span:hover {
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
+    scale: 1.05;
+}
+
+.loginSocial > span > img {
+    width: 24px;
+    height: 24px;
+}
+
+.error {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    font-size: small;
+    color: red;
+    text-align: left;
+}
+
+.error img {
+    width: 14px;
+    height: 14px;
+}
+
+@media (max-width: 950px) {
+   .register {
+        width: 100%;
+   } 
+}
