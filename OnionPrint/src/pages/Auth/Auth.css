@@ -11,7 +11,7 @@
     flex-direction: column;
     padding: 50px;
     gap: 20px;
-    width: 33vw;
+    width: 40vw;
 }
 
 .title {
@@ -27,7 +27,7 @@
     font-weight: 300;
 }
 
-.title > span {
+.titleSpan {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -137,8 +137,50 @@ hr {
     height: 14px;
 }
 
+.loginError {
+    color: black;
+    font-size: small;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: rgba(255, 0, 0, 0.3);
+    margin-top: 20px;
+    display: none;
+}
+
+.passwordLabels {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    font-size: small;
+    font-weight: 300;
+}
+
+.forgotPasswordLabel {
+    color: #4285F4;
+    font-size: 400;
+}
+
+.haveAccount {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.haveAccount_link {
+    color: #4285F4;
+}
+
 @media (max-width: 950px) {
    .register {
         width: 100%;
    } 
 }
+
+@media (min-width: 1440px) {
+    .register {
+         width: 33vw;
+    } 
+ }
