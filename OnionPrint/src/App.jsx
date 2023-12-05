@@ -2,6 +2,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from '../src/auth/AuthContext.jsx';
 import { ToastContainer } from "react-toastify";
+import { useAuth } from "../src/auth/AuthContext.jsx";
 
 //Pages
 import Home from "./pages/Home/Home.jsx";
@@ -11,6 +12,7 @@ import Login from "./pages/Auth/Login.jsx"
 //Components
 import Header from "./components/Header/Header.jsx"
 import Footer from "./components/Footer/Footer.jsx"
+import Loader from './components/Loader/Loader.jsx'
 
 //Styles
 import "./App.css"
@@ -19,8 +21,8 @@ import ForgotPassword from "./pages/Auth/ForgotPassword.jsx";
 export default function App() {
     return (
         <div className="App">
-            <BrowserRouter>
-                <AuthProvider>
+            <AuthProvider>
+                <BrowserRouter>
                     <Header />
                     <Routes>
                         <Route path="/" element={<Home />} />
@@ -29,8 +31,9 @@ export default function App() {
                         <Route path="/forgotpassword" element={<ForgotPassword />} />
                     </Routes>
                     <Footer />
-                </AuthProvider>
-            </BrowserRouter>
+                </BrowserRouter>
+            </AuthProvider>
+            {/* {loading && <Loader />} */}
             <ToastContainer />
         </div>
     )

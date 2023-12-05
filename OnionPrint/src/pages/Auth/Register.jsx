@@ -1,20 +1,21 @@
 //Icons
 import lockIcon from '../../assets/lockIcon.png';
 import googleIcon from '../../assets/googleIcon.png';
-import appleIcon from '../../assets/appleIcon.png';
 import exclamationIcon from '../../assets/exclamationIcon.png';
 
 //Dependencies
 import { Link, useNavigate } from 'react-router-dom';
-import { validateEmail, validatePassword, signInWithGoogle, registerUser } from '../../utils/User';
+import { validateEmail, validatePassword } from '../../utils/UserDataValidation';
 import { useState } from 'react';
 
 //Style
 import './Auth.css';
+import { useAuth } from '../../auth/AuthContext';
 
 export default function Register() {
 
     const navigator = useNavigate();
+    const { registerUser, signInWithGoogle } = useAuth();
 
     const [formData, setFormData] = useState({
         email: '',
@@ -31,8 +32,10 @@ export default function Register() {
     const handleSubmit = (e) => {
         e.preventDefault();
         // Realizar validaciones antes de enviar los datos.
-        const emailError = formData.email === "" ? "Este campo no puede estar vacío" : validateEmail(formData.email);
-        const passwordError = formData.password === "" ? "Este campo no puede estar vacío" : validatePassword(formData.password);
+        var emailErrorMessage = validateEmail(formData.email) ? "" : "El correo electrónico no es válido."
+        var passwordErrorMessage = validatePassword(formData.password) ? "" : "La contraseña debe tener al menos 8 caracteres, una mayúscula y un número."
+        const emailError = formData.email === "" ? "Este campo no puede estar vacío" : emailErrorMessage;
+        const passwordError = formData.password === "" ? "Este campo no puede estar vacío" : passwordErrorMessage;
         const passwordRepetitionError =
             formData.password !== formData.passwordRepetition
                 ? 'Las contraseñas no coinciden.'
@@ -123,9 +126,6 @@ export default function Register() {
                 <div className='loginSocial'>
                     <span onClick={() => signInWithGoogle(navigator)}>
                         <img src={googleIcon} alt="Imagen para iniciar sesión con Google" />
-                    </span>
-                    <span>
-                        <img src={appleIcon} alt="Imagen para iniciar sesión con Apple" />
                     </span>
                 </div>
 

@@ -1,13 +1,13 @@
 //Icons
 import lockIcon from '../../assets/lockIcon.png';
 import googleIcon from '../../assets/googleIcon.png';
-import appleIcon from '../../assets/appleIcon.png';
 import exclamationIcon from '../../assets/exclamationIcon.png';
 
 //Dependencies
 import { Link, useNavigate } from 'react-router-dom';
-import { validateEmail, signInWithGoogle, signInWithEmailPassword } from '../../utils/User';
+import { validateEmail } from '../../utils/UserDataValidation';
 import { useState } from 'react';
+import { useAuth } from '../../auth/AuthContext'
 
 //Style
 import './Auth.css';
@@ -15,6 +15,7 @@ import './Auth.css';
 export default function Login() {
 
     const navigator = useNavigate();
+    const { signInWithEmailPassword, signInWithGoogle } = useAuth();
 
     const [formData, setFormData] = useState({
         email: '',
@@ -30,7 +31,8 @@ export default function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         // Realizar validaciones antes de enviar los datos.
-        const emailError = formData.email === "" ? "Este campo no puede estar vacío" : validateEmail(formData.email);
+        var emailErrorMessage = validateEmail(formData.email) ? "" : "El correo electrónico no es válido."
+        const emailError = formData.email === "" ? "Este campo no puede estar vacío" : emailErrorMessage;
         const passwordError = formData.password === "" ? "Debes introducir una contraseña" : "";
 
         setErrors({
@@ -115,9 +117,6 @@ export default function Login() {
                 <div className='loginSocial'>
                     <span onClick={() => signInWithGoogle(navigator)}>
                         <img src={googleIcon} alt="Imagen para iniciar sesión con Google" />
-                    </span>
-                    <span>
-                        <img src={appleIcon} alt="Imagen para iniciar sesión con Apple" />
                     </span>
                 </div>
 

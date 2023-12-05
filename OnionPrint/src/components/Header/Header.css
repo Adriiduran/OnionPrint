@@ -12,7 +12,7 @@ a {
     border-radius: 20px;
     padding: 8px 15px;
     transition: all 0.3s;
-    max-width: min-content;
+    max-width: fit-content;
     cursor: pointer;
 }
 
@@ -23,6 +23,11 @@ a {
 
 .primary {
     background-color: #4285F4;
+    color: white;
+}
+
+.logout {
+    background-color: red;
     color: white;
 }
 

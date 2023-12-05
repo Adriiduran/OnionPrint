@@ -1,9 +1,10 @@
 //Dependencies
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { validateEmail } from "../../utils/User";
-import { resetPassword } from "../../utils/User";
+import { validateEmail } from "../../utils/UserDataValidation";
 import 'react-toastify/dist/ReactToastify.css';
+import Loader from "../../components/Loader/Loader";
+import { useAuth } from '../../auth/AuthContext'
 
 //Styles
 import './Auth.css';
@@ -15,6 +16,7 @@ import exclamationIcon from '../../assets/exclamationIcon.png';
 export default function ForgotPassword() {
 
     const navigator = useNavigate();
+    const { resetPassword } = useAuth();
 
     const [formData, setFormData] = useState({
         email: '',
@@ -23,6 +25,8 @@ export default function ForgotPassword() {
     const [errors, setErrors] = useState({
         email: '',
     });
+
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -35,6 +39,7 @@ export default function ForgotPassword() {
 
         // Si no hay errores, puedes enviar los datos al servidor aquí.
         if (!emailError) {
+            setLoading(true)
             console.log('Datos válidos, enviando formulario...');
             try {
                 await resetPassword(formData.email, navigator);
@@ -43,6 +48,8 @@ export default function ForgotPassword() {
                     email: error.message
                 });
                 console.log("Reset Password: " + error.message);
+            } finally {
+                setLoading(false)
             }
         }
     };
@@ -85,6 +92,8 @@ export default function ForgotPassword() {
                     <input type="submit" value="RECUPERAR CONTRASEÑA" className='inputSubmit' />
                 </form>
             </div>
+
+            {loading && <Loader />}
         </main>
     );
 }
