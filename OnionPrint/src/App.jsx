@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from '../src/auth/AuthContext.jsx';
 import { ToastContainer } from "react-toastify";
 import { useAuth } from "../src/auth/AuthContext.jsx";
+import { pdfjs } from "react-pdf";
 
 //Pages
 import Home from "./pages/Home/Home.jsx";
@@ -17,6 +18,12 @@ import Loader from './components/Loader/Loader.jsx'
 //Styles
 import "./App.css"
 import ForgotPassword from "./pages/Auth/ForgotPassword.jsx";
+
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+    'pdfjs-dist/build/pdf.worker.min.js',
+    import.meta.url,
+).toString();
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 export default function App() {
     return (

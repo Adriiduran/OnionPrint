@@ -1,0 +1,113 @@
+.background {
+    display: block;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    padding: 10px 10px;
+    width: 90vw;
+}
+
+.fileSelectedView {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+    overflow-y: scroll;
+    padding: 20px 0px;
+}
+
+.image {
+    display: block;
+    object-fit: contain;
+}
+
+.pdf {
+    border: 1px solid black;
+    margin-top: 80px;
+}
+
+.fileSelectedDetails {
+    display: flex;
+    flex-direction: column;
+}
+
+.firstDetails {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 5px;
+    font-size: x-small;
+}
+
+.firstDetails > img {
+    width: 16px;
+    height: 16px;
+}
+
+.numberOfFile {
+    color: white;
+    border-radius: 50px;
+    background-color: #4285F4;
+    padding: 5px 8px;
+}
+
+.nameOfFile {
+    padding: 10px 0px;
+    font-size: small;
+    font-weight: 600;
+}
+
+.secondDetails {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: small;
+    background-color: lightgray;
+    border-radius: 5px;
+    padding: 5px 0px;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+
+.separator {
+    border-left: 1px solid black;
+    height: 40px;
+}
+
+.secondDetails > hr {
+    height: 100%;
+    width: 1px;
+}
+
+.numberOfPages, .sizeOfFile {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-weight: 600;
+}
+
+.numberOfPages > .details, .sizeOfFile > .details {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: x-small;
+    font-weight: 400;
+    gap: 3px;
+}
+
+.details > img {
+    width: 16px;
+    height: 16px;
+}
+
+.finalDetails {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 2px;
+}
+
+.finalDetails > img {
+    width: 24px;
+    height: 24px;
+}

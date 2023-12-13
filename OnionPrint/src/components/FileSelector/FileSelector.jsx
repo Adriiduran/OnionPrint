@@ -1,14 +1,26 @@
-import React, { useEffect, useState } from 'react';
+//Dependencies
+import React, { useState } from 'react';
+
+//Components
+import FileView from '../FileView/FileView';
+
+//Styles
 import './FileSelector.css'
 
 export default function FileSelector() {
-    const [selectedFiles, setselectedFiles] = useState([]); 
+    const [selectedFiles, setselectedFiles] = useState([]);
     const [numberOfPages, setNumberOfPages] = useState(0);
     const fileInputRef = React.useRef(null);
 
     const handleFileChange = (e) => {
         const files = Array.from(e.target.files);
         setselectedFiles(files);
+    };
+
+    const handleDeleteFile = (position) => {
+        const updatedFiles = [...selectedFiles];
+        updatedFiles.splice(position, 1);
+        setselectedFiles(updatedFiles);
     };
 
     const removeFiles = () => {
@@ -46,6 +58,7 @@ export default function FileSelector() {
                     </div>
                     <div className='removeFiles' onClick={removeFiles}>
                         <img src="src/assets/trashIcon.png" alt="Trash Button Icon" />
+                        <p>ELIMINAR DOCUMENTOS</p>
                     </div>
                 </div>
                 <span className='buttonFileSelector primary' onClick={() => fileInput.click()}>
@@ -53,7 +66,7 @@ export default function FileSelector() {
                     <p>SELECCIONAR DOCUMENTOS</p>
                 </span>
                 <input type="file"
-                    accept=".txt, .csv, .tsv, .md, .doc, .docx, .rtf, .odt, .key, .eps, .pdf"
+                    accept=".txt, .csv, .tsv, .md, .doc, .docx, .rtf, .odt, .key, .eps, .pdf, .png"
                     style={{ display: 'none' }}
                     onChange={handleFileChange}
                     id='fileInput'
@@ -65,6 +78,12 @@ export default function FileSelector() {
                 <p>Total de configuración seleccionada</p>
                 <h1>0 €</h1>
                 <span>AÑADIR AL CARRITO</span>
+            </div>
+
+            <div className='fileView'>
+                {selectedFiles.map((file, index) => (
+                    <FileView key={index} file={file} arrayPosition={index + 1} />
+                ))}
             </div>
         </div>
     )
