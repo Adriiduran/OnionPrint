@@ -1,26 +1,56 @@
 //Dependencies
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 //Components
 import FileView from '../FileView/FileView';
+
+//Context
+import { useShoppingCart } from '../../context/ShoppingCartContext';
 
 //Styles
 import './FileSelector.css'
 
 export default function FileSelector() {
+    const { shoppingCartPreferences, resetCurrentShoppingCartPages, addCurrentFileToCurrentCart, updateCurrentShoppingCartPages, addCurrentShoppingCartToFinal } = useShoppingCart();
     const [selectedFiles, setselectedFiles] = useState([]);
-    const [numberOfPages, setNumberOfPages] = useState(0);
     const fileInputRef = React.useRef(null);
+    const [isFirstTime, setIsFirstTime] = useState(true)
+    const [finishesDescription, setFinishesDescription] = useState("")
+
+    useEffect(() => {
+        if (shoppingCartPreferences.preference.finishes != undefined) {
+            if (shoppingCartPreferences.preference.finishes.title === "ENCUADERNADO") {
+                setFinishesDescription("+3.9€")
+            } else if (shoppingCartPreferences.preference.finishes.title === "GRAPADO") {
+                setFinishesDescription("+0.9€")
+            } else if (shoppingCartPreferences.preference.finishes.title === "2 AGUJEROS") {
+                setFinishesDescription("+0.9€")
+            } else if (shoppingCartPreferences.preference.finishes.title === "4 AGUJEROS") {
+                setFinishesDescription("+0.9€")
+            } else if (shoppingCartPreferences.preference.finishes.title === "PLASTIFICADO") {
+                setFinishesDescription("+1€ por página")
+            }
+        }
+    }, [shoppingCartPreferences.preference.finishes])
 
     const handleFileChange = (e) => {
         const files = Array.from(e.target.files);
+        resetCurrentShoppingCartPages();
         setselectedFiles(files);
+        addCurrentFileToCurrentCart(files)
+        setIsFirstTime(false)
     };
 
-    const handleDeleteFile = (position) => {
-        const updatedFiles = [...selectedFiles];
-        updatedFiles.splice(position, 1);
+    const handleDeleteFile = (position, numPages) => {
+        const previousFilesLength = selectedFiles.length
+        const updatedFiles = selectedFiles.filter((file, index) => index !== position);
         setselectedFiles(updatedFiles);
+
+        if (position + 1 < previousFilesLength) {
+            resetCurrentShoppingCartPages();
+        } else {
+            updateCurrentShoppingCartPages(-numPages)
+        }
     };
 
     const removeFiles = () => {
@@ -28,63 +58,107 @@ export default function FileSelector() {
         if (fileInputRef.current) {
             fileInputRef.current.value = '';
         }
+        resetCurrentShoppingCartPages();
     };
 
-    return (
-        <div className='fileSelector' style={{ display: selectedFiles.length > 0 ? 'grid' : 'flex', gridTemplateColumns: selectedFiles > 0 ? '2fr 1fr' : '1fr' }}>
-            <div className='fileSelectorHeader'>
-                <img className='image' src="src/assets/selectFileImage.svg" alt="File Selector Image" style={{ display: selectedFiles.length > 0 ? 'none' : 'block' }} />
-                <h2 className='title' style={{ display: selectedFiles.length > 0 ? 'none' : 'block' }}>Selecciona los documentos que quieres imprimir</h2>
-                <div className='fileDetails' style={{ display: selectedFiles.length > 0 ? 'flex' : 'none' }}>
-                    <span>
-                        <img src="src/assets/copiesIcon.png" alt="Copy Number Icon" />
-                        <p>0</p>
-                    </span>
-                    <span>
-                        <img src="src/assets/pagesIcon.png" alt="Pages Number Icon" />
-                        <p>{numberOfPages}</p>
-                    </span>
-                    <span>
-                        <img src="src/assets/fileConfiguration.png" alt="Price per Copy Icon" />
-                        <p>0</p>
-                    </span>
-                    <div className='fileFinishes'>
-                        <p>ACABADOS</p>
-                        <span>SIN ACABADO</span>
-                    </div>
-                    <div className='fileShippingPrice'>
-                        <img src="src/assets/warningIcon.png" alt="Warning Icon" />
-                        <span>Añade solo <strong>PRICE</strong> para conseguir tu <strong>ENVÍO GRATIS</strong></span>
-                    </div>
-                    <div className='removeFiles' onClick={removeFiles}>
-                        <img src="src/assets/trashIcon.png" alt="Trash Button Icon" />
-                        <p>ELIMINAR DOCUMENTOS</p>
-                    </div>
-                </div>
-                <span className='buttonFileSelector primary' onClick={() => fileInput.click()}>
-                    <img src="/src/assets/folderIcon.png" alt="User Icon Button" />
-                    <p>SELECCIONAR DOCUMENTOS</p>
-                </span>
-                <input type="file"
-                    accept=".txt, .csv, .tsv, .md, .doc, .docx, .rtf, .odt, .key, .eps, .pdf, .png"
-                    style={{ display: 'none' }}
-                    onChange={handleFileChange}
-                    id='fileInput'
-                    multiple
-                    ref={fileInputRef}
-                />
-            </div>
-            <div className='selectedConfiguration' style={{ display: selectedFiles.length > 0 ? 'flex' : 'none' }}>
-                <p>Total de configuración seleccionada</p>
-                <h1>0 €</h1>
-                <span>AÑADIR AL CARRITO</span>
-            </div>
+    const handleAddToCart = () => {
+        addCurrentShoppingCartToFinal();
+        setselectedFiles([])
+        resetCurrentShoppingCartPages();
+    }
 
-            <div className='fileView'>
-                {selectedFiles.map((file, index) => (
-                    <FileView key={index} file={file} arrayPosition={index + 1} />
-                ))}
-            </div>
-        </div>
+    return (
+        <>
+            {isFirstTime ? (
+                <div className='frontPageFileSelector'>
+                    <img className='imageFileSelector' src="src/assets/selectFileImage.svg" alt="File Selector Image" style={{ display: selectedFiles.length > 0 ? 'none' : 'block' }} />
+                    <h2 className='titleFileSelector' style={{ display: selectedFiles.length > 0 ? 'none' : 'block' }}>Pulsa el botón para subir tus documentos</h2>
+                    <span className='buttonFileSelector primaryFileSelector' onClick={() => fileInput.click()}>
+                        <img src="/src/assets/folderIcon.png" alt="User Icon Button" />
+                        <p>SUBIR DOCUMENTOS</p>
+                    </span>
+                </div>
+            ) : (
+                <>
+                    <div className='fileSelector'>
+                        <div className='fileSelectorHeader'>
+                            <div className='firstFileDetailsFileSelector'>
+                                <span>
+                                    <img src="src/assets/copiesIcon.png" alt="Copy Number Icon" />
+                                    <p>{shoppingCartPreferences.preference.copies}</p>
+                                </span>
+                                <span>
+                                    <img src="src/assets/pagesIcon.png" alt="Pages Number Icon" />
+                                    <p>{shoppingCartPreferences.pages}</p>
+                                </span>
+                                <span>
+                                    <img src="src/assets/fileConfiguration.png" alt="Price per Copy Icon" />
+                                    <p>{shoppingCartPreferences.pricePerCopy}€</p>
+                                </span>
+                                <div className='fileFinishesFileSelector'>
+                                    {shoppingCartPreferences.preference.finishes !== undefined ? (
+                                        <>
+                                            {shoppingCartPreferences.preference.finishes.title === "SIN ACABADO" ? (
+                                                <>
+                                                    <p>ACABADOS</p>
+                                                    <span>SIN ACABADO</span>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <span>{shoppingCartPreferences.preference.finishes.title}</span>
+                                                    <p>{finishesDescription}</p>
+                                                </>
+                                            )}
+                                        </>
+                                    ) : (
+                                        <>
+                                            <p>ACABADOS</p>
+                                            <span>SIN ACABADO</span>
+                                        </>
+                                    )}
+                                </div>
+                            </div>
+                            {shoppingCartPreferences.finalPrice <= 50 ? (
+                                <>
+                                    <div className='fileShippingPriceFileSelector'>
+                                        <img src="src/assets/warningIcon.png" alt="Warning Icon" />
+                                        <span>Añade solo <span>{(50 - shoppingCartPreferences.finalPrice).toFixed(2)}€</span> para conseguir tu <span>ENVÍO GRATIS</span></span>
+                                    </div>
+                                </>
+                            ) : null}
+                            <div className='secondFileDetailsFileSelector'>
+                                <div className='buttonFileSelector secondaryFileSelector' onClick={removeFiles}>
+                                    <img src="src/assets/trashIcon.png" alt="Trash Button Icon" />
+                                    <p>ELIMINAR DOCUMENTOS</p>
+                                </div>
+                                <span className='buttonFileSelector primaryFileSelector' onClick={() => fileInput.click()}>
+                                    <img src="/src/assets/folderIcon.png" alt="User Icon Button" />
+                                    <p>SELECCIONAR DOCUMENTOS</p>
+                                </span>
+                            </div>
+                        </div>
+                        <div className='selectedConfigurationFileSelector'>
+                            <p>Total de configuración seleccionada</p>
+                            <h1>{shoppingCartPreferences.finalPrice} €</h1>
+                            <span onClick={handleAddToCart}>AÑADIR AL CARRITO</span>
+                        </div>
+                    </div>
+
+                    <div className='fileViewFileSelector'>
+                        {selectedFiles.map((file, index) => (
+                            <FileView key={index} file={file} arrayPosition={index} onDelete={handleDeleteFile} />
+                        ))}
+                    </div>
+                </>
+            )}
+            <input type="file"
+                accept=".pdf, .png, .jpg, .tiff, .docx, .doc, .txt"
+                style={{ display: 'none' }}
+                onChange={handleFileChange}
+                id='fileInput'
+                multiple
+                ref={fileInputRef}
+            />
+        </>
     )
 }

@@ -1,0 +1,49 @@
+.backgroundPreferenceList {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #FAFAFA;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+    gap: 10px;
+    font-size: small;
+    font-weight: 600;
+    padding: 10px 5px;
+}
+
+.filePreferenceItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.filePreferenceItemTitle {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    padding-left: 8px;
+}
+
+.filePreferenceItemTitle > span {
+    color: #3c4043;
+    font-size: 12px;
+    display: block;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: .5px;
+}
+
+.filePreferenceListCounter {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+/* .filePreferenceListCounter > * {
+    width: 45%;
+} */

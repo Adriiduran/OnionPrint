@@ -63,17 +63,17 @@ export default function ForgotPassword() {
     };
 
     return (
-        <main className='main'>
-            <div className="register">
-                <div className="title">
-                    <span className='titleSpan'>
+        <main className='mainAuth'>
+            <div className="registerAuth">
+                <div className="titleAuth">
+                    <span className='titleSpanAuth'>
                         <img src={questionIcon} alt="Imagen del título de la página de registro" />
                     </span>
                     <h1>Recuperar Contraseña</h1>
                 </div>
 
-                <form onSubmit={handleSubmit} className="form">
-                    <div className='inputGroup'>
+                <form onSubmit={handleSubmit} className="formAuth">
+                    <div className='inputGroupAuth'>
                         <label htmlFor="email">Correo Electrónico</label>
                         <input
                             type="text"
@@ -84,12 +84,12 @@ export default function ForgotPassword() {
                             onChange={handleChange}
                             autoComplete='email'
                         />
-                        <div className='error' style={{ display: errors.email === '' ? 'none' : 'flex' }}>
+                        <div className='errorAuth' style={{ display: errors.email === '' ? 'none' : 'flex' }}>
                             <img src={exclamationIcon} alt='exclamationIcon' />
                             <p>{errors.email}</p>
                         </div>
                     </div>
-                    <input type="submit" value="RECUPERAR CONTRASEÑA" className='inputSubmit' />
+                    <input type="submit" value="RECUPERAR CONTRASEÑA" className='inputSubmitAuth' />
                 </form>
             </div>
 

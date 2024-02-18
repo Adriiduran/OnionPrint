@@ -1,14 +1,18 @@
 //Dependencies
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Document, Page } from 'react-pdf';
 import PropTypes from 'prop-types';
+
+//Context
+import { useShoppingCart } from '../../context/ShoppingCartContext';
 
 //Styles
 import './FileView.css'
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
 
-export default function FileView({ file, arrayPosition }) {
+export default function FileView({ file, arrayPosition, onDelete }) {
+    const { shoppingCartPreferences, updateCurrentShoppingCartPages, removeFileFromPositionInCurrentCart } = useShoppingCart();
     const [fileContent, setFileContent] = useState(null)
     const [numPages, setNumPages] = useState(null);
 
@@ -24,8 +28,6 @@ export default function FileView({ file, arrayPosition }) {
             return;
         }
 
-        console.log(file.type)
-
         if (isImage(file.name)) {
             displayImage(file);
         } else if (file.type === "application/pdf") {
@@ -35,65 +37,86 @@ export default function FileView({ file, arrayPosition }) {
         }
     };
 
-    const isImage = (filename) => /\.(jpg|jpeg|png|gif)$/i.test(filename);
+    const isImage = (filename) => /\.(jpg|jpeg|png)$/i.test(filename);
 
     const displayImage = (file) => {
         setFileContent(
             <img src={URL.createObjectURL(file)} className='image' alt='Archivo seleccionado' />
         );
+        updateCurrentShoppingCartPages(1)
     };
 
     const displayPDF = (file) => {
         setFileContent(
-            <Document className={"pdf"} file={URL.createObjectURL(file)} onLoadSuccess={onDocumentLoadSuccess}>
-                <Page height={300} scale={1.1} pageNumber={1} />
+            <Document file={URL.createObjectURL(file)} onLoadSuccess={onDocumentLoadSuccess}>
+                <Page width={230} pageNumber={1} className={'pdfFileView'} />
             </Document>
         );
     };
 
     function onDocumentLoadSuccess({ numPages }) {
         setNumPages(numPages);
+        updateCurrentShoppingCartPages(numPages)
     }
 
+    const handleDeleteFile = () => {
+        onDelete(arrayPosition, numPages);
+        removeFileFromPositionInCurrentCart(arrayPosition)
+    };
+
+    const formatFileSize = (size) => {
+        const kb = 1024;
+        const mb = kb * 1024;
+        const gb = mb * 1024;
+
+        if (size < kb) {
+            return `${size.toFixed(2)} B`;
+        } else if (size < mb) {
+            return `${(size / kb).toFixed(2)} KB`;
+        } else if (size < gb) {
+            return `${(size / mb).toFixed(2)} MB`;
+        } else {
+            return `${(size / gb).toFixed(2)} GB`;
+        }
+    };
+
     return (
-        <div className="background">
-            <div className="fileSelectedView">
-                { fileContent }
-            </div>
-            <div className="fileSelectedDetails">
-                <div className="firstDetails">
+        <div className="backgroundFileView">
+            {fileContent}
+            <div className="fileSelectedDetailsFileView">
+                <div className="firstDetailsFileView">
                     <img src="/src/assets/expandIcon.png" alt="Expand File Selected View" />
-                    <p>297 mm x 210 mm</p>
-                    <span className="numberOfFile">{arrayPosition}</span>
+                    <p>{shoppingCartPreferences.preference.size.description}</p>
+                    <span className="numberOfFileFileView">{arrayPosition + 1}</span>
                 </div>
 
                 <hr />
 
-                <p className="nameOfFile">{file.name}</p>
+                <p className="nameOfFileFileView">{file.name}</p>
 
-                <div className="secondDetails">
-                    <div className="numberOfPages">
+                <div className="secondDetailsFileView">
+                    <div className="numberOfPagesFileView">
                         <p>PÁGINAS</p>
-                        <div className="details">
+                        <div className="detailsFileView">
                             <img src="/src/assets/pagesIcon.png" alt="Páginas de fichero" />
-                            <p className="pages">{numPages}</p>
+                            <p className="pagesFileView">{numPages}</p>
                         </div>
                     </div>
-                    <div className='separator'></div>
-                    <div className="sizeOfFile">
+                    <div className='separatorFileView'></div>
+                    <div className="sizeOfFileFileView">
                         <p>TAMAÑO</p>
-                        <div className="details">
+                        <div className="detailsFileView">
                             <img src="/src/assets/uploadIcon.png" alt="Tamaño del fichero" />
-                            <p className="pages">{file.size} B</p>
+                            <p className="pagesFileView">{formatFileSize(file.size)}</p>
                         </div>
                     </div>
                 </div>
 
                 <hr />
 
-                <div className="finalDetails">
-                    <img src="/src/assets/trashIcon.png" alt="Eliminar fichero" />
-                    <p className="price">0,06€</p>
+                <div className="finalDetailsFileView">
+                    <img src="/src/assets/trashIcon.png" alt="Eliminar fichero" onClick={handleDeleteFile} />
+                    <p className="priceFileView">{shoppingCartPreferences.pricePerCopy}€</p>
                 </div>
             </div>
         </div>
@@ -102,5 +125,6 @@ export default function FileView({ file, arrayPosition }) {
 
 FileView.propTypes = {
     file: PropTypes.object.isRequired,
-    arrayPosition: PropTypes.number.isRequired
+    arrayPosition: PropTypes.number.isRequired,
+    onDelete: PropTypes.func.isRequired
 };

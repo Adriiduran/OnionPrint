@@ -1,10 +1,10 @@
-.main {
+.mainAuth {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.register {
+.registerAuth {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,7 +14,7 @@
     width: 40vw;
 }
 
-.title {
+.titleAuth {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -22,33 +22,33 @@
     gap: 8px;
 }
 
-.title > h1 {
+.titleAuth > h1 {
     font-size: 30px;
     font-weight: 300;
 }
 
-.titleSpan {
+.titleSpanAuth {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #4285F4;
+    background-color: var(--primary);
     border-radius: 50px;
     padding: 12px;
 }
 
-.title > span > img {
+.titleAuth > span > img {
     width: 20px;
     height: 20px;
 }
 
-.form {
+.formAuth {
     display: flex;
     flex-direction: column;
     gap: 15px;
     width: 100%;
 }
 
-.inputGroup {
+.inputGroupAuth {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -56,22 +56,22 @@
     gap: 6px;
 }
 
-.inputGroup > label {
+.inputGroupAuth > label {
     font-size: small;
     font-weight: 300;
 }
 
-.inputGroup > input {
+.inputGroupAuth > input {
     width: 100%;
     padding: 15px;
 }
 
-.inputGroup > input:focus {
-    box-shadow: 0 0 10px #4285F4;
+.inputGroupAuth > input:focus {
+    box-shadow: 0 0 10px var(--primary);
 }
 
-.inputSubmit {
-    background-color: #4285F4;
+.inputSubmitAuth {
+    background-color: var(--primary);
     border: 0px solid black;
     padding: 15px;
     color: white;
@@ -84,7 +84,7 @@
     transition: all 0.3s;
 }
 
-.inputSubmit:hover {
+.inputSubmitAuth:hover {
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
     scale: 1.02;
 }
@@ -93,7 +93,7 @@ hr {
     width: 100%;
 }
 
-.loginSocial {
+.loginSocialAuth {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -102,7 +102,7 @@ hr {
     transition: 0.5 all ease-in-out;
 }
 
-.loginSocial > span {
+.loginSocialAuth > span {
     padding: 10px;
     border-radius: 50px;
     display: flex;
@@ -113,17 +113,17 @@ hr {
     cursor: pointer;
 }
 
-.loginSocial > span:hover {
+.loginSocialAuth > span:hover {
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
     scale: 1.05;
 }
 
-.loginSocial > span > img {
+.loginSocialAuth > span > img {
     width: 24px;
     height: 24px;
 }
 
-.error {
+.errorAuth {
     display: flex;
     gap: 5px;
     align-items: center;
@@ -132,12 +132,12 @@ hr {
     text-align: left;
 }
 
-.error img {
+.errorAuth img {
     width: 14px;
     height: 14px;
 }
 
-.loginError {
+.loginErrorAuth {
     color: black;
     font-size: small;
     padding: 10px 20px;
@@ -147,7 +147,7 @@ hr {
     display: none;
 }
 
-.passwordLabels {
+.passwordLabelsAuth {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -156,12 +156,12 @@ hr {
     font-weight: 300;
 }
 
-.forgotPasswordLabel {
-    color: #4285F4;
+.forgotPasswordLabelAuth {
+    color: var(--primary);
     font-size: 400;
 }
 
-.haveAccount {
+.haveAccountAuth {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -169,18 +169,18 @@ hr {
     gap: 10px;
 }
 
-.haveAccount_link {
-    color: #4285F4;
+.haveAccount_linkAuth {
+    color: var(--primary);
 }
 
 @media (max-width: 950px) {
-   .register {
+   .registerAuth {
         width: 100%;
    } 
 }
 
 @media (min-width: 1440px) {
-    .register {
+    .registerAuth {
          width: 33vw;
     } 
  }

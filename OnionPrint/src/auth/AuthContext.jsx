@@ -10,7 +10,7 @@ import {
   onAuthStateChanged,
   signOut
 } from 'firebase/auth';
-import app from '../config/firebase';
+import { app } from '../config/firebase';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -33,9 +33,7 @@ export const AuthProvider = ({ children }) => {
   const registerUser = async (email, password, navigator) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
-      console.log(user.displayName);
-      console.log(user.email);
+      const user = userCredential.user
 
       setUser(user);
 

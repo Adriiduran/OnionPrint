@@ -1,9 +1,16 @@
+.headerHeader {
+    position: sticky;
+    z-index: 10;
+    top: 0;
+    background-color: white;
+} 
+
 a {
     text-decoration: none;
     color: black;
 }
 
-.button {
+.buttonHeader {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,55 +23,55 @@ a {
     cursor: pointer;
 }
 
-.button:hover {
+.buttonHeader:hover {
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
     scale: 1.01;
 }
 
-.primary {
-    background-color: #4285F4;
+.primaryHeader {
+    background-color: var(--primary);
     color: white;
 }
 
-.logout {
+.logoutHeader {
     background-color: red;
     color: white;
 }
 
-.button > img {
+.buttonHeader > img {
     width: 16px;
     height: 16px;
 }
 
-.button > p {
+.buttonHeader > p {
     font-size: x-small;
     font-weight: 400;
 }
 
-.header {
+.headerHeader {
     padding: 20px 30px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
 }
 
-.header .desktop {
+.headerHeader .desktopHeader {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
 }
 
-.header .desktop .main {
+.headerHeader .desktopHeader .mainHeader {
     display: flex;
     gap: 16px;
 }
 
-.header .desktop .main > a {
+.headerHeader .desktopHeader .mainHeader > a {
     font-size: small;
     font-weight: 500;
 }
 
-.header .desktop .elements > ul{
+.headerHeader .desktopHeader .elementsHeader > ul{
     list-style: none;
     display: flex;
     gap: 16px;
@@ -72,20 +79,20 @@ a {
     align-items: center;
 }
 
-.header .mobile {
+.headerHeader .mobileHeader {
     display: none;
 }
 
-.mobileMenuClose {
+.mobileMenuCloseHeader {
     display: none;
 }
 
-.hamburguerIcon {
+.hamburguerIconHeader {
     width: 32px;
     height: 32px;
 }
 
-.delivery {
+.deliveryHeader {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -93,59 +100,73 @@ a {
     transition: 0.2s all ease-in-out;
 }
 
-.delivery > img {
+.deliveryHeader > img {
     width: 20px;
     height: 20px;
 }
 
-.delivery p {
+.deliveryHeader p {
     font-size: small;
     font-weight: 500;
 }
 
-.delivery:hover {
+.deliveryHeader:hover {
     transform: scale(1.02);
 }
 
-.logo {
-    width: 200px;
+.logoHeader {
+    width: 150px;
     height: 40px;
 }
 
+@media (max-width: 375px) {
+    .logoHeader {
+        width: 150px;
+        height: 40px;
+    } 
+}
+
+@media (max-width: 425px) {
+    .logoHeader {
+        width: 150px;
+        height: 40px;
+    } 
+}
+
 @media (max-width: 950px) {
-    .header {
+    .headerHeader {
         padding: 0px;
     }
 
-    .header .desktop {
+    .headerHeader .desktopHeader {
         display: none;
     }
 
-    .header .mobile {
+    .headerHeader .mobileHeader {
         display: flex;
         flex-direction: column;
     }
 
-    .header .mobile .main {
+    .headerHeader .mobileHeader .mainHeader {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 10px 20px;
     }
 
-    .header .mobile .elements {
+    .headerHeader .mobileHeader .elementsHeader {
         border-top: 1px solid rgba(0, 0, 0, 0.2);
         width: 100%;
     }
 
-    .header .mobile .elements > ul {
+    .headerHeader .mobileHeader .elementsHeader > ul {
         list-style: none;
         display: flex;
         flex-direction: column;
         align-items: center;
     }
 
-    .header .mobile .elements > ul > li {
+    .headerHeader .mobileHeader .elementsHeader > ul > li {
         margin: 10px 0;
     }
 }

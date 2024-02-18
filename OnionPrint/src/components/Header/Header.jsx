@@ -3,97 +3,105 @@ import './Header.css';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../auth/AuthContext'
 
+//Context
+import { useShoppingCart } from '../../context/ShoppingCartContext';
+
 function Header() {
     const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
     const { user, logout } = useAuth();
+    const { finalShoppingCartPreferences } = useShoppingCart();
 
     const toggleMobileMenu = () => {
         setMobileMenuOpen(!isMobileMenuOpen);
     };
 
     return (
-        <header className="header">
-            <article className='desktop'>
-                <div className="main">
+        <header className="headerHeader">
+            <article className='desktopHeader'>
+                <div className="mainHeader">
                     <Link to="/">
-                        <img src="/src/assets/logo.svg" alt="Logo" className='logo' />
+                        <img src="/src/assets/logo.svg" alt="Logo" className='logoHeader' />
                     </Link>
-                    <a href="#" className='delivery'>
+                    <a href="#" className='deliveryHeader'>
                         <p>ENVÍOS A DOMICILIO</p>
                         <img src="/src/assets/deliveryIcon.png" alt="Delivery Icon Button" />
                     </a>
                 </div>
-                <nav className="elements">
+                <nav className="elementsHeader">
                     <ul>
                         <li style={{ display: user ? 'none' : 'block' }}><Link to="/register">
-                            <span className='button'>
+                            <span className='buttonHeader'>
                                 <p>REGISTRARSE</p>
                                 <img src="/src/assets/registerIcon.png" alt="User Icon Button" />
                             </span>
                         </Link></li>
                         <li style={{ display: user ? 'none' : 'block' }}><Link to="/login">
-                            <span className='button primary'>
+                            <span className='buttonHeader primaryHeader'>
                                 <p>IDENTIFICARSE</p>
                                 <img src="/src/assets/loginIcon.png" alt="User Icon Button" />
                             </span>
                         </Link></li>
                         <li style={{ display: user ? 'block' : 'none' }}>
-                            <span className='button primary'>
+                            <span className='buttonHeader primaryHeader'>
                                 <p>PERFIL</p>
                                 <img src="/src/assets/profileIcon.png" alt="User Icon Button" />
                             </span>
                         </li>
-                        <li style={{ display: user ? 'block' : 'none' }} onClick={ logout }>
-                            <span className='button logout'>
+                        <li style={{ display: user ? 'block' : 'none' }} onClick={logout}>
+                            <span className='buttonHeader logoutHeader'>
                                 <p>CERRAR SESIÓN</p>
                                 <img src="/src/assets/loginIcon.png" alt="User Icon Button" />
                             </span></li>
-                        <li><span className='button primary'>
-                            <img src="/src/assets/cartIcon.png" alt="User Icon Button" />
-                            <p>0€</p>
-                        </span></li>
+                        <li><Link to="/cart">
+                            <span className='buttonHeader primaryHeader'>
+                                <img src="/src/assets/cartIcon.png" alt="User Icon Button" />
+                                <p>{finalShoppingCartPreferences.items.length !== undefined ? finalShoppingCartPreferences.items.length : 0}</p>
+                            </span>
+                        </Link></li>
                     </ul>
                 </nav>
             </article>
 
-            <article className='mobile'>
-                <div className="main">
-                    <Link to='/'><img src="/src/assets/logo.svg" alt="Logo" className='logo' /></Link>
-                    <img className='hamburguerIcon' src={`${isMobileMenuOpen ? '/src/assets/closeIcon.png' : '/src/assets/burgerMenu.png'}`} alt="Hamburguer Menu Button" onClick={toggleMobileMenu} />
+            <article className='mobileHeader'>
+                <div className="mainHeader">
+                    <Link to='/'><img src="/src/assets/logo.svg" alt="Logo" className='logoHeader' /></Link>
+                    <img className='hamburguerIconHeader' src={`${isMobileMenuOpen ? '/src/assets/closeIcon.png' : '/src/assets/burgerMenu.png'}`} alt="Hamburguer Menu Button" onClick={toggleMobileMenu} />
                 </div>
-                <nav className={`${isMobileMenuOpen ? 'elements' : 'mobileMenuClose'}`}>
+                <nav className={`${isMobileMenuOpen ? 'elementsHeader' : 'mobileMenuCloseHeader'}`}>
                     <ul>
-                        <li><a href="#" className='delivery'>
+                        <li><a href="#" className='deliveryHeader'>
                             <p>ENVÍOS A DOMICILIO</p>
                             <img src="/src/assets/deliveryIcon.png" alt="Delivery Icon Button" />
                         </a></li>
                         <li style={{ display: user ? 'none' : 'block' }}><Link to="/register">
-                            <span className='button'>
+                            <span className='buttonHeader'>
                                 <p>REGISTRARSE</p>
                                 <img src="/src/assets/registerIcon.png" alt="User Icon Button" />
                             </span>
                         </Link></li>
                         <li style={{ display: user ? 'none' : 'block' }}><Link to="/login">
-                            <span className='button primary'>
+                            <span className='buttonHeader primaryHeader'>
                                 <p>IDENTIFICARSE</p>
                                 <img src="/src/assets/loginIcon.png" alt="User Icon Button" />
                             </span>
                         </Link></li>
                         <li style={{ display: user ? 'block' : 'none' }}>
-                            <span className='button primary'>
+                            <span className='buttonHeader primaryHeader'>
                                 <p>PERFIL</p>
                                 <img src="/src/assets/profileIcon.png" alt="User Icon Button" />
                             </span>
                         </li>
-                        <li style={{ display: user ? 'block' : 'none' }} onClick={ logout }>
-                            <span className='button logout'>
+                        <li style={{ display: user ? 'block' : 'none' }} onClick={logout}>
+                            <span className='buttonHeader logoutHeader'>
                                 <p>CERRAR SESIÓN</p>
                                 <img src="/src/assets/loginIcon.png" alt="User Icon Button" />
                             </span></li>
-                        <li><span className='button primary'>
-                            <img src="/src/assets/cartIcon.png" alt="User Icon Button" />
-                            <p>0€</p>
-                        </span></li>
+                        <li><Link to="/cart">
+                            <span className='buttonHeader primaryHeader'>
+                                <img src="/src/assets/cartIcon.png" alt="User Icon Button" />
+                                <p>{finalShoppingCartPreferences.items.length !== undefined ? finalShoppingCartPreferences.items.length : 0}</p>
+                            </span>
+                        </Link></li>
                     </ul>
                 </nav>
             </article>

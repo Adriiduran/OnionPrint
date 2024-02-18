@@ -1,8 +1,17 @@
+.frontPageFileSelector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
 .fileSelector {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
+  width: 100%;
   margin-top: 20px;
 }
 
@@ -12,9 +21,10 @@
   justify-content: center;
   align-items: center;
   gap: 16px;
+  padding-bottom: 20px;
 }
 
-.image {
+.imageFileSelector {
   width: 320px;
   height: 260px;
 }
@@ -35,12 +45,16 @@
 
 .buttonFileSelector:hover {
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
-  scale: 1.01;
+  scale: 1.1;
 }
 
-.primary {
-  background-color: #4285f4;
+.primaryFileSelector {
+  background-color: var(--primary);
   color: white;
+}
+
+.secondaryFileSelector {
+  background-color: #e0e0e0;
 }
 
 .buttonFileSelector > img {
@@ -52,12 +66,12 @@
   font-size: 14px;
 }
 
-.title {
+.titleFileSelector {
   font-weight: 200;
   font-size: 20px;
 }
 
-.fileDetails {
+.firstFileDetailsFileSelector {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -65,41 +79,41 @@
   gap: 6px;
 }
 
-.fileDetails > span {
+.firstFileDetailsFileSelector > span {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
 }
 
-.fileDetails > span > img {
+.firstFileDetailsFileSelector > span > img {
   width: 24px;
   height: 24px;
 }
 
-.fileDetails > span > p {
+.firstFileDetailsFileSelector > span > p {
   color: #4285f4;
   font-weight: 400;
 }
 
-.fileFinishes {
+.fileFinishesFileSelector {
   display: flex;
   flex-direction: column;
   gap: 6px;
   margin-top: 6px;
 }
 
-.fileFinishes > * {
+.fileFinishesFileSelector > * {
   font-size: small;
 }
 
-.fileFinishes > p {
+.fileFinishesFileSelector > p {
   color: gray;
   font-weight: 600;
 }
 
-.fileFinishes > span {
+.fileFinishesFileSelector > span {
   color: #fff;
   font-weight: 600;
   background-color: gray;
@@ -107,71 +121,55 @@
   border-radius: 5px;
 }
 
-.fileShippingPrice {
+.fileShippingPriceFileSelector {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 2px;
+  gap: 5px;
   margin-top: 20px;
 }
 
-.fileShippingPrice > img {
+.fileShippingPriceFileSelector > span > span {
+  font-weight: 500;
+  font-size: small;
+}
+
+.fileShippingPriceFileSelector > span {
+  font-size: x-small;
+}
+
+.fileShippingPriceFileSelector > img {
   width: 16px;
   height: 16px;
 }
 
-.fileShippingPrice > span {
-  font-size: x-small;
-}
-
-.fileShippingPrice > span > strong {
-  font-size: small;
-}
-
-.removeFiles {
-  display: flex;
-  gap: 6px;
-  padding: 12px 24px;
-  background-color: #e0e0e0;
-  border-radius: 15px;
-  margin-top: 30px;
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.removeFiles:hover {
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
-  scale: 1.01;
-}
-
-.removeFiles > img {
-  width: 18px;
-  height: 18px;
-}
-
-.selectedConfiguration {
+.secondFileDetailsFileSelector {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: rgb(34, 195, 157);
+  gap: 10px;
+}
+
+.selectedConfigurationFileSelector {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background: linear-gradient(
     74deg,
     rgba(34, 195, 157, 1) 0%,
     rgba(253, 187, 45, 1) 100%
   );
-  width: 100vw;
   color: white;
   padding: 20px;
-  gap: 20px;
+  gap: 16px;
   font-size: small;
-  margin-top: 20px;
 }
 
-.selectedConfiguration > span {
-  color: rgba(34, 195, 157, 1);
+.selectedConfigurationFileSelector > span {
+  color: #388e3c;
   background-color: white;
   padding: 15px 25px;
   border-radius: 30px;
@@ -181,20 +179,239 @@
   transition: all 0.3s;
 }
 
-.selectedConfiguration > span:hover {
+.selectedConfigurationFileSelector > span:hover {
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
   scale: 1.01;
 }
 
-.fileView {
+.fileViewFileSelector {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
   width: 100%;
-  margin: 20px 0px;
+  padding: 20px 10px;
 }
 
-@media (min-width: 950px) {
+.fileViewFileSelector > * {
+  width: 80%;
+  height: 522px;
+}
 
+@media (min-width: 375px) {
+  .buttonFileSelector {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+    border-radius: 40px;
+    padding: 16px 30px;
+    transition: all 0.3s;
+    max-width: 95vw;
+    margin-top: 8px;
+    cursor: pointer;
+  }
+  
+  .fileViewFileSelector > * {
+    width: 70%;
+  }
+}
+
+@media (min-width: 425px) {
+  .fileViewFileSelector > * {
+    width: 60%;
+  }
+}
+
+@media (min-width: 768px) {
+  .fileViewFileSelector {
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .fileViewFileSelector > * {
+    width: 30%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .fileSelector {
+    flex-direction: row;
+    gap: 20px;
+    padding-left: 20px;
+    margin-top: 0px;
+    margin-bottom: 20px;
+  }
+
+  .fileSelectorHeader {
+    width: 66%;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    padding: 15px;
+    justify-content: space-evenly;
+  }
+
+  .firstFileDetailsFileSelector {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+
+  .firstFileDetailsFileSelector > span {
+    font-size: x-large;
+  }
+
+  .firstFileDetailsFileSelector > span > img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .fileShippingPriceFileSelector {
+    margin: 10px 0px;
+  }
+
+  .fileShippingPriceFileSelector > span, .fileShippingPriceFileSelector > span > span {
+    font-size: small;
+  }
+
+  .fileShippingPriceFileSelector > img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .secondFileDetailsFileSelector {
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .buttonFileSelector {
+    justify-content: space-between;
+    padding: 10px 20px;
+  }
+
+  .buttonFileSelector > img {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .buttonFileSelector > p {
+    font-size: 12px;
+  }
+
+  .selectedConfigurationFileSelector {
+    justify-content: space-around;
+    width: 33%;
+    border-radius: 10px;
+    padding: 15px;
+  }
+
+  .selectedConfigurationFileSelector > * {
+    font-size: medium;
+  }
+
+  .selectedConfigurationFileSelector > h1 {
+    font-size: x-large;
+  }
+
+  .selectedConfigurationFileSelector > span {
+    padding: 10px 20px;
+    font-weight: 600;
+    font-size: small;
+  }
+
+  .fileViewFileSelector {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 30px;
+    padding: 0px 20px;
+  }
+
+  .fileViewFileSelector > * {
+    width: auto;
+    height: 522px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .firstFileDetailsFileSelector > span {
+    font-size: xx-large;
+  }
+
+  .firstFileDetailsFileSelector > span > img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .fileShippingPriceFileSelector > span, .fileShippingPriceFileSelector > span > span {
+    font-size: medium;
+  }
+
+  .fileShippingPriceFileSelector > img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .buttonFileSelector > img {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .buttonFileSelector > p {
+    font-size: 16px;
+  }
+
+  .selectedConfigurationFileSelector > * {
+    font-size: large;
+  }
+
+  .selectedConfigurationFileSelector > h1 {
+    font-size: xx-large;
+  }
+
+  .selectedConfigurationFileSelector > span {
+    padding: 10px 20px;
+    font-weight: 600;
+    font-size: medium;
+  }
+}
+
+@media (min-width: 2560px) {
+  .firstFileDetailsFileSelector > span {
+    font-size: 50px;
+  }
+
+  .firstFileDetailsFileSelector > span > img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .fileShippingPriceFileSelector > span, .fileShippingPriceFileSelector > span > span {
+    font-size: x-large;
+  }
+
+  .buttonFileSelector > img {
+    width: 38px;
+    height: 38px;
+  }
+  
+  .buttonFileSelector > p {
+    font-size: 24px;
+  }
+
+  .selectedConfigurationFileSelector > * {
+    font-size: xx-large;
+  }
+
+  .selectedConfigurationFileSelector > h1 {
+    font-size: 50px;
+  }
+
+  .selectedConfigurationFileSelector > span {
+    font-size: x-large;
+  }
 }

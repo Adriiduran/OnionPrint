@@ -1,36 +1,37 @@
-.background {
-    display: block;
+.backgroundFileView {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 270px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
     border-radius: 10px;
     padding: 10px 10px;
-    width: 90vw;
 }
 
-.fileSelectedView {
+.fileSelectedViewFileView {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 40vh;
     overflow-y: scroll;
-    padding: 20px 0px;
 }
 
-.image {
+.imageFileView {
     display: block;
     object-fit: contain;
 }
 
-.pdf {
-    border: 1px solid black;
-    margin-top: 80px;
+.pdfFileView {
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
 }
 
-.fileSelectedDetails {
+.fileSelectedDetailsFileView {
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
-.firstDetails {
+.firstDetailsFileView {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -39,25 +40,25 @@
     font-size: x-small;
 }
 
-.firstDetails > img {
+.firstDetailsFileView > img {
     width: 16px;
     height: 16px;
 }
 
-.numberOfFile {
+.numberOfFileFileView {
     color: white;
     border-radius: 50px;
     background-color: #4285F4;
     padding: 5px 8px;
 }
 
-.nameOfFile {
+.nameOfFileFileView {
     padding: 10px 0px;
     font-size: small;
     font-weight: 600;
 }
 
-.secondDetails {
+.secondDetailsFileView {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -69,24 +70,24 @@
     gap: 10px;
 }
 
-.separator {
+.separatorFileView {
     border-left: 1px solid black;
     height: 40px;
 }
 
-.secondDetails > hr {
+.secondDetailsFileView > hr {
     height: 100%;
     width: 1px;
 }
 
-.numberOfPages, .sizeOfFile {
+.numberOfPagesFileView, .sizeOfFileFileView {
     display: flex;
     flex-direction: column;
     gap: 5px;
     font-weight: 600;
 }
 
-.numberOfPages > .details, .sizeOfFile > .details {
+.numberOfPagesFileView > .detailsFileView, .sizeOfFileFileView > .detailsFileView {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -95,19 +96,25 @@
     gap: 3px;
 }
 
-.details > img {
+.detailsFileView > img {
     width: 16px;
     height: 16px;
 }
 
-.finalDetails {
+.finalDetailsFileView {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 2px;
 }
 
-.finalDetails > img {
+.finalDetailsFileView > img {
     width: 24px;
     height: 24px;
+    transition: all 0.3s;
+}
+
+.finalDetailsFileView > img:hover {
+    transform: scale(1.1);
+    cursor: pointer;
 }

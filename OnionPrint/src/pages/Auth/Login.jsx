@@ -66,19 +66,19 @@ export default function Login() {
     };
 
     return (
-        <main className='main'>
-            <div className="register">
-                <div className="title">
-                    <span className='titleSpan'>
+        <main className='mainAuth'>
+            <div className="registerAuth">
+                <div className="titleAuth">
+                    <span className='titleSpanAuth'>
                         <img src={lockIcon} alt="Imagen del título de la página de registro" />
                     </span>
                     <h1>Iniciar Sesión</h1>
-                    <span className='loginError' style={{ display: errors.login === "" ? 'none' : 'block' }}>El correo electrónico o la contraseña son incorrectos</span>
+                    <span className='loginErrorAuth' style={{ display: errors.login === "" ? 'none' : 'block' }}>El correo electrónico o la contraseña son incorrectos</span>
                 </div>
 
-                <form onSubmit={handleSubmit} className="form">
-                    <div className='inputGroup'>
-                        <label htmlFor="email">Correo Electrónico</label>
+                <form onSubmit={handleSubmit} className="formAuth">
+                    <div className='inputGroupAuth'>
+                        <label htmlFor="emailAuth">Correo Electrónico</label>
                         <input
                             type="text"
                             name="email"
@@ -88,15 +88,15 @@ export default function Login() {
                             onChange={handleChange}
                             autoComplete='email'
                         />
-                        <div className='error' style={{ display: errors.email === '' ? 'none' : 'flex' }}>
+                        <div className='errorAuth' style={{ display: errors.email === '' ? 'none' : 'flex' }}>
                             <img src={exclamationIcon} alt='exclamationIcon' />
                             <p>{errors.email}</p>
                         </div>
                     </div>
-                    <div className='inputGroup'>
-                        <div className='passwordLabels'>
-                            <label htmlFor="password" className='passwordLabel'>Contraseña</label>
-                            <Link to='/forgotpassword' className='forgotPasswordLabel'>¿Has olvidado tu contraseña?</Link>
+                    <div className='inputGroupAuth'>
+                        <div className='passwordLabelsAuth'>
+                            <label htmlFor="password" className='passwordLabelAuth'>Contraseña</label>
+                            <Link to='/forgotpassword' className='forgotPasswordLabelAuth'>¿Has olvidado tu contraseña?</Link>
                         </div>
                         <input
                             type="password"
@@ -106,23 +106,23 @@ export default function Login() {
                             value={formData.password}
                             onChange={handleChange}
                         />
-                        <div className='error' style={{ display: errors.password === '' ? 'none' : 'flex' }}>
+                        <div className='errorAuth' style={{ display: errors.password === '' ? 'none' : 'flex' }}>
                             <img src={exclamationIcon} alt='exclamationIcon' />
                             <p>{errors.password}</p>
                         </div>
                     </div>
-                    <input type="submit" value="INICIAR SESIÓN" className='inputSubmit' />
+                    <input type="submit" value="INICIAR SESIÓN" className='inputSubmitAuth' />
                 </form>
 
-                <div className='loginSocial'>
+                <div className='loginSocialAuth'>
                     <span onClick={() => signInWithGoogle(navigator)}>
                         <img src={googleIcon} alt="Imagen para iniciar sesión con Google" />
                     </span>
                 </div>
 
-                <div className='haveAccount'>
-                    <p className='haveAccount_title'>¿Eres nuevo en OnionPrint?</p>
-                    <Link to='/register' className='haveAccount_link'>¡Crea tu cuenta ahora!</Link>
+                <div className='haveAccountAuth'>
+                    <p className='haveAccount_titleAuth'>¿Eres nuevo en OnionPrint?</p>
+                    <Link to='/register' className='haveAccount_linkAuth'>¡Crea tu cuenta ahora!</Link>
                 </div>
             </div>
         </main>

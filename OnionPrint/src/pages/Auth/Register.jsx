@@ -63,17 +63,17 @@ export default function Register() {
     };
 
     return (
-        <main className='main'>
-            <div className="register">
-                <div className="title">
-                    <span className='titleSpan'>
+        <main className='mainAuth'>
+            <div className="registerAuth">
+                <div className="titleAuth">
+                    <span className='titleSpanAuth'>
                         <img src={lockIcon} alt="Imagen del título de la página de registro" />
                     </span>
                     <h1>Crear cuenta</h1>
                 </div>
 
-                <form onSubmit={handleSubmit} action='post' className="form">
-                    <div className='inputGroup'>
+                <form onSubmit={handleSubmit} action='post' className="formAuth">
+                    <div className='inputGroupAuth'>
                         <label htmlFor="email">Correo Electrónico</label>
                         <input
                             type="text"
@@ -84,12 +84,12 @@ export default function Register() {
                             onChange={handleChange}
                             autoComplete='email'
                         />
-                        <div className='error' style={{ display: errors.email === '' ? 'none' : 'flex' }}>
+                        <div className='errorAuth' style={{ display: errors.email === '' ? 'none' : 'flex' }}>
                             <img src={exclamationIcon} alt='exclamationIcon' />
                             <p>{errors.email}</p>
                         </div>
                     </div>
-                    <div className='inputGroup'>
+                    <div className='inputGroupAuth'>
                         <label htmlFor="password">Contraseña</label>
                         <input
                             type="password"
@@ -99,12 +99,12 @@ export default function Register() {
                             value={formData.password}
                             onChange={handleChange}
                         />
-                        <div className='error' style={{ display: errors.password === '' ? 'none' : 'flex' }}>
+                        <div className='errorAuth' style={{ display: errors.password === '' ? 'none' : 'flex' }}>
                             <img src={exclamationIcon} alt='exclamationIcon' />
                             <p>{errors.password}</p>
                         </div>
                     </div>
-                    <div className='inputGroup'>
+                    <div className='inputGroupAuth'>
                         <label htmlFor="passwordRepetition">Repetir Contraseña</label>
                         <input
                             type="password"
@@ -114,24 +114,24 @@ export default function Register() {
                             value={formData.passwordRepetition}
                             onChange={handleChange}
                         />
-                        <div className='error' style={{ display: errors.passwordRepetition === '' ? 'none' : 'flex' }}>
+                        <div className='errorAuth' style={{ display: errors.passwordRepetition === '' ? 'none' : 'flex' }}>
                             <img src={exclamationIcon} alt='exclamationIcon' />
                             <p>{errors.passwordRepetition}</p>
                         </div>
                     </div>
 
-                    <input type="submit" value="CREAR CUENTA" className='inputSubmit' />
+                    <input type="submit" value="CREAR CUENTA" className='inputSubmitAuth' />
                 </form>
 
-                <div className='loginSocial'>
+                <div className='loginSocialAuth'>
                     <span onClick={() => signInWithGoogle(navigator)}>
                         <img src={googleIcon} alt="Imagen para iniciar sesión con Google" />
                     </span>
                 </div>
 
-                <div className='haveAccount'>
-                    <p className='haveAccount_title'>¿Ya tienes una cuenta?</p>
-                    <Link to='/login' className='haveAccount_link'>¡Inicia sesión aquí!</Link>
+                <div className='haveAccountAuth'>
+                    <p className='haveAccount_titleAuth'>¿Ya tienes una cuenta?</p>
+                    <Link to='/login' className='haveAccount_linkAuth'>¡Inicia sesión aquí!</Link>
                 </div>
             </div>
         </main>

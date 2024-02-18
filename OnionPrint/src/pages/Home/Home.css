@@ -1,4 +1,54 @@
+* {
+  box-sizing: border-box;
+}
+
 .home {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+@media (min-width: 1024px) {
+  .home {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    margin-top: 20px;
+    padding-right: 20px;
+    padding-left: 10px;
+    gap: 0px;
+  }
+
+  .filePreferenceListHome {
+    flex: 0 0 35%;
+    max-width: 35%;
+  }
+
+  .fileSelectorHome {
+    flex: 0 0 65%;
+    max-width: 65%;
+  }
+}
+
+@media (min-width: 1440px) {
+  .filePreferenceListHome {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+
+  .fileSelectorHome {
+    flex: 0 0 75%;
+    max-width: 75%;
+  }
+}
+
+@media (min-width: 2560px) {
+  .filePreferenceListHome {
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+
+  .fileSelectorHome {
+    flex: 0 0 80%;
+    max-width: 80%;
+  }
 }
