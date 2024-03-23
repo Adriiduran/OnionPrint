@@ -184,10 +184,18 @@ const FilePreference = ({ preferenceType }) => {
 
     const handle160GRClick = () => {
         updateCurrentPreferences({ thickness: filePreferences.paperThickness['160GR'] })
+
+        if (currentPreferences.finishes !== filePreferences.finishes.noFinishes) {
+            updateCurrentPreferences({ finishes: filePreferences.finishes.noFinishes})
+        }
     }
 
     const handle280GRClick = () => {
         updateCurrentPreferences({ thickness: filePreferences.paperThickness['280GR'] })
+
+        if (currentPreferences.finishes !== filePreferences.finishes.noFinishes) {
+            updateCurrentPreferences({ finishes: filePreferences.finishes.noFinishes})
+        }
     }
 
     const handle90GRClick = () => {
