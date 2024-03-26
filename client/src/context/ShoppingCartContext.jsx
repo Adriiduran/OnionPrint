@@ -7,17 +7,20 @@ import { useAuth } from '../auth/AuthContext';
 // Creamos el contexto
 const ShoppingCartContext = createContext();
 
-//Billing Method
+//Billing Methods
 const billingMethod = {
     card: "card",
     wireTransfer: "wireTransfer",
     paypal: "paypal"
 }
 
+// Shipping Methods
 const shippingMethod = {
-    delivery: "delivery"
+    standard: "standard",
+    premium: "premium"
 }
 
+// Order States
 const stateEnum = {
     recived: "recived",
     accepted: "accepted",
@@ -31,17 +34,19 @@ export const ShoppingCartProvider = ({ children }) => {
     const { user } = useAuth();
 
     const [finalShoppingCartPreferences, setFinalShoppingCartPreferences] = useState({
+        id: null,
         items: [],
         user: {
             uid: user != undefined ? user.uid : null,
-            email: user != undefined ? user.email : null,
             name: null,
+            email: null,
             phoneNumber: null,
+            dni: null,
             address: null,
             postalCode: null,
+            deliveryComments: null,
         },
-        shipping: shippingMethod.delivery,
-        premium: false,
+        shipping: shippingMethod.standard,
         billingMethod: billingMethod.card,
         itemsPrice: 0,
         finalPrice: 0,
@@ -72,7 +77,7 @@ export const ShoppingCartProvider = ({ children }) => {
         if (finalShoppingCartPreferences.items.length > 0) {
             calculateFinalShoppingCartPrice();
         }
-    }, [finalShoppingCartPreferences.items]);
+    }, [finalShoppingCartPreferences.items, finalShoppingCartPreferences.shipping]);
 
     useEffect(() => {
         console.log('Current Shopping Cart Preferences:', shoppingCartPreferences);
@@ -189,6 +194,7 @@ export const ShoppingCartProvider = ({ children }) => {
     const calculateFinalShoppingCartPrice = () => {
         let calculatedFinalPrice = 0;
         let calculatedItemsPrice = 0;
+
         finalShoppingCartPreferences.items.forEach(element => {
             calculatedItemsPrice += element.finalPrice;
             setFinalShoppingCartPreferences((prevPreferences) => ({
@@ -199,17 +205,16 @@ export const ShoppingCartProvider = ({ children }) => {
             calculatedFinalPrice = calculatedItemsPrice
         });
 
-        if (calculatedFinalPrice < 50) {
-            calculatedFinalPrice += 4.9;
+        if (finalShoppingCartPreferences.shipping === shippingMethod.standard) {
+            if (calculatedItemsPrice < 50) {
+                calculatedFinalPrice += 4.9;
+            }
         } else {
-            setFinalShoppingCartPreferences((prevPreferences) => ({
-                ...prevPreferences,
-                shipping: false
-            }));
-        }
-
-        if (finalShoppingCartPreferences.premium === true) {
-            calculatedFinalPrice += 6
+            if (calculatedItemsPrice < 50) {
+                calculatedFinalPrice += 6.9;
+            } else {
+                calculatedFinalPrice += 2.9;
+            }
         }
 
         let fechaHoraActual = new Date();
