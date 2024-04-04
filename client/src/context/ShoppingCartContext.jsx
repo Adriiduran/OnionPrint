@@ -34,24 +34,25 @@ export const ShoppingCartProvider = ({ children }) => {
     const { user } = useAuth();
 
     const [finalShoppingCartPreferences, setFinalShoppingCartPreferences] = useState({
-        id: null,
+        id: '',
         items: [],
         user: {
-            uid: user != undefined ? user.uid : null,
-            name: null,
-            email: null,
-            phoneNumber: null,
-            dni: null,
-            address: null,
-            postalCode: null,
-            deliveryComments: null,
+            uid: user != undefined ? user.uid : '',
+            name: '',
+            email: '',
+            phoneNumber: '',
+            dni: '',
+            address: '',
+            postalCode: '',
+            deliveryComments: '',
         },
         shipping: shippingMethod.standard,
         billingMethod: billingMethod.card,
         itemsPrice: 0,
         finalPrice: 0,
-        creation_date: null,
-        state: stateEnum.recived
+        creation_date: '',
+        state: stateEnum.recived,
+        stripe_payment_intent: {},
     })
 
     const [shoppingCartPreferences, setShoppingCartPreferences] = useState({
@@ -155,7 +156,26 @@ export const ShoppingCartProvider = ({ children }) => {
             } else {
                 totalPages = shoppingCartPreferences.pages
             }
+        } else {
+            if (shoppingCartPreferences.preference.color === filePreferences.color.color) {
+                pricePerCopy += 2;
+            }
 
+            if (shoppingCartPreferences.preference.size === filePreferences.paperSize.A2) {
+                pricePerCopy += 2.90
+            } else if (shoppingCartPreferences.preference.size === filePreferences.paperSize.A1) {
+                pricePerCopy += 5.90
+            } else {
+                pricePerCopy += 8.90
+            }
+
+            if (shoppingCartPreferences.preference.thickness === filePreferences.paperThickness['200GR']) {
+                pricePerCopy = pricePerCopy * 1.5
+            } else if (shoppingCartPreferences.preference.thickness === filePreferences.paperThickness['300GR']) {
+                pricePerCopy = pricePerCopy * 2
+            }
+
+            totalPages = shoppingCartPreferences.pages
         }
 
         finalPrice = Number(pricePerCopy.toFixed(2)) * shoppingCartPreferences.preference.copies * totalPages
@@ -312,8 +332,16 @@ export const ShoppingCartProvider = ({ children }) => {
         }));
     }
 
+    // Función para asignar el ID del pedido al objeto finalShoppingCartProperties
+    const assignOrderIdToFinalCart = (orderId) => {
+        setFinalShoppingCartPreferences((prevPreferences) => ({
+            ...prevPreferences,
+            id: orderId
+        }));
+    };
+
     return (
-        <ShoppingCartContext.Provider value={{ finalShoppingCartPreferences, shoppingCartPreferences, updateCurrentShoppingCartPages, resetCurrentShoppingCart, resetFinalShoppingCart, addCurrentFileToCurrentCart, resetCurrentShoppingCartPages, removeFileFromPositionInCurrentCart, addCurrentShoppingCartToFinal, getTotalPages, removeItemFromFinalShoppingCart, updateBillingMethodFinalShoppingCart, billingMethod, stateEnum, shippingMethod, updateShippingMethodFinalShoppingCart }}>
+        <ShoppingCartContext.Provider value={{ finalShoppingCartPreferences, shoppingCartPreferences, updateCurrentShoppingCartPages, resetCurrentShoppingCart, resetFinalShoppingCart, addCurrentFileToCurrentCart, resetCurrentShoppingCartPages, removeFileFromPositionInCurrentCart, addCurrentShoppingCartToFinal, getTotalPages, removeItemFromFinalShoppingCart, updateBillingMethodFinalShoppingCart, billingMethod, stateEnum, shippingMethod, updateShippingMethodFinalShoppingCart, assignOrderIdToFinalCart }}>
             {children}
         </ShoppingCartContext.Provider>
     );

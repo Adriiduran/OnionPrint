@@ -14,6 +14,7 @@ import Home from "./pages/Home/Home.jsx";
 import Register from "./pages/Auth/Register.jsx";
 import Login from "./pages/Auth/Login.jsx";
 import ShoppingCart from "./pages/Cart/ShoppingCart.jsx";
+import Completion from './pages/Completion/Completion.jsx';
 
 //Components
 import Header from "./components/Header/Header.jsx"
@@ -43,6 +44,7 @@ export default function App() {
                                 <Route path="/login" element={<Login />} />
                                 <Route path="/forgotpassword" element={<ForgotPassword />} />
                                 <Route path="/cart" element={<ShoppingCart />} />
+                                <Route path="/completion" element={<Completion />} />
                             </Routes>
                             <Footer />
                         </BrowserRouter>
