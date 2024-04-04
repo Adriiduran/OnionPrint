@@ -1,21 +1,42 @@
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { initializeApp } from "firebase/app";
 import { getFirestore, doc, setDoc, collection } from "firebase/firestore";
+import axios from "axios";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCQJDrir0SeuDUmWskTFjJTvcSbsUyTDow",
-  authDomain: "onionprint-49a4e.firebaseapp.com",
-  projectId: "onionprint-49a4e",
-  storageBucket: "onionprint-49a4e.appspot.com",
-  messagingSenderId: "229769973826",
-  appId: "1:229769973826:web:230e4eed524ab20a1e9ddb",
-  measurementId: "G-98S9YRSQBC",
+  apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: "",
+  measurementId: "",
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const storage = getStorage(app);
-const firestore = getFirestore(app);
+let app, storage, firestore = null;
+
+try {
+  axios.get("http://localhost:5252/firebase-config")
+    .then(response => {
+      firebaseConfig.apiKey = response.data.api_key;
+      firebaseConfig.authDomain = response.data.auth_domain;
+      firebaseConfig.projectId = response.data.project_id;
+      firebaseConfig.storageBucket = response.data.storage_bucket;
+      firebaseConfig.messagingSenderId = response.data.messaging_sender_id;
+      firebaseConfig.appId = response.data.app_id;
+      firebaseConfig.measurementId = response.data.measurement_id;
+
+      // Initialize Firebase
+      app = initializeApp(firebaseConfig);
+      storage = getStorage(app);
+      firestore = getFirestore(app);
+    })
+    .catch(error => {
+      console.log("Ha ocurrido un error al intentar cargar firebase con error: " + error);
+    });
+} catch (error) {
+  console.log("Ha ocurrido un error al intentar cargar firebase con error: " + error);
+}
 
 const getNewOrderRef = () => {
   // Crear una nueva colección 'orders' en Firestore
@@ -24,11 +45,14 @@ const getNewOrderRef = () => {
   // Agregar el objeto sin los archivos a Firestore
   const newOrderRef = doc(ordersCollection);
 
-  return newOrderRef
+  return newOrderRef;
 };
 
 // Función para guardar el objeto en Firestore y subir archivos a Storage
-const saveFinalCartOnFirebase = async (finalShoppingCartPreferences, newOrderRef) => {
+const saveFinalCartOnFirebase = async (
+  finalShoppingCartPreferences,
+  newOrderRef
+) => {
   try {
     const cleanItems = finalShoppingCartPreferences.items.map((item) => {
       // Crear un nuevo objeto con todos los campos excepto 'files'
@@ -48,7 +72,7 @@ const saveFinalCartOnFirebase = async (finalShoppingCartPreferences, newOrderRef
       creation_date: finalShoppingCartPreferences.creation_date,
       state: finalShoppingCartPreferences.state,
       filesInfo: {}, // Inicializar la propiedad filesURL como un objeto vacío
-      stripe_payment_intent: finalShoppingCartPreferences.stripe_payment_intent
+      stripe_payment_intent: finalShoppingCartPreferences.stripe_payment_intent,
     });
 
     // Subir cada archivo a Firebase Storage con el mismo ID como referencia
@@ -61,7 +85,7 @@ const saveFinalCartOnFirebase = async (finalShoppingCartPreferences, newOrderRef
             item.files.map(async (archivo, archivoIndex) => {
               const storageRef = ref(
                 storage,
-                `files/${newOrderRef}/${itemIndex}_${archivoIndex}`
+                `files/${newOrderRef.id}/${itemIndex}_${archivoIndex}`
               );
               await uploadBytes(storageRef, archivo);
               const downloadURL = await getDownloadURL(storageRef);

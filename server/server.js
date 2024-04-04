@@ -27,6 +27,19 @@ app.get("/config", (req, res) => {
   });
 });
 
+// Sends firebase config to the frontend
+app.get("/firebase-config", (req, res) => {
+  res.send({
+    api_key: process.env.FIREBASE_API_KEY,
+    auth_domain: process.env.FIREBASE_AUTH_DOMAIN,
+    project_id: process.env.FIREBASE_PROJECT_ID,
+    storage_bucket: process.env.FIREBASE_STORAGE_BUCKET,
+    messaging_sender_id: process.env.FIREBASE_MESSAGING_SENDER_ID,
+    app_id: process.env.FIREBASE_APP_ID,
+    measurement_id: process.env.FIREBASE_MEASUREMENT_ID
+  });
+})
+
 // Created payment intent based on final cart preferences
 app.post("/create-payment-intent", async (req, res) => {
   const data = req.body
