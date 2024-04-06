@@ -256,8 +256,8 @@ function ShoppingCart() {
                         {finalShoppingCartPreferences.items.length != 0 && (
                             <div className='shoppingCartInfoSubtotalDetails'>
                                 <span>Gastos de envío:</span>
-                                <span style={finalShoppingCartPreferences.finalPrice > 50 ? { color: 'green' } : {}}>
-                                    {finalShoppingCartPreferences.finalPrice > 50 ? ('GRATIS') : ('3.9€')}
+                                <span style={finalShoppingCartPreferences.itemsPrice > 50 ? { color: 'green' } : {}}>
+                                    {finalShoppingCartPreferences.itemsPrice > 50 ? ('GRATIS') : ('3.9€')}
                                 </span>
                             </div>
                         )}
