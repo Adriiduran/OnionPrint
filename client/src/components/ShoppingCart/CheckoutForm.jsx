@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { PaymentElement } from "@stripe/react-stripe-js";
 import { useState } from "react";
 import { useStripe, useElements } from "@stripe/react-stripe-js";
+import axios from "axios";
 
 //Context
 import { useShoppingCart } from '../../context/ShoppingCartContext';
@@ -46,19 +47,17 @@ export default function CheckoutForm() {
       }
     } else {
       finalShoppingCartPreferences.stripe_payment_intent = paymentIntent
-      await saveFinalCartOnFirebase(finalShoppingCartPreferences, newOrderRef)
+      try {
+        await saveFinalCartOnFirebase(finalShoppingCartPreferences, newOrderRef)
 
-      await fetch("http://localhost:5252/send-email", {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(finalShoppingCartPreferences),
-      });
+        axios.post("http://localhost:5252/send-email", {finalShoppingCartPreferences})
 
-      resetFinalShoppingCart();
-    
-      navigator('/completion')
+        resetFinalShoppingCart();
+
+        navigator('/completion')
+      } catch (error) {
+        console.log('Ha ocurrido un error al guardar o enviar el email de pedido')
+      }
     }
 
     setIsProcessing(false);

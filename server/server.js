@@ -2,10 +2,9 @@ const bodyParser = require("body-parser");
 const express = require("express");
 const app = express();
 const { resolve } = require("path");
-const cors = require('cors');
+const cors = require("cors");
 const env = require("dotenv").config({ path: "./.env" });
-const resend = require('resend')
-const newResend = new resend.Resend(process.env.RESEND_API_KEY);
+const nodemailer = require("nodemailer");
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2022-08-01",
@@ -14,6 +13,17 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY, {
 app.use(express.static(process.env.STATIC_DIR));
 app.use(bodyParser.json());
 app.use(cors());
+
+// Configuración del transportador SMTP
+const transporter = nodemailer.createTransport({
+  host: process.env.EMAIL_HOST,
+  port: process.env.EMAIL_PORT,
+  secure: false,
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASSWORD,
+  },
+});
 
 app.get("/", (req, res) => {
   const path = resolve(process.env.STATIC_DIR + "/index.html");
@@ -36,13 +46,13 @@ app.get("/firebase-config", (req, res) => {
     storage_bucket: process.env.FIREBASE_STORAGE_BUCKET,
     messaging_sender_id: process.env.FIREBASE_MESSAGING_SENDER_ID,
     app_id: process.env.FIREBASE_APP_ID,
-    measurement_id: process.env.FIREBASE_MEASUREMENT_ID
+    measurement_id: process.env.FIREBASE_MEASUREMENT_ID,
   });
-})
+});
 
 // Created payment intent based on final cart preferences
 app.post("/create-payment-intent", async (req, res) => {
-  const data = req.body
+  const data = req.body;
 
   try {
     const paymentIntent = await stripe.paymentIntents.create({
@@ -56,11 +66,9 @@ app.post("/create-payment-intent", async (req, res) => {
         dni: data.user.dni,
         address: data.user.address,
         postalCode: data.user.postalCode,
-        deliveryComments: data.user.deliveryComments
-      }
+        deliveryComments: data.user.deliveryComments,
+      },
     });
-
-    console.log(paymentIntent)
 
     res.send({
       clientSecret: paymentIntent.client_secret,
@@ -75,26 +83,23 @@ app.post("/create-payment-intent", async (req, res) => {
 });
 
 // Send new email with user data
-app.post("/send-email", async (req, res) => {
-  console.log('Ha entrado para mandar un correo')
-  const finalShoppingCartPreferences = req.body
+app.post("/send-email", (req, res) => {
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    to: req.body.user.email,
+    subject: "PEDIDO REALIZADO 😎",
+    text: "Se ha realizado un pedido con un precio final de: " + req.body.finalPrice,
+  };
 
-  const { data, error } = await newResend.emails.send({
-    from: 'Acme <onboarding@resend.dev>',
-    to: [finalShoppingCartPreferences.user.email],
-    subject: 'PEDIDO REALIZADO 😎',
-    html: '<strong>It works!</strong>',
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error("Error al enviar el correo electrónico:", error);
+    } else {
+      console.log("Correo electrónico enviado:", info.response);
+      res.status(200);
+    }
   });
-
-  if (error) {
-    console.log('Ha ocurrido un error al mandar el correo con error: ' + error)
-    return console.error({ error });
-  }
-  
-  console.log('Se ha mandado el correo correctamente')
-  console.log(data)
-  res.status(200).json({ data });
-})
+});
 
 app.listen(5252, () =>
   console.log(`Node server listening at http://localhost:5252`)
