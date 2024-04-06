@@ -231,7 +231,7 @@ export const ShoppingCartProvider = ({ children }) => {
             }
         } else {
             if (calculatedItemsPrice < 50) {
-                calculatedFinalPrice += 7.9;
+                calculatedFinalPrice += 8.8;
             } else {
                 calculatedFinalPrice += 4.9;
             }
@@ -255,7 +255,7 @@ export const ShoppingCartProvider = ({ children }) => {
         setFinalShoppingCartPreferences((prevPreferences) => ({
             ...prevPreferences,
             creation_date: fechaHoraFormateada,
-            finalPrice: calculatedFinalPrice
+            finalPrice: Number(calculatedFinalPrice.toFixed(2))
         }));
     }
 
