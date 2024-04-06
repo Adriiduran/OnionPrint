@@ -7,6 +7,8 @@ import { useStripe, useElements } from "@stripe/react-stripe-js";
 import { useShoppingCart } from '../../context/ShoppingCartContext';
 import { getNewOrderRef, saveFinalCartOnFirebase } from "../../config/firebase";
 
+import './CheckoutForm.css';
+
 export default function CheckoutForm() {
   const navigator = useNavigate();
   const { finalShoppingCartPreferences, resetFinalShoppingCart } = useShoppingCart();
@@ -65,10 +67,11 @@ export default function CheckoutForm() {
   return (
     <form onSubmit={handleSubmit}>
       <PaymentElement />
-      <button disabled={isProcessing || !stripe || !elements}>
+      <button disabled={isProcessing || !stripe || !elements} className="confirmPaymentButton">
         <span>
-          {isProcessing ? "Procesando... " : `Pagar ${finalShoppingCartPreferences.finalPrice}€`}
+          {isProcessing ? "PROCESANDO PAGO... " : `PAGAR ${finalShoppingCartPreferences.finalPrice}€`}
         </span>
+        <img src="/src/assets/lock.png" alt="Icono de pago seguro" />
       </button>
       {message && <div>{message}</div>}
     </form>

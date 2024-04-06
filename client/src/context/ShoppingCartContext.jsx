@@ -227,13 +227,13 @@ export const ShoppingCartProvider = ({ children }) => {
 
         if (finalShoppingCartPreferences.shipping === shippingMethod.standard) {
             if (calculatedItemsPrice < 50) {
-                calculatedFinalPrice += 4.9;
+                calculatedFinalPrice += 3.9;
             }
         } else {
             if (calculatedItemsPrice < 50) {
-                calculatedFinalPrice += 6.9;
+                calculatedFinalPrice += 7.9;
             } else {
-                calculatedFinalPrice += 2.9;
+                calculatedFinalPrice += 4.9;
             }
         }
 

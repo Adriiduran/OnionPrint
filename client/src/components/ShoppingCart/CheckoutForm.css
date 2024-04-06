@@ -1,0 +1,28 @@
+.confirmPaymentButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: #fed78a;
+  color: black;
+  padding: 20px 10px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  cursor: pointer;
+  border: 0px;
+  margin: 20px 0px;
+}
+
+.confirmPaymentButton > span {
+  flex-grow: 1;
+  font-weight: 550;
+  font-size: large;
+}
+
+.confirmPaymentButton > img {
+  width: 24px;
+  height: 24px;
+}

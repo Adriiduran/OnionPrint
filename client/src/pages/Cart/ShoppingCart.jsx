@@ -253,18 +253,19 @@ function ShoppingCart() {
                             <span>Subtotal:</span>
                             <span>{finalShoppingCartPreferences.itemsPrice}€</span>
                         </div>
-                        {finalShoppingCartPreferences.items.length != 0 ? (
+                        {finalShoppingCartPreferences.items.length != 0 && (
                             <div className='shoppingCartInfoSubtotalDetails'>
-                                <span>Gastos de envío: {finalShoppingCartPreferences.shipping === shippingMethod.premium && ('(PRIORITARIO)')}</span>
-                                <span>
-                                    {finalShoppingCartPreferences.shipping === shippingMethod.standard && finalShoppingCartPreferences.finalPrice > 50 && ('GRATIS')}
-                                    {finalShoppingCartPreferences.shipping === shippingMethod.standard && finalShoppingCartPreferences.finalPrice < 50 && ('4.9€')}
-                                    {finalShoppingCartPreferences.shipping === shippingMethod.premium && finalShoppingCartPreferences.finalPrice > 50 && ('2.9€')}
-                                    {finalShoppingCartPreferences.shipping === shippingMethod.premium && finalShoppingCartPreferences.finalPrice < 50 && ('6.9€')}
+                                <span>Gastos de envío:</span>
+                                <span style={finalShoppingCartPreferences.finalPrice > 50 ? { color: 'green' } : {}}>
+                                    {finalShoppingCartPreferences.finalPrice > 50 ? ('GRATIS') : ('3.9€')}
                                 </span>
                             </div>
-                        ) : (
-                            null
+                        )}
+                        {finalShoppingCartPreferences.items.length != 0 && finalShoppingCartPreferences.shipping === shippingMethod.premium && (
+                            <div className='shoppingCartInfoSubtotalDetails'>
+                                <span>Gastos pedido Prioritario:</span>
+                                <span>4.9€</span>
+                            </div>
                         )}
                     </div>
 
@@ -345,7 +346,7 @@ function ShoppingCart() {
                         </div>
                         {userConfirmedInfo ? (
                                 <>
-                                    <p style={{padding: '30px 20px', textAlign: 'left', fontSize: 'small'}}>{ finalShoppingCartPreferences.shippingMethod === 'standard' ? ('ENVÍO ESTANDAR - 2 a 3 días laborables') : ('ENVÍO PRIORITARIO - 1 a 2 días laborables') }</p>
+                                    <p style={{padding: '30px 20px', textAlign: 'left', fontSize: 'small'}}>{ finalShoppingCartPreferences.shipping === 'standard' ? ('ENVÍO ESTANDAR - 2 a 3 días laborables') : ('ENVÍO PRIORITARIO - 1 a 2 días laborables') }</p>
                                 </>
                             ) : (
                                 <>
