@@ -219,7 +219,7 @@ export const ShoppingCartProvider = ({ children }) => {
             calculatedItemsPrice += element.finalPrice;
             setFinalShoppingCartPreferences((prevPreferences) => ({
                 ...prevPreferences,
-                itemsPrice: calculatedItemsPrice
+                itemsPrice: Number(calculatedItemsPrice.toFixed(2))
             }));
 
             calculatedFinalPrice = calculatedItemsPrice
