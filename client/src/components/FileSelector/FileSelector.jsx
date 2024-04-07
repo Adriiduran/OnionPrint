@@ -11,7 +11,7 @@ import { useShoppingCart } from '../../context/ShoppingCartContext';
 import './FileSelector.css'
 
 export default function FileSelector() {
-    const { shoppingCartPreferences, resetCurrentShoppingCartPages, addCurrentFileToCurrentCart, updateCurrentShoppingCartPages, addCurrentShoppingCartToFinal } = useShoppingCart();
+    const { shoppingCartPreferences, resetCurrentShoppingCartPages, addCurrentFileToCurrentCart, updateCurrentShoppingCartPages, addCurrentShoppingCartToFinal, finalShoppingCartPreferences } = useShoppingCart();
     const [selectedFiles, setselectedFiles] = useState([]);
     const fileInputRef = React.useRef(null);
     const [isFirstTime, setIsFirstTime] = useState(true)
@@ -118,14 +118,19 @@ export default function FileSelector() {
                                     )}
                                 </div>
                             </div>
-                            {shoppingCartPreferences.finalPrice <= 50 ? (
+                            {(finalShoppingCartPreferences.itemsPrice + shoppingCartPreferences.finalPrice) <= 50 ? (
                                 <>
                                     <div className='fileShippingPriceFileSelector'>
                                         <img src="src/assets/warningIcon.png" alt="Warning Icon" />
-                                        <span>Añade solo <span>{(50 - shoppingCartPreferences.finalPrice).toFixed(2)}€</span> para conseguir tu <span>ENVÍO GRATIS</span></span>
+                                        <span>Añade solo <span>{(50 - (finalShoppingCartPreferences.itemsPrice + shoppingCartPreferences.finalPrice)).toFixed(2)}€</span> para conseguir tu <span>ENVÍO GRATIS</span></span>
                                     </div>
                                 </>
-                            ) : null}
+                            ) :
+                                <div className='fileShippingPriceFileSelector'>
+                                    <img src="src/assets/shippingMethod.png" alt="Free shipping icon" />
+                                    <span>ENVÍO GRATIS</span>
+                                </div>
+                            }
                             <div className='secondFileDetailsFileSelector'>
                                 <div className='buttonFileSelector secondaryFileSelector' onClick={removeFiles}>
                                     <img src="src/assets/trashIcon.png" alt="Trash Button Icon" />
