@@ -22,10 +22,6 @@ function Header() {
                     <Link to="/">
                         <img src="/src/assets/logo.svg" alt="Logo" className='logoHeader' />
                     </Link>
-                    <a href="#" className='deliveryHeader'>
-                        <p>ENVÍOS A DOMICILIO</p>
-                        <img src="/src/assets/deliveryIcon.png" alt="Delivery Icon Button" />
-                    </a>
                 </div>
                 <nav className="elementsHeader">
                     <ul>
@@ -69,10 +65,6 @@ function Header() {
                 </div>
                 <nav className={`${isMobileMenuOpen ? 'elementsHeader' : 'mobileMenuCloseHeader'}`}>
                     <ul>
-                        <li><a href="#" className='deliveryHeader'>
-                            <p>ENVÍOS A DOMICILIO</p>
-                            <img src="/src/assets/deliveryIcon.png" alt="Delivery Icon Button" />
-                        </a></li>
                         <li style={{ display: user ? 'none' : 'block' }}><Link to="/register">
                             <span className='buttonHeader'>
                                 <p>REGISTRARSE</p>
