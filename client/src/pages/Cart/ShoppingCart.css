@@ -598,273 +598,58 @@
   }
 }
 
-@media (min-width: 768px) {
-  .itemFilesTitle > img {
-    width: 20px;
-    height: 20px;
+@media (min-width: 831px) {
+  .shoppingCart {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    gap: 30px;
+    margin: 30px 0px;
+    padding: 0px;
   }
 
-  .itemFilesTitle > h3 {
-    font-size: medium;
+  .shoppingCartLeftSide, .shoppingCartRightSide {
+    width: 100%;
   }
 
-  .itemFilesDetails > p {
-    font-size: small;
+  .shoppingCartLeftSide {
+    margin-left: 20px;
+    max-width: 600px;
   }
 
-  .shoppingCartButton > img {
-    width: 20px;
-    height: 20px;
+  .shoppingCartRightSide {
+    margin-right: 20px;
+    max-width: 600px;
   }
 
-  .shoppingCartButton > p {
-    font-size: small;
+  .shoppingCartUserInfo, .shoppingCartShipping {
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
   }
 
-  .shoppingCartButtonActive > img {
-    width: 20px;
-    height: 20px;
+  .shoppingCartShipping {
+    margin: 30px 0px;
   }
 
-  .shoppingCartButtonActive > p {
-    font-size: small;
+  .shoppingCartItemList {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
   }
 
-  .shoppingCartShippingMethodsItemActive, .shoppingCartShippingMethodsItem, .shoppingCartBillingMethodsItemActive, .shoppingCartBillingMethodsItem {
-    width: 25%;
-    gap: 15px;
+  .shoppingCartShippingMethodsItemActive, .shoppingCartShippingMethodsItem {
+    min-width: 200px;
   }
 }
 
 @media (min-width: 1024px) {
-  .shoppingCart {
-    margin: 20px 150px;
-  }
-
-  .shoppingCartTitle {
-    font-size: xx-large;
-  }
-
-  .step-name {
-    font-size: medium;
-  }
-
-  .shoppingCartItemListDetails {
-    padding: 20px 20px;
-  }
-
-  .shoppingCartItemListButtons {
-    width: 100%;
-    flex-direction: row;
-  }
-
-  .shoppingCartItemListTitleFirst > img {
-    width: 30px;
-    height: 30px;
-  }
-
-  .shoppingCartItemListTitleFirst > h3 {
-    font-size: large;
-  }
-
-  .shoppingCartItemListTitle > span {
-    font-size: medium;
-  }
-
-  .shoppingCartItemListCounter > h2 {
-    font-size: x-large;
-  }
-
-  .shoppingCartItemListDetailsItemData > p, span {
-    font-size: medium;
-  }
-
-  .tags > span {
-    font-size: medium;
-  }
-
-  .itemFilesDetails > p {
-    font-size: medium;
-  }
-
-  .shoppingCartItemListDetailsItemData {
-    gap: 15px;
-  }
-
-  .shoppingCartButton > img, .shoppingCartButtonActive > img {
-    width: 25px;
-    height: 25px;
-  }
-
-  .shoppingCartButton > p, .shoppingCartButtonActive > p {
-    font-size: medium;
-  }
-
-  .shoppingCartShippingTitle, .shoppingCartShippingDescription > span {
-    font-size: large;
-  }
-
-  .shoppingCartShippingMethodsItemActive > img, .shoppingCartShippingMethodsItem > img, .shoppingCartBillingMethodsItemActive > img, .shoppingCartBillingMethodsItem > img {
-    width: 30px;
-    height: 30px;
-  }
-
-  .shoppingCartInfoDisplayFirst > * {
-    font-size: medium;
-  }
-
-  .shoppingCartInfoSubtotalDetails > * {
-    font-size: large;
-  }
-
-  .shoppingCartInfoTotal > * {
-    font-size: x-large;
-  }
-
-  .shoppingCartCreateOrder {
-    font-size: large;
-  }
-
-  .shoppingCartShipping, .shoppingCartBilling, .shoppingCartInfo {
-    margin-top: 40px;
-  }
-
-  .shoppingCartInfo {
-    padding: 20px;
-  }
-
-  .itemPrice {
-    font-size: large;
-  }
+  
 }
 
 @media (min-width: 1440px) {
-  .shoppingCart {
-    margin: 20px 250px;
-  }
-
-  .step-name {
-    font-size: large;
-  }
-
-  .shoppingCartItemListDetails {
-    padding: 20px 20px;
-  }
-
-  .shoppingCartItemListDetailsItemDataFirst > img {
-    width: 45px;
-    height: 45px;
-  }
-
-  .shoppingCartItemListDetailsItemDataFirst > p {
-    font-size: 40px;
-  }
-
-  .shoppingCartItemListTitleFirst > img {
-    width: 35px;
-    height: 35px;
-  }
-
-  .shoppingCartItemListTitleFirst > h3 {
-    font-size: x-large;
-  }
-
-  .shoppingCartItemListTitle > span {
-    font-size: large;
-  }
-
-  .shoppingCartItemListCounter > h2 {
-    font-size: x-large;
-    padding: 20px;
-  }
-
-  .shoppingCartItemListDetailsItemData > p, .shoppingCartItemListDetailsItemData > span {
-    font-size: 20px;
-  }
-
-  .tags > span {
-    font-size: large;
-  }
-
-  .itemFilesTitle > img {
-    width: 30px;
-    height: 30px;
-  }
-
-  .itemFilesTitle > h3 {
-    font-size: large;
-  }
-
-  .itemFilesDetails > p {
-    font-size: large;
-    padding-left: 20px;
-  }
-
-  .shoppingCartItemListDetailsItemData {
-    gap: 20px;
-  }
-
-  .shoppingCartButton > img, .shoppingCartButtonActive > img {
-    width: 30px;
-    height: 30px;
-  }
-
-  .shoppingCartButton > p, .shoppingCartButtonActive > p {
-    font-size: large;
-  }
-
-  .shoppingCartBillingMethods, .shoppingCartShippingMethods {
-    padding: 30px 0px;
-  }
-
-  .shoppingCartShippingTitle > span, .shoppingCartShippingDescription > span, .shoppingCartBillingTitle > span, .shoppingCartBillingDescription > span {
-    font-size: x-large;
-  }
-
-  .shoppingCartShippingMethodsItemActive > img, .shoppingCartShippingMethodsItem > img, .shoppingCartBillingMethodsItemActive > img, .shoppingCartBillingMethodsItem > img {
-    width: 40px;
-    height: 40px;
-  }
-
-  .shoppingCartShippingMethodsItemActive > span, .shoppingCartShippingMethodsItem > span, .shoppingCartBillingMethodsItemActive > span, .shoppingCartBillingMethodsItem > span {
-    font-size: medium;
-  }
-
-  .shoppingCartShippingMethodsItemActive, .shoppingCartShippingMethodsItem, .shoppingCartBillingMethodsItemActive, .shoppingCartBillingMethodsItem {
-    width: 30%;
-  }
-
-  .shoppingCartInfoDisplayFirst > * {
-    font-size: x-large;
-  }
-
-  .shoppingCartInfoSubtotalDetails > * {
-    font-size: x-large;
-  }
-
-  .shoppingCartInfoTotal > * {
-    font-size: xx-large;
-  }
-
-  .shoppingCartCreateOrder {
-    font-size: x-large;
-  }
-
-  .shoppingCartShipping, .shoppingCartBilling, .shoppingCartInfo {
-    margin-top: 40px;
-  }
-
-  .shoppingCartInfo {
-    padding: 20px;
-  }
-
-  .itemPrice {
-    font-size: x-large;
-  }
 }
 
 @media (min-width: 2560px) {
-  .shoppingCart {
-    margin: 20px 600px;
-  }
 }
