@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './Header.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../auth/AuthContext'
 
 //Context
@@ -10,6 +10,7 @@ function Header() {
     const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
     const { user, logout } = useAuth();
     const { finalShoppingCartPreferences } = useShoppingCart();
+    const navigator = useNavigate();
 
     const toggleMobileMenu = () => {
         setMobileMenuOpen(!isMobileMenuOpen);
@@ -43,7 +44,7 @@ function Header() {
                                 <img src="/src/assets/profileIcon.png" alt="User Icon Button" />
                             </span>
                         </li>
-                        <li style={{ display: user ? 'block' : 'none' }} onClick={logout}>
+                        <li style={{ display: user ? 'block' : 'none' }} onClick={() => {logout(navigator)}}>
                             <span className='buttonHeader logoutHeader'>
                                 <p>CERRAR SESIÓN</p>
                                 <img src="/src/assets/loginIcon.png" alt="User Icon Button" />
@@ -83,7 +84,7 @@ function Header() {
                                 <img src="/src/assets/profileIcon.png" alt="User Icon Button" />
                             </span>
                         </li>
-                        <li style={{ display: user ? 'block' : 'none' }} onClick={logout}>
+                        <li style={{ display: user ? 'block' : 'none' }} onClick={() => {logout(navigator)}}>
                             <span className='buttonHeader logoutHeader'>
                                 <p>CERRAR SESIÓN</p>
                                 <img src="/src/assets/loginIcon.png" alt="User Icon Button" />

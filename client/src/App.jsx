@@ -13,6 +13,7 @@ import { ShoppingCartProvider } from "./context/ShoppingCartContext.jsx";
 import Home from "./pages/Home/Home.jsx";
 import Register from "./pages/Auth/Register.jsx";
 import Login from "./pages/Auth/Login.jsx";
+import LoginAdmin from "./pages/Auth/LoginAdmin.jsx";
 import ShoppingCart from "./pages/Cart/ShoppingCart.jsx";
 import Completion from './pages/Completion/Completion.jsx';
 
@@ -45,6 +46,7 @@ export default function App() {
                                 <Route path="/forgotpassword" element={<ForgotPassword />} />
                                 <Route path="/cart" element={<ShoppingCart />} />
                                 <Route path="/completion" element={<Completion />} />
+                                <Route path="/admin" element={<LoginAdmin />} />
                             </Routes>
                             <Footer />
                         </BrowserRouter>

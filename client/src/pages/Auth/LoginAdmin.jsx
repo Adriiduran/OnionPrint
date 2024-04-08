@@ -1,10 +1,9 @@
 //Icons
 import lockIcon from '../../assets/lockIcon.png';
-import googleIcon from '../../assets/googleIcon.png';
 import exclamationIcon from '../../assets/exclamationIcon.png';
 
 //Dependencies
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { validateEmail } from '../../utils/UserDataValidation';
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../auth/AuthContext'
@@ -12,10 +11,10 @@ import { useAuth } from '../../auth/AuthContext'
 //Style
 import './Auth.css';
 
-export default function Login() {
+export default function LoginAdmin() {
 
     const navigator = useNavigate();
-    const { signInWithEmailPassword, signInWithGoogle, user } = useAuth();
+    const { adminVerification, isAdmin } = useAuth();
 
     const [formData, setFormData] = useState({
         email: '',
@@ -29,10 +28,8 @@ export default function Login() {
     });
 
     useEffect(() => {
-        if (user && user.email !== '') {
-            navigator('/')
-        }
-    }, [user])
+        navigator(isAdmin ? '/dashboard' : '/')
+    }, [isAdmin])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -50,14 +47,14 @@ export default function Login() {
         // Si no hay errores, puedes enviar los datos al servidor aquí.
         if (!emailError && !passwordError) {
             try {
-                await signInWithEmailPassword(formData.email, formData.password, navigator);
+                await adminVerification(formData.email, formData.password, navigator)
             } catch (error) {
-                console.log(error)
                 setErrors({
                     email: "",
                     password: "",
                     login: error.message
                 });
+                console.log("login: " + error.message);
             }
         }
     };
@@ -101,7 +98,6 @@ export default function Login() {
                     <div className='inputGroupAuth'>
                         <div className='passwordLabelsAuth'>
                             <label htmlFor="password" className='passwordLabelAuth'>Contraseña</label>
-                            <Link to='/forgotpassword' className='forgotPasswordLabelAuth'>¿Has olvidado tu contraseña?</Link>
                         </div>
                         <input
                             type="password"
@@ -118,17 +114,6 @@ export default function Login() {
                     </div>
                     <input type="submit" value="INICIAR SESIÓN" className='inputSubmitAuth' />
                 </form>
-
-                <div className='loginSocialAuth'>
-                    <span onClick={() => signInWithGoogle(navigator)}>
-                        <img src={googleIcon} alt="Imagen para iniciar sesión con Google" />
-                    </span>
-                </div>
-
-                <div className='haveAccountAuth'>
-                    <p className='haveAccount_titleAuth'>¿Eres nuevo en OnionPrint?</p>
-                    <Link to='/register' className='haveAccount_linkAuth'>¡Crea tu cuenta ahora!</Link>
-                </div>
             </div>
         </main>
     );

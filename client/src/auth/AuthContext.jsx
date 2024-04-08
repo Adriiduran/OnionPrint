@@ -19,16 +19,21 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const auth = getAuth(app);
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false)
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
-      setLoading(false);
     });
     // Limpiar el efecto al desmontar el componente
     return () => unsubscribe();
   }, []);
+
+  useEffect(() => {
+    if (user && user.email === 'admin@onionprint.es') {
+      setIsAdmin(true)
+    }
+  }, [user])
 
   const registerUser = async (email, password, navigator) => {
     try {
@@ -55,24 +60,33 @@ export const AuthProvider = ({ children }) => {
   };
 
   const signInWithEmailPassword = async (email, password, navigator) => {
-    try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
 
-      const user = userCredential.user;
+    setUser(user);
 
-      setUser(user);
+    toast.success('Inicio de sesión correcto!', {
+      position: 'top-right',
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      theme: 'light',
+    });
 
-      toast.success('Inicio de sesión correcto!', {
-        position: 'top-right',
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        theme: 'light',
-      });
-
+    if (!isAdmin) {
       navigator('/');
-    } catch (error) {
-      console.error('Error al iniciar sesión con correo electrónico y contraseña:', error);
+    }
+  };
+
+  const adminVerification = async (email, password, navigator) => {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+
+    if (userCredential && userCredential.user && userCredential.user.email === 'admin@onionprint.es') {
+      setIsAdmin(true);
+
+      navigator('/dashboard');
+    } else {
+      throw new Error('Credenciales inválidas');
     }
   };
 
@@ -106,10 +120,6 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const signInWithApple = async () => {
-    // TODO: Implementar el método para registrar usuarios con Apple
-  };
-
   const resetPassword = async (email, navigator) => {
     sendPasswordResetEmail(auth, email)
       .then(() => {
@@ -127,17 +137,26 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
-  const logout = async () => {
+  const logout = async (navigator) => {
     try {
       await signOut(auth);
-      navigator("/")
+
+      toast.success('Sesión cerrada correctamente!', {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        theme: 'light',
+      });
+
+      navigator("/");
     } catch (error) {
       console.error('Error durante el Logout:', error);
     }
   };
 
   return (
-    <AuthContext.Provider value={{ user, setUser, registerUser, signInWithGoogle, signInWithApple, signInWithEmailPassword, resetPassword, logout }}>
+    <AuthContext.Provider value={{ user, setUser, registerUser, signInWithGoogle, signInWithEmailPassword, resetPassword, logout, adminVerification, isAdmin }}>
       {children}
     </AuthContext.Provider>
   );

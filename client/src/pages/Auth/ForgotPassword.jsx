@@ -1,5 +1,5 @@
 //Dependencies
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { validateEmail } from "../../utils/UserDataValidation";
 import 'react-toastify/dist/ReactToastify.css';
@@ -16,7 +16,7 @@ import exclamationIcon from '../../assets/exclamationIcon.png';
 export default function ForgotPassword() {
 
     const navigator = useNavigate();
-    const { resetPassword } = useAuth();
+    const { resetPassword, user } = useAuth();
 
     const [formData, setFormData] = useState({
         email: '',
@@ -28,6 +28,12 @@ export default function ForgotPassword() {
 
     const [loading, setLoading] = useState(false);
 
+    useEffect(() => {
+        if (user && user.email !== '') {
+            navigator('/')
+        }
+    }, [user])
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         // Realizar validaciones antes de enviar los datos.
@@ -38,7 +44,7 @@ export default function ForgotPassword() {
         });
 
         // Si no hay errores, puedes enviar los datos al servidor aquí.
-        if (!emailError) {
+        if (emailError && emailError !== 'Este campo no puede estar vacío') {
             setLoading(true)
             console.log('Datos válidos, enviando formulario...');
             try {
@@ -51,6 +57,8 @@ export default function ForgotPassword() {
             } finally {
                 setLoading(false)
             }
+        } else {
+            console.log('No entra')
         }
     };
 

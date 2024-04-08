@@ -81,14 +81,6 @@ export const ShoppingCartProvider = ({ children }) => {
     }, [finalShoppingCartPreferences.items, finalShoppingCartPreferences.shipping]);
 
     useEffect(() => {
-        console.log('Current Shopping Cart Preferences:', shoppingCartPreferences);
-    }, [shoppingCartPreferences]);
-
-    useEffect(() => {
-        console.log('Final Shopping Cart Preferences:', finalShoppingCartPreferences);
-    }, [finalShoppingCartPreferences]);
-
-    useEffect(() => {
         if (user != undefined) {
             setFinalShoppingCartPreferences((prevPreferences) => ({
                 ...prevPreferences,

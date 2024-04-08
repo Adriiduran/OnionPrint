@@ -6,7 +6,7 @@ import exclamationIcon from '../../assets/exclamationIcon.png';
 //Dependencies
 import { Link, useNavigate } from 'react-router-dom';
 import { validateEmail, validatePassword } from '../../utils/UserDataValidation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 //Style
 import './Auth.css';
@@ -15,7 +15,7 @@ import { useAuth } from '../../auth/AuthContext';
 export default function Register() {
 
     const navigator = useNavigate();
-    const { registerUser, signInWithGoogle } = useAuth();
+    const { registerUser, signInWithGoogle, user } = useAuth();
 
     const [formData, setFormData] = useState({
         email: '',
@@ -28,6 +28,12 @@ export default function Register() {
         password: '',
         passwordRepetition: '',
     });
+
+    useEffect(() => {
+        if (user && user.email !== '') {
+            navigator('/')
+        }
+    }, [user])
 
     const handleSubmit = (e) => {
         e.preventDefault();
