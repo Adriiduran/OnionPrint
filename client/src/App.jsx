@@ -16,6 +16,10 @@ import Login from "./pages/Auth/Login.jsx";
 import LoginAdmin from "./pages/Auth/LoginAdmin.jsx";
 import ShoppingCart from "./pages/Cart/ShoppingCart.jsx";
 import Completion from './pages/Completion/Completion.jsx';
+import PaymentMethods from "./pages/Info/PaymentMethods.jsx";
+import Cookies from "./pages/Info/Cookies.jsx";
+import ProductionShipment from "./pages/Info/ProductionShipment.jsx";
+import WarrantyReturns from "./pages/Info/WarrantyReturns.jsx";
 
 //Components
 import Header from "./components/Header/Header.jsx"
@@ -47,6 +51,10 @@ export default function App() {
                                 <Route path="/cart" element={<ShoppingCart />} />
                                 <Route path="/completion" element={<Completion />} />
                                 <Route path="/admin" element={<LoginAdmin />} />
+                                <Route path="/payment-methods" element={<PaymentMethods />} />
+                                <Route path="/cookies" element={<Cookies />} />
+                                <Route path="/warranty-returns" element={<WarrantyReturns />} />
+                                <Route path="/production-shipment" element={<ProductionShipment />} />
                             </Routes>
                             <Footer />
                         </BrowserRouter>
