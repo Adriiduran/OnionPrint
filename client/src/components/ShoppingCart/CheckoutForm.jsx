@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { PaymentElement } from "@stripe/react-stripe-js";
 import { useState } from "react";
 import { useStripe, useElements } from "@stripe/react-stripe-js";
+import { toast } from 'react-toastify';
 import axios from "axios";
 
 //Context
@@ -54,7 +55,15 @@ export default function CheckoutForm() {
 
         resetFinalShoppingCart();
 
-        navigator('/completion')
+        toast.success('Pedido creado con éxito!', {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          theme: 'light',
+        });
+
+        navigator('/')
       } catch (error) {
         console.log('Ha ocurrido un error al guardar o enviar el email de pedido')
       }
