@@ -163,6 +163,14 @@
     gap: 30px;
   }
 
+  .footer-main-logo {
+    align-items: start;
+
+    p {
+      text-align: left;
+    }
+  }
+
   .footer-secondary-info {
     flex-direction: column;
     align-items: start;
