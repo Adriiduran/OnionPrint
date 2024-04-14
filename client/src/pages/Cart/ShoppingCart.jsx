@@ -325,7 +325,7 @@ function ShoppingCart() {
                                         <div>
                                             <input type="text" id="deliveryComments" name="deliveryComments" value={formData.deliveryComments} onChange={handleChange} placeholder='Comentarios al repartidor' />
                                         </div>
-                                        <div className='info'>
+                                        <div className='shoppingCartUserInfoDisplay'>
                                             <p>* Campos obligatorios</p>
                                         </div>
                                     </form>
@@ -439,7 +439,7 @@ function ShoppingCart() {
                                             <div>
                                                 <input type="text" id="deliveryComments" name="deliveryComments" value={formData.deliveryComments} onChange={handleChange} placeholder='Comentarios al repartidor' />
                                             </div>
-                                            <div className='info'>
+                                            <div className='shoppingCartUserInfoDisplay'>
                                                 <p>* Campos obligatorios</p>
                                             </div>
                                         </form>
