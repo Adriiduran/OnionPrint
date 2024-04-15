@@ -101,6 +101,7 @@
     border: 1px solid var(--primary);
     font-size: medium;
     font-weight: 600;
+    cursor: pointer;
   }
 
   div {

@@ -482,6 +482,7 @@
   font-size: 30px;
   font-weight: 600;
   color: black;
+  cursor: pointer;
 }
 
 .tags {
@@ -598,7 +599,7 @@
   justify-content: center;
   gap: 30px;
   width: 100%;
-  margin-top: 30px;
+  margin: 50px 0px 100px 0px;
 }
 
 .noItemsImage {
