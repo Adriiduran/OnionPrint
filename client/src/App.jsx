@@ -20,6 +20,7 @@ import PaymentMethods from "./pages/Info/PaymentMethods.jsx";
 import Cookies from "./pages/Info/Cookies.jsx";
 import ProductionShipment from "./pages/Info/ProductionShipment.jsx";
 import WarrantyReturns from "./pages/Info/WarrantyReturns.jsx";
+import PageNotFound from "./pages/PageNotFound/PageNotFound.jsx";
 
 //Components
 import Header from "./components/Header/Header.jsx"
@@ -55,6 +56,7 @@ export default function App() {
                                 <Route path="/cookies" element={<Cookies />} />
                                 <Route path="/warranty-returns" element={<WarrantyReturns />} />
                                 <Route path="/production-shipment" element={<ProductionShipment />} />
+                                <Route path="*" element={<PageNotFound />}/>
                             </Routes>
                             <Footer />
                         </BrowserRouter>

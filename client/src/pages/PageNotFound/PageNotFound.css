@@ -1,0 +1,116 @@
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap");
+
+.PageNotFoundhome {
+  padding: 0 77px;
+  font-size: 62.5%;
+  margin-bottom: 100px;
+}
+
+.PageNotFoundhome {
+  padding-top: 6rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5rem;
+}
+
+.PageNotFoundhome .PageNotFoundimage {
+  flex: 1 1 45rem;
+}
+
+.PageNotFoundhome img {
+  width: 400px;
+  height: 400px;
+}
+
+.PageNotFoundhome .PageNotFoundcontent {
+  flex: 1 1 60rem;
+}
+
+.PageNotFoundhome .PageNotFoundcontent h1 {
+  font-family: "Space Mono", monospace;
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 95px;
+  letter-spacing: -0.035em;
+  padding-bottom: 1rem;
+  color: #333333;
+  text-align: left;
+}
+
+.PageNotFoundhome .PageNotFoundcontent p {
+  font-size: 24px;
+  font-weight: normal;
+  font-style: normal;
+  font-family: "Space Mono", monospace;
+  line-height: 36px;
+  letter-spacing: -0.035em;
+  padding-bottom: 5rem;
+  max-width: 50rem;
+  color: #4f4f4f;
+  text-align: left;
+}
+
+.PageNotFoundhome .PageNotFoundcontent a {
+  padding: 2rem 3rem;
+  background-color: #333333;
+  color: #fff;
+  font-family: Space Mono;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  transition: 0.2s;
+}
+
+.PageNotFoundhome .PageNotFoundcontent a:hover {
+  background-color: #4f4f4f;
+  text-decoration: none;
+}
+
+/* Media Queries */
+@media (max-width: 991px) {
+  .PageNotFoundhome {
+    font-size: 55%;
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .PageNotFoundhome .PageNotFoundcontent h1 {
+    font-size: 48px;
+    line-height: 71px;
+    padding-bottom: 2rem;
+  }
+
+  .PageNotFoundhome .PageNotFoundcontent p {
+    font-size: 18px;
+    line-height: 27px;
+  }
+}
+@media (max-width: 450px) {
+  .PageNotFoundhome {
+    font-size: 50%;
+  }
+
+  .PageNotFoundhome .PageNotFoundcontent h1 {
+    font-size: 40px;
+    line-height: 55px;
+    padding-bottom: 2rem;
+  }
+
+  .PageNotFoundhome .PageNotFoundcontent p {
+    font-size: 18px;
+    line-height: 27px;
+  }
+
+  .PageNotFoundhome .PageNotFoundcontent a {
+    margin-bottom: 5rem;
+  }
+  section {
+    padding: 0 1.5rem;
+  }
+}
