@@ -16,6 +16,11 @@ function Header() {
         setMobileMenuOpen(!isMobileMenuOpen);
     };
 
+    const handleLogout = () => {
+        setMobileMenuOpen(false)
+        logout(navigator)
+    }
+
     return (
         <header className="headerHeader">
             <article className='desktopHeader'>
@@ -61,18 +66,18 @@ function Header() {
 
             <article className='mobileHeader'>
                 <div className="mainHeader">
-                    <Link to='/'><img src="/src/assets/logo.svg" alt="Logo" className='logoHeader' /></Link>
+                    <Link to='/' onClick={() => {setMobileMenuOpen(false)}}><img src="/src/assets/logo.svg" alt="Logo" className='logoHeader' /></Link>
                     <img className='hamburguerIconHeader' src={`${isMobileMenuOpen ? '/src/assets/closeIcon.png' : '/src/assets/burgerMenu.png'}`} alt="Hamburguer Menu Button" onClick={toggleMobileMenu} />
                 </div>
                 <nav className={`${isMobileMenuOpen ? 'elementsHeader' : 'mobileMenuCloseHeader'}`}>
                     <ul>
-                        <li style={{ display: user ? 'none' : 'block' }}><Link to="/register">
+                        <li style={{ display: user ? 'none' : 'block' }}><Link to="/register" onClick={() => {setMobileMenuOpen(false)}}>
                             <span className='buttonHeader'>
                                 <p>REGISTRARSE</p>
                                 <img src="/src/assets/registerIcon.png" alt="User Icon Button" />
                             </span>
                         </Link></li>
-                        <li style={{ display: user ? 'none' : 'block' }}><Link to="/login">
+                        <li style={{ display: user ? 'none' : 'block' }}><Link to="/login" onClick={() => {setMobileMenuOpen(false)}}>
                             <span className='buttonHeader primaryHeader'>
                                 <p>IDENTIFICARSE</p>
                                 <img src="/src/assets/loginIcon.png" alt="User Icon Button" />
@@ -84,7 +89,7 @@ function Header() {
                                 <img src="/src/assets/profileIcon.png" alt="User Icon Button" />
                             </span>
                         </li>
-                        <li style={{ display: user ? 'block' : 'none' }} onClick={() => {logout(navigator)}}>
+                        <li style={{ display: user ? 'block' : 'none' }} onClick={handleLogout}>
                             <span className='buttonHeader logoutHeader'>
                                 <p>CERRAR SESIÓN</p>
                                 <img src="/src/assets/loginIcon.png" alt="User Icon Button" />

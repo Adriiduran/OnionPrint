@@ -79,7 +79,7 @@ export default function Footer() {
                     <h2>Boletín</h2>
                     <p>Recibirás un <strong>Bono</strong> de descuento al suscribirte</p>
                     <form onSubmit={handleSubmit}>
-                        <input type="email" name="email" id="email" className="footer-main-newsletter-input" placeholder="Email" onChange={(e) => handleEmailOnChange(e)} />
+                        <input type="email" name="email" id="footerEmail" className="footer-main-newsletter-input" placeholder="Email" onChange={(e) => handleEmailOnChange(e)} />
                         <input type="submit" value="Enviar" />
                     </form>
                     {emailError !== "" && (
