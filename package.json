@@ -1,0 +1,29 @@
+{
+  "name": "onionprint-app",
+  "version": "1.0.0",
+  "description": "OnionPrint App.",
+  "main": "index.js",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "start:frontend": "cd frontend && npm run dev",
+    "start:backend": "cd backend && npm run dev",
+    "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://Adriiduran@github.com/Adriiduran/OnionPrint.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Adriiduran/OnionPrint/issues"
+  },
+  "homepage": "https://github.com/Adriiduran/OnionPrint#readme",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
