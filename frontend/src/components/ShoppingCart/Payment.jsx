@@ -13,14 +13,14 @@ export default function Payment() {
   const { finalShoppingCartPreferences } = useShoppingCart();
 
   useEffect(() => {
-    fetch("http://localhost:5252/api/stripe-config").then(async (r) => {
+    fetch(`${import.meta.env.VITE_API_URL}/stripe-config`).then(async (r) => {
       const { publishableKey } = await r.json();
       setStripePromise(loadStripe(publishableKey));
     });
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:5252/api/create-payment-intent", {
+    fetch(`${import.meta.env.VITE_API_URL}/create-payment-intent`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'

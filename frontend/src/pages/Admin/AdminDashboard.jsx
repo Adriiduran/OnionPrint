@@ -17,26 +17,26 @@ import AdminOrders from '../../components/Admin/AdminOrders.jsx';
 import AdminDiscounts from '../../components/Admin/AdminDiscounts.jsx';
 import AdminOrderDetail from '../../components/Admin/AdminOrderDetail.jsx';
 
-export const AdminDashboard = () => {
-  const PageEnum = {
-    HOME: {
-      name : 'Inicio',
-      url: '/admin/home'
-    },
-    USERS: {
-      name : 'Usuarios',
-      url: '/admin/users'
-    },
-    ORDERS: {
-      name : 'Pedidos',
-      url: '/admin/orders'
-    },
-    DISCOUNTS: {
-      name : 'Descuentos',
-      url: '/admin/discounts'
-    }
+export const PageEnum = {
+  HOME: {
+    name: 'Inicio',
+    url: '/admin/home'
+  },
+  USERS: {
+    name: 'Usuarios',
+    url: '/admin/users'
+  },
+  ORDERS: {
+    name: 'Pedidos',
+    url: '/admin/orders'
+  },
+  DISCOUNTS: {
+    name: 'Descuentos',
+    url: '/admin/discounts'
   }
+}
 
+export const AdminDashboard = () => {
   const { isAdmin } = useAuth();
   const [activePage, setActivePage] = useState(PageEnum.HOME.name);
   const [orderId, setOrderId] = useState(null);
@@ -52,38 +52,39 @@ export const AdminDashboard = () => {
   useEffect(() => {
     if (location.pathname === PageEnum.HOME.url) {
       setActivePage(PageEnum.HOME.name)
-    } else if (location.pathname.includes(PageEnum.ORDERS.url)) {
-      setActivePage(PageEnum.ORDERS.name)
+      setOrderId(null)
+    } else if (location.pathname === PageEnum.USERS.url) {
+      setActivePage(PageEnum.USERS.name)
+      setOrderId(null)
     } else if (location.pathname === PageEnum.DISCOUNTS.url) {
       setActivePage(PageEnum.DISCOUNTS.name)
+      setOrderId(null)
     } else {
-      setActivePage(PageEnum.USERS.name)
+      setActivePage(PageEnum.ORDERS.name)
     }
   }, [location]);
 
   return (
     <div className='admin-dashboard'>
-        <AdminNavbar/>
-        <main className='main'>
-          {activePage !== PageEnum.HOME.name && (
-            <>
-              <h1>{activePage}</h1>
-              <Breadcrumbs aria-label="breadcrumb">
-                <Link to={PageEnum.HOME.url}>{PageEnum.HOME.name}</Link>
-                { orderId ? <Link to={PageEnum.ORDERS.url}>{PageEnum.ORDERS.name}</Link> : <Typography color="text.primary">{activePage}</Typography> }
-                { orderId && <Typography color="text.primary">{orderId}</Typography>}
-              </Breadcrumbs>
-            </>
-          )}
-          <Routes>
-            <Route path="/home" element={<AdminHome />} />
-            <Route path="/users" element={<AdminUsers />} />
-            <Route path="/orders" element={<AdminOrders setOrderId={setOrderId} />} />
-            <Route path="/orders/:orderId" element={<AdminOrderDetail setOrderId={setOrderId}/>} />
-            <Route path="/discounts" element={<AdminDiscounts />} />
-          </Routes>
-        </main>
-      </div>
+      <AdminNavbar />
+      <main className='main'>
+        <h1>{activePage}</h1>
+        {activePage !== PageEnum.HOME.name && (
+          <Breadcrumbs aria-label="breadcrumb">
+            <Link to={PageEnum.HOME.url}>{PageEnum.HOME.name}</Link>
+            {orderId ? <Link to={PageEnum.ORDERS.url}>{PageEnum.ORDERS.name}</Link> : <Typography color="text.primary">{activePage}</Typography>}
+            {orderId && <Typography color="text.primary">{orderId}</Typography>}
+          </Breadcrumbs>
+        )}
+        <Routes>
+          <Route path="/home" element={<AdminHome />} />
+          <Route path="/users" element={<AdminUsers />} />
+          <Route path="/orders" element={<AdminOrders />} />
+          <Route path="/orders/:orderId" element={<AdminOrderDetail setOrderId={setOrderId} />} />
+          <Route path="/discounts" element={<AdminDiscounts />} />
+        </Routes>
+      </main>
+    </div>
   );
 };
 

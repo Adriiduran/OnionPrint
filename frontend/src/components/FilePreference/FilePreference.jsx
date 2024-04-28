@@ -583,7 +583,7 @@ const FilePreference = ({ preferenceType }) => {
                     <div className="preferenceItemDetailsColumn">
                         <div className="preferenceItemList">
                             <div className={handleStylesByCurrentPreferences(filePreferences.printPerFace.normal) + 'preferenceItemDetailsRow'} onClick={handleStylesByCurrentPreferences(filePreferences.printPerFace.normal) === 'disabled ' ? null : handleNormalClick}>
-                                <img src="/src/assets/normal.svg" alt="impresion normal" />
+                                <img src={`${import.meta.env.VITE_ASSETS_URL}/normal.svg`} alt="impresion normal" />
                                 <div className='preferenceItemDetailsColumn' >
                                     <h3>{filePreferences.printPerFace.normal.title}</h3>
                                     <span>{filePreferences.printPerFace.normal.description}</span>
@@ -591,7 +591,7 @@ const FilePreference = ({ preferenceType }) => {
                             </div>
 
                             <div className={handleStylesByCurrentPreferences(filePreferences.printPerFace['2Pages']) + 'preferenceItemDetailsRow'} onClick={handleStylesByCurrentPreferences(filePreferences.printPerFace['2Pages']) === 'disabled ' ? null : handle2PagesClick}>
-                                <img src="/src/assets/2paginas.svg" alt="impresion normal" />
+                                <img src={`${import.meta.env.VITE_ASSETS_URL}/2paginas.svg`} alt="impresion normal" />
                                 <div className='preferenceItemDetailsColumn' >
                                     <h3>{filePreferences.printPerFace['2Pages'].title}</h3>
                                     <span>{filePreferences.printPerFace['2Pages'].description}</span>
@@ -600,7 +600,7 @@ const FilePreference = ({ preferenceType }) => {
                         </div>
                         <div className="preferenceItemList">
                             <div className={handleStylesByCurrentPreferences(filePreferences.printPerFace['2Slides']) + 'preferenceItemDetailsRow'} onClick={handleStylesByCurrentPreferences(filePreferences.printPerFace['2Slides']) === 'disabled ' ? null : handle2SlidesClick}>
-                                <img src="/src/assets/2diapositivas.svg" alt="impresion normal" />
+                                <img src={`${import.meta.env.VITE_ASSETS_URL}/2diapositivas.svg`} alt="impresion normal" />
                                 <div className='preferenceItemDetailsColumn' >
                                     <h3>{filePreferences.printPerFace['2Slides'].title}</h3>
                                     <span>{filePreferences.printPerFace['2Slides'].description}</span>
@@ -608,7 +608,7 @@ const FilePreference = ({ preferenceType }) => {
                             </div>
 
                             <div className={handleStylesByCurrentPreferences(filePreferences.printPerFace['4Slides']) + 'preferenceItemDetailsRow'} onClick={handleStylesByCurrentPreferences(filePreferences.printPerFace['4Slides']) === 'disabled ' ? null : handle4SlidesClick}>
-                                <img src="/src/assets/4diapositivas.svg" alt="impresion normal" />
+                                <img src={`${import.meta.env.VITE_ASSETS_URL}/4diapositivas.svg`} alt="impresion normal" />
                                 <div className='preferenceItemDetailsColumn' >
                                     <h3>{filePreferences.printPerFace['4Slides'].title}</h3>
                                     <span>{filePreferences.printPerFace['4Slides'].description}</span>
@@ -659,7 +659,7 @@ const FilePreference = ({ preferenceType }) => {
                     <div className="preferenceItemDetailsColumn">
                         <div className="preferenceItemList">
                             <div className={handleStylesByCurrentPreferences(filePreferences.finishes.noFinishes) + 'preferenceItemDetailsRow'} onClick={handleNoFinishesClick}>
-                                <img src="/src/assets/sinAcabado.svg" alt="impresion normal" />
+                                <img src={`${import.meta.env.VITE_ASSETS_URL}/sinAcabado.svg`} alt="impresion normal" />
                                 <div className='preferenceItemDetailsColumn' >
                                     <h3>{filePreferences.finishes.noFinishes.title}</h3>
                                     <span>{filePreferences.finishes.noFinishes.description}</span>
@@ -667,7 +667,7 @@ const FilePreference = ({ preferenceType }) => {
                             </div>
 
                             <div className={handleStylesByCurrentPreferences(filePreferences.finishes.bound) + 'preferenceItemDetailsRow'} onClick={handleBoundClick}>
-                                <img src="/src/assets/grapado.svg" alt="encuadernado" />
+                                <img src={`${import.meta.env.VITE_ASSETS_URL}/grapado.svg`} alt="encuadernado" />
                                 <div className='preferenceItemDetailsColumn' >
                                     <h3>{filePreferences.finishes.bound.title}</h3>
                                     <span>{filePreferences.finishes.bound.description}</span>
@@ -676,7 +676,7 @@ const FilePreference = ({ preferenceType }) => {
                         </div>
                         <div className="preferenceItemList">
                             <div className={handleStylesByCurrentPreferences(filePreferences.finishes.stapling) + 'preferenceItemDetailsRow'} onClick={handleStaplingClick}>
-                                <img src="/src/assets/grapado.svg" alt="impresion normal" />
+                                <img src={`${import.meta.env.VITE_ASSETS_URL}/grapado.svg`} alt="impresion normal" />
                                 <div className='preferenceItemDetailsColumn' >
                                     <h3>{filePreferences.finishes.stapling.title}</h3>
                                     <span>{filePreferences.finishes.stapling.description}</span>
@@ -684,7 +684,7 @@ const FilePreference = ({ preferenceType }) => {
                             </div>
 
                             <div className={handleStylesByCurrentPreferences(filePreferences.finishes['2Holes']) + 'preferenceItemDetailsRow'} onClick={handle2HolesClick}>
-                                <img src="/src/assets/2Agujeros.svg" alt="impresion normal" />
+                                <img src={`${import.meta.env.VITE_ASSETS_URL}/2Agujeros.svg`} alt="impresion normal" />
                                 <div className='preferenceItemDetailsColumn' >
                                     <h3>{filePreferences.finishes['2Holes'].title}</h3>
                                     <span>{filePreferences.finishes['2Holes'].description}</span>
@@ -694,7 +694,7 @@ const FilePreference = ({ preferenceType }) => {
 
                         <div className="preferenceItemList">
                             <div className={handleStylesByCurrentPreferences(filePreferences.finishes['4Holes']) + 'preferenceItemDetailsRow'} onClick={handle4HolesClick}>
-                                <img src="/src/assets/4Agujeros.svg" alt="impresion normal" />
+                                <img src={`${import.meta.env.VITE_ASSETS_URL}/4Agujeros.svg`} alt="impresion normal" />
                                 <div className='preferenceItemDetailsColumn' >
                                     <h3>{filePreferences.finishes['4Holes'].title}</h3>
                                     <span>{filePreferences.finishes['4Holes'].description}</span>
@@ -702,7 +702,7 @@ const FilePreference = ({ preferenceType }) => {
                             </div>
 
                             <div className={handleStylesByCurrentPreferences(filePreferences.finishes.laminated) + 'preferenceItemDetailsRow'} onClick={handleLaminatedClick}>
-                                <img src="/src/assets/sinAcabado.svg" alt="impresion normal" />
+                                <img src={`${import.meta.env.VITE_ASSETS_URL}/sinAcabado.svg`} alt="impresion normal" />
                                 <div className='preferenceItemDetailsColumn' >
                                     <h3>{filePreferences.finishes.laminated.title}</h3>
                                     <span>{filePreferences.finishes.laminated.description}</span>

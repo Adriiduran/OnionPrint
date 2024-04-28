@@ -30,7 +30,7 @@ export default function AdminUsers() {
 
     const fetchUsers = async () => {
         try {
-            const usersData = await axios.get("http://localhost:5252/api/users", {
+            const usersData = await axios.get(`${import.meta.env.VITE_API_URL}/users`, {
                 params: {
                     userUid: user.uid,
                 }

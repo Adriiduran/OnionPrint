@@ -38,7 +38,7 @@ app.use(express.static(process.env.STATIC_DIR));
 app.use(bodyParser.json());
 app.use(cors());
 
-// Configuración del transportador SMTP
+// SMTP transporter configuration
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_HOST,
   port: process.env.EMAIL_PORT,
@@ -52,6 +52,7 @@ const transporter = nodemailer.createTransport({
 app.get("/", (req, res) => {
   const path = resolve(process.env.STATIC_DIR + "/index.html");
   res.sendFile(path);
+  res.json({ message: "Esto funciona ma nigga" })
 });
 
 // Sends the publishable stripe key to the frontend
@@ -94,7 +95,8 @@ app.get("/api/orders", async (req, res) => {
     try {
       const ordersRef = adminFirebaseApp.firestore().collection("orders");
 
-      const snapshot = await ordersRef.get();
+      // Ordena las órdenes por la fecha de creación de forma descendente
+      const snapshot = await ordersRef.orderBy("creation_date", "desc").get();
 
       const orders = [];
 
@@ -116,6 +118,7 @@ app.get("/api/orders", async (req, res) => {
     });
   }
 });
+
 
 // Get order by id
 app.get("/api/orders/:orderId", async (req, res) => {
@@ -251,6 +254,122 @@ app.post("/api/send-order-creation-email", (req, res) => {
   });
 });
 
+// Get all discounts
+app.get("/api/discounts", async (req, res) => {
+  const userUid = req.query.userUid; 
+
+  if (userUid === process.env.ADMIN_UID) {
+    try {
+      const discounts = await adminFirebaseApp
+        .firestore()
+        .collection("discounts")
+        .get();
+      const discountsArray = discounts.docs.map((doc) => doc.data());
+      res.json(discountsArray);
+    } catch (error) {
+      console.error("Error al obtener los descuentos:", error);
+      res.status(500).json({ error: "Error al obtener los descuentos" });
+    }
+  } else {
+    res.status(500).json({ error: "Only admin can access to this endpoint" });
+  }
+})
+
+// Get discount by id
+app.get("/api/discounts/:discountId", async (req, res) => {
+  const userUid = req.query.userUid;
+  const discountId = req.params.discountId;
+
+  if (userUid === process.env.ADMIN_UID) {
+    try {
+      const discount = await adminFirebaseApp
+        .firestore()
+        .collection("discounts")
+        .doc(discountId)
+        .get();
+      res.json(discount.data());
+    } catch (error) {
+      console.error("Error al obtener el descuento:", error);
+      res.status(500).json({ error: "Error al obtener el descuento" });
+    }
+  } else {
+    res.status(500).json({ error: "Only admin can access to this endpoint" });
+  }
+})
+
+// Create discount
+app.post("/api/discounts", async (req, res) => {
+  const userUid = req.body.userUid;
+  const discount = req.body.discount;
+
+  if (userUid === process.env.ADMIN_UID) {
+    try {
+      await adminFirebaseApp
+        .firestore()
+        .collection("discounts")
+        .add(discount);
+      res.json({ message: "Descuento creado correctamente" });
+    } catch (error) {
+      console.error("Error al crear el descuento:", error);
+      res
+        .status(500)
+        .json({ error: "Error al crear el descuento" });
+    }
+  } else {
+    res.status(500).json({ error: "Only admin can access to this endpoint" });
+  }
+})
+
+// Update discount
+app.put("/api/discounts/:discountId", async (req, res) => {
+  const userUid = req.body.userUid;
+  const discountId = req.params.discountId;
+  const discount = req.body.discount;
+
+  if (userUid === process.env.ADMIN_UID) {
+    try {
+      await adminFirebaseApp
+        .firestore()
+        .collection("discounts")
+        .doc(discountId)
+        .update(discount);
+      res.json({ message: "Descuento actualizado correctamente" });
+    } catch (error) {
+      console.error("Error al actualizar el descuento:", error);
+      res
+        .status(500)
+        .json({ error: "Error al actualizar el descuento" });
+    }
+  } else {
+    res.status(500).json({ error: "Only admin can access to this endpoint" });
+  }
+})
+
+// Delete discount
+app.delete("/api/discounts/:discountId", async (req, res) => {
+  const userUid = req.body.userUid;
+  const discountId = req.params.discountId;
+
+  if (userUid === process.env.ADMIN_UID) {
+    try {
+      await adminFirebaseApp
+        .firestore()
+        .collection("discounts")
+        .doc(discountId)
+        .delete();
+      res.json({ message: "Descuento eliminado correctamente" });
+    } catch (error) {
+      console.error("Error al eliminar el descuento:", error);
+      res
+        .status(500)
+        .json({ error: "Error al eliminar el descuento" });
+    }
+  } else {
+    res.status(500).json({ error: "Only admin can access to this endpoint" });
+  }
+})
+
+// Send email when order status is changed
 async function sendEmailWhenOrderStatusIsChanged(orderStatus, order) {
   if (orderStatus === "received") {
     return
@@ -275,6 +394,6 @@ async function sendEmailWhenOrderStatusIsChanged(orderStatus, order) {
   });
 }
 
-app.listen(5252, () =>
-  console.log(`Node server listening at http://localhost:5252`)
+app.listen(3000, () =>
+  console.log(`Node server listening at PORT 3000`)
 );

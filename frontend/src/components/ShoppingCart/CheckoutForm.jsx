@@ -16,6 +16,7 @@ export default function CheckoutForm() {
   const { finalShoppingCartPreferences, resetFinalShoppingCart } = useShoppingCart();
   const stripe = useStripe();
   const elements = useElements()
+  
 
   const [message, setMessage] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -51,7 +52,7 @@ export default function CheckoutForm() {
       try {
         await saveFinalCartOnFirebase(finalShoppingCartPreferences, newOrderRef)
 
-        axios.post("http://localhost:5252/api/send-order-creation-email", {finalShoppingCartPreferences})
+        axios.post(`${import.meta.env.VITE_API_URL}/send-order-creation-email`, {finalShoppingCartPreferences})
 
         resetFinalShoppingCart();
 
@@ -79,7 +80,7 @@ export default function CheckoutForm() {
         <span>
           {isProcessing ? "PROCESANDO PAGO... " : `PAGAR ${finalShoppingCartPreferences.finalPrice}€`}
         </span>
-        <img src="/src/assets/lock.png" alt="Icono de pago seguro" />
+        <img src={`${import.meta.env.VITE_ASSETS_URL}/lock.png`} alt="Icono de pago seguro" />
       </button>
       {message && <div>{message}</div>}
     </form>

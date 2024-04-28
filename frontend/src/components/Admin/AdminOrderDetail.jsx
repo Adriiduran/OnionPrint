@@ -29,7 +29,7 @@ export default function AdminOrderDetail({ setOrderId }) {
     // Función que llama al servicio para obtener el pedido concreto usando el id de los parametros de la url
     const fetchOrder = async () => {
         try {
-            const orderData = await axios.get(`http://localhost:5252/api/orders/${orderId}`, {
+            const orderData = await axios.get(`${import.meta.env.VITE_API_URL}/orders/${orderId}`, {
                 params: {
                     userUid: user.uid,
                 }
@@ -138,7 +138,7 @@ export default function AdminOrderDetail({ setOrderId }) {
     // Función para aceptar el cambio de estado y actualizar en firebase
     const acceptOrderChange = async () => {
         try {
-            await axios.put(`http://localhost:5252/api/orders/${orderId}`, {
+            await axios.put(`${import.meta.env.VITE_API_URL}/orders/${orderId}`, {
                 orderStatus: orderStatus,
                 userUid: user.uid,
                 order: order

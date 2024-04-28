@@ -12,7 +12,6 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import TextField from '@mui/material/TextField';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import PropTypes from 'prop-types';
 
 const columns = [
     { id: 'id', label: 'ID'},
@@ -23,7 +22,7 @@ const columns = [
     { id: 'state', label: 'Estado'},
 ];
 
-export default function AdminOrders( { setOrderId } ) {
+export default function AdminOrders() {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [orders, setOrders] = useState([]);
@@ -35,7 +34,7 @@ export default function AdminOrders( { setOrderId } ) {
 
     const fetchUsers = async () => {
         try {
-            const ordersData = await axios.get("http://localhost:5252/api/orders", {
+            const ordersData = await axios.get(`${import.meta.env.VITE_API_URL}/orders`, {
                 params: {
                     userUid: user.uid,
                 }
@@ -49,7 +48,6 @@ export default function AdminOrders( { setOrderId } ) {
     }
 
     useEffect(() => {
-        setOrderId(null)
         if (user) {
             fetchUsers();
         }
@@ -59,7 +57,7 @@ export default function AdminOrders( { setOrderId } ) {
         const searchTerm = event.target.value.toLowerCase();
         setSearchTerm(searchTerm);
         const filtered = orders.filter((order) =>
-            order.id.toLowerCase().includes(searchTerm) || order.data.state.toLowerCase().includes(searchTerm) || order.data.creation_date.toLowerCase().includes(searchTerm)
+            order.id.toLowerCase().includes(searchTerm) || order.data.state.toLowerCase().includes(searchTerm) || order.data.creation_date.toLowerCase().includes(searchTerm) || order.data.user.name.toLowerCase().includes(searchTerm) || order.data.user.email.toLowerCase().includes(searchTerm) || order.data.user.phoneNumber.toLowerCase().includes(searchTerm)
         );
         setFilteredOrders(filtered);
     };
@@ -167,7 +165,3 @@ export default function AdminOrders( { setOrderId } ) {
 
     );
 }
-
-AdminOrders.propTypes = {
-    setOrderId: PropTypes.func.isRequired
-};

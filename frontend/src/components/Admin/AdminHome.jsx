@@ -1,4 +1,3 @@
-import './AdminHome.css'
 
 
 export default function AdminHome() {

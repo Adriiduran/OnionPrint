@@ -11,7 +11,8 @@
     "start:frontend": "cd frontend && npm run dev",
     "start:backend": "cd backend && npm run dev",
     "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cd frontend && npm run build"
   },
   "repository": {
     "type": "git",

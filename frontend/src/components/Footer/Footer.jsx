@@ -19,6 +19,7 @@ export default function Footer() {
     const [emailError, setEmailError] = useState("")
     const location = useLocation();
     const [isAdminRoute, setIsAdminRoute] = useState(false)
+    
 
     useEffect(() => {
         setIsAdminRoute(location.pathname.includes('/admin') ? true : false)
@@ -38,7 +39,7 @@ export default function Footer() {
         setEmailError("")
         setCheckboxError("")
 
-        axios.post("http://localhost:5252/send-discount", { email })
+        axios.post(`${import.meta.env.VITE_API_URL}/send-discount`, { email })
             .then(() => {
                 toast.success('Codigo de descuento enviado!', {
                     position: 'top-right',
@@ -74,7 +75,7 @@ export default function Footer() {
             <footer className="footer">
                 <div className="footer-main">
                     <div className="footer-main-logo">
-                        <img src="/src/assets/logo_blanco.svg" alt="Onion Print Logo" />
+                        <img src={`${import.meta.env.VITE_ASSETS_URL}/logo_blanco.svg`} alt="Onion Print Logo" />
                         <p>Tu imprenta de confianza en un mundo online.</p>
                     </div>
                     <div className="footer-main-links">
@@ -108,25 +109,25 @@ export default function Footer() {
                             <>
                                 <p>2004-2024 onionprint.es |</p>
                                 <div>
-                                    <img src="/src/assets/whatsappIcon.svg" alt="Whatsapp Icon" />
+                                    <img src={`${import.meta.env.VITE_ASSETS_URL}/whatsappIcon.svg`} alt="Whatsapp Icon" />
                                     <p>644012942 ( Lunes a Viernes de 9:00 a 16:00 ) |</p>
                                 </div>
                             </>
                         ) : (
                             <>
                                 <p>2004-2024 onionprint.es |</p>
-                                <img src="/src/assets/whatsappIcon.svg" alt="Whatsapp Icon" />
+                                <img src={`${import.meta.env.VITE_ASSETS_URL}/whatsappIcon.svg`} alt="Whatsapp Icon" />
                                 <p>644012942 ( Lunes a Viernes de 9:00 a 16:00 ) |</p>
                             </>
     
                         )}
                     </div>
                     <div className="footer-secondary-icons">
-                        <img src="/src/assets/googlePayIcon.svg" alt="Google Pay Icon" />
-                        <img src="/src/assets/applePayIcon.svg" alt="Apple Pay Icon" />
-                        <img src="/src/assets/paypalIcon.svg" alt="PayPal Icon" />
-                        <img src="/src/assets/visaIcon.svg" alt="Visa Icon" />
-                        <img src="/src/assets/mastercardIcon.svg" alt="Mastercard Icon" />
+                        <img src={`${import.meta.env.VITE_ASSETS_URL}/googlePayIcon.svg`} alt="Google Pay Icon" />
+                        <img src={`${import.meta.env.VITE_ASSETS_URL}/applePayIcon.svg`} alt="Apple Pay Icon" />
+                        <img src={`${import.meta.env.VITE_ASSETS_URL}/paypalIcon.svg`} alt="PayPal Icon" />
+                        <img src={`${import.meta.env.VITE_ASSETS_URL}/visaIcon.svg`} alt="Visa Icon" />
+                        <img src={`${import.meta.env.VITE_ASSETS_URL}/mastercardIcon.svg`} alt="Mastercard Icon" />
                     </div>
                 </div>
             </footer>

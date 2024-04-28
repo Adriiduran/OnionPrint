@@ -15,6 +15,7 @@ export default function FileView({ file, arrayPosition, onDelete }) {
     const { shoppingCartPreferences, updateCurrentShoppingCartPages, removeFileFromPositionInCurrentCart } = useShoppingCart();
     const [fileContent, setFileContent] = useState(null)
     const [numPages, setNumPages] = useState(null);
+    
 
     useEffect(() => {
         if (file) {
@@ -85,7 +86,7 @@ export default function FileView({ file, arrayPosition, onDelete }) {
             {fileContent}
             <div className="fileSelectedDetailsFileView">
                 <div className="firstDetailsFileView">
-                    <img src="/src/assets/expandIcon.png" alt="Expand File Selected View" />
+                    <img src={`${import.meta.env.VITE_ASSETS_URL}/expandIcon.png`} alt="Expand File Selected View" />
                     <p>{shoppingCartPreferences.preference.size.description}</p>
                     <span className="numberOfFileFileView">{arrayPosition + 1}</span>
                 </div>
@@ -98,7 +99,7 @@ export default function FileView({ file, arrayPosition, onDelete }) {
                     <div className="numberOfPagesFileView">
                         <p>PÁGINAS</p>
                         <div className="detailsFileView">
-                            <img src="/src/assets/pagesIcon.png" alt="Páginas de fichero" />
+                            <img src={`${import.meta.env.VITE_ASSETS_URL}/pagesIcon.png`} alt="Páginas de fichero" />
                             <p className="pagesFileView">{numPages}</p>
                         </div>
                     </div>
@@ -106,7 +107,7 @@ export default function FileView({ file, arrayPosition, onDelete }) {
                     <div className="sizeOfFileFileView">
                         <p>TAMAÑO</p>
                         <div className="detailsFileView">
-                            <img src="/src/assets/uploadIcon.png" alt="Tamaño del fichero" />
+                            <img src={`${import.meta.env.VITE_ASSETS_URL}/uploadIcon.png`} alt="Tamaño del fichero" />
                             <p className="pagesFileView">{formatFileSize(file.size)}</p>
                         </div>
                     </div>
@@ -115,7 +116,7 @@ export default function FileView({ file, arrayPosition, onDelete }) {
                 <hr />
 
                 <div className="finalDetailsFileView">
-                    <img src="/src/assets/trashIcon.png" alt="Eliminar fichero" onClick={handleDeleteFile} />
+                    <img src={`${import.meta.env.VITE_ASSETS_URL}/trashIcon.png`} alt="Eliminar fichero" onClick={handleDeleteFile} />
                     <p className="priceFileView">{shoppingCartPreferences.pricePerCopy}€</p>
                 </div>
             </div>
