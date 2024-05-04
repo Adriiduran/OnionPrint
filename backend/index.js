@@ -7,7 +7,7 @@ const env = require("dotenv").config({ path: "./.env" });
 const nodemailer = require("nodemailer");
 const admin = require("firebase-admin");
 const { error } = require("console");
-const path = require('path');
+const axios = require("axios");
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2022-08-01",
@@ -63,8 +63,14 @@ app.get("/api/stripe-config", (req, res) => {
   });
 });
 
-app.get("/.well-known/apple-developer-merchantid-domain-association", (req, res) => {
-  res.status(200).sendFile("https://onionprint.es/.well-known/apple-developer-merchantid-domain-association");
+app.get("/.well-known/apple-developer-merchantid-domain-association", async (req, res) => {
+  try {
+    const response = await axios.get("https://onionprint.es/.well-known/apple-developer-merchantid-domain-association");
+    res.status(200).send(response.data);
+  } catch (error) {
+    console.error("Error al obtener el archivo:", error);
+    res.status(500).send("Error interno del servidor");
+  }
 });
 
 // Sends firebase users list
