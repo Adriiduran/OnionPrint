@@ -151,7 +151,7 @@ export const AuthProvider = ({ children }) => {
         theme: 'light',
       });
 
-      navigator("/zapp");
+      navigator("/app");
     } catch (error) {
       console.error('Error durante el Logout:', error);
       toast.error('Error al cerrar sesión', {
