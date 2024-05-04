@@ -372,11 +372,90 @@
   }
 }
 
-@media (min-width: 1024px) {
+/* @media (min-width: 1024px) {
   .landingLogo,
   .landingBusiness,
   .landingPaperPlane,
   .landingBlueprints {
     flex-direction: row !important;
+  }
+} */
+
+@media (min-width: 1060px) {
+  .landingLogo,
+  .landingBusiness,
+  .landingPaperPlane,
+  .landingBlueprints {
+    flex-direction: row !important;
+    justify-content: center !important;
+    min-height: 600px !important;
+  }
+
+  .landingLogoFirst {
+    width: 40% !important;
+    display: flex;
+    flex-direction: row;
+    align-items: center ;
+    justify-content: center;
+
+    & > img {
+      max-width: 600px;
+    }
+  }
+
+  .landingLogoSecond {
+    align-items: start !important;
+    width: 40% !important;
+    padding-left: 50px;
+  }
+
+  .landingPaperPlaneFirst {
+    width: 40% !important;
+    display: flex;
+    align-items: center !important;
+    justify-content: center !important;
+
+    & > img {
+      max-width: 600px;
+      min-height: 600px !important;
+    }
+  }
+
+  .landingPaperPlaneSecond {
+    max-width: 40% !important;
+    align-items: start !important;
+  }
+
+  .landingBusinessGrid {
+    width: 40% !important;
+    display: flex;
+    align-items: start !important;
+    justify-content: center !important;
+  }
+
+  .landingBusinessGridRow {
+    align-items: start !important;
+    justify-content: start !important;
+  }
+
+  .landingBusinessInfo {
+    width: 40% !important;
+    display: flex;
+    align-items: start !important;
+    justify-content: start !important;
+  }
+
+  .landingBlueprintsFirst {
+    width: 40% !important;
+    display: flex;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .landingBlueprintsSecond {
+    width: 40% !important;
+    display: flex;
+    align-items: start !important;
+    justify-content: start !important;
   }
 }

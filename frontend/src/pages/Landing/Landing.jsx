@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { useMediaQuery } from '@mui/material';
 
 export default function Landing() {
-    const isDesktop = useMediaQuery('(min-width:1024px)');
+    const isDesktop = useMediaQuery('(min-width:1060px)');
 
     return (
         <main className="landing">

@@ -26,7 +26,6 @@ function Header() {
 
     useEffect(() => {
         setIsAdminRoute(location.pathname.includes('/admin') ? true : false)
-        console.log(import.meta.env.VITE_ASSETS_URL)
     }, [location])
 
     if (!isAdminRoute) {
