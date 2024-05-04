@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="122.095mm" height="122.095mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 23200.4 23200.4"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ xmlns:xodm="http://www.corel.com/coreldraw/odm/2003">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str0 {stroke:white;stroke-width:38;stroke-miterlimit:22.9256}
+    .fil0 {fill:fuchsia;fill-rule:nonzero}
+   ]]>
+  </style>
+   <clipPath id="id0">
+    <rect width="23200.4" height="23200.4"/>
+   </clipPath>
+ </defs>
+ <g id="Contenido_x0020_de_x0020_PowerClip">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g style="clip-path:url(#id0)">
+   <image x="-0" y="0" width="23200.4" height="23200.4" xlink:href="Imagen_chica_Images/Imagen_chica_ImgID1.png"/>
+  </g>
+  <path class="fil0 str0" d="M15049.68 5823.32c55.87,-100.18 111.73,-150.25 223.48,-150.25 123.34,0 223.46,89.75 223.46,200.34 0,200.36 -223.46,400.71 -446.95,601.05 -223.46,-200.34 -446.93,-400.69 -446.93,-601.05 0,-110.59 100.1,-200.34 223.46,-200.34 111.73,0 167.62,50.07 223.46,150.25z"/>
+  <path class="fil0 str0" d="M16115.37 4912.08c70.31,-126.08 140.63,-189.11 281.27,-189.11 155.26,0 281.27,112.95 281.27,252.16 0,252.16 -281.27,504.33 -562.53,756.49 -281.27,-252.16 -562.51,-504.33 -562.51,-756.49 0,-139.21 126,-252.16 281.25,-252.16 140.65,0 210.96,63.03 281.27,189.11z"/>
+  <path class="fil0 str0" d="M17181.06 4000.84c84.75,-151.98 169.54,-227.97 339.07,-227.97 187.15,0 339.03,136.17 339.03,303.97 0,303.97 -339.03,607.97 -678.1,911.94 -339.05,-303.97 -678.1,-607.97 -678.1,-911.94 0,-167.81 151.88,-303.97 339.05,-303.97 169.54,0 254.3,75.99 339.05,227.97z"/>
+ </g>
+</svg>

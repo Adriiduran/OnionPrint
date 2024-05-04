@@ -21,6 +21,7 @@ import Cookies from "./pages/Info/Cookies.jsx";
 import ProductionShipment from "./pages/Info/ProductionShipment.jsx";
 import WarrantyReturns from "./pages/Info/WarrantyReturns.jsx";
 import PageNotFound from "./pages/PageNotFound/PageNotFound.jsx";
+import Landing from "./pages/Landing/Landing.jsx";
 
 //Components
 import Header from "./components/Header/Header.jsx"
@@ -44,7 +45,8 @@ export default function App() {
                         <BrowserRouter>
                             <Header />
                             <Routes>
-                                <Route path="/" element={<Home />} />
+                                <Route path="/" element={<Landing />} />
+                                <Route path="/app" element={<Home />} />
                                 <Route path="/register" element={<Register />} />
                                 <Route path="/login" element={<Login />} />
                                 <Route path="/forgotpassword" element={<ForgotPassword />} />

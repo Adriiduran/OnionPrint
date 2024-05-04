@@ -9,10 +9,6 @@ import { useAuth } from '../../auth/AuthContext'
 //Styles
 import './Auth.css';
 
-//Icons
-import questionIcon from '../../assets/questionIcon.png';
-import exclamationIcon from '../../assets/exclamationIcon.png';
-
 export default function ForgotPassword() {
 
     const navigator = useNavigate();
@@ -75,7 +71,7 @@ export default function ForgotPassword() {
             <div className="registerAuth">
                 <div className="titleAuth">
                     <span className='titleSpanAuth'>
-                        <img src={questionIcon} alt="Imagen del título de la página de registro" />
+                        <img src={`${import.meta.env.VITE_ASSETS_URL}/exclamationIcon.png`} alt="Imagen del título de la página de registro" />
                     </span>
                     <h1>Recuperar Contraseña</h1>
                 </div>
@@ -93,7 +89,7 @@ export default function ForgotPassword() {
                             autoComplete='email'
                         />
                         <div className='errorAuth' style={{ display: errors.email === '' ? 'none' : 'flex' }}>
-                            <img src={exclamationIcon} alt='exclamationIcon' />
+                            <img src={`${import.meta.env.VITE_ASSETS_URL}/exclamationIcon.png`} alt='exclamationIcon' />
                             <p>{errors.email}</p>
                         </div>
                     </div>

@@ -596,7 +596,7 @@ function ShoppingCart() {
                 <div className='noItemsDescription'>
                     <h1>Tu carrito está vacío</h1>
                     <p>Cuando hayas añadido algo al carrito, aparecerá aquí</p>
-                    <Link to="/" className='noItemsDescriptionButton'>
+                    <Link to="/app" className='noItemsDescriptionButton'>
                         <span>CONTINUAR IMPRIMIENDO</span>
                         <img src={`${import.meta.env.VITE_ASSETS_URL}/arrowRight.png`} alt="Imagen flecha derecha" />
                     </Link>

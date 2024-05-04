@@ -15,7 +15,7 @@ export default function PageNotFound() {
         <h1>Tenemos malas noticias para tí</h1>
         <p>La página que estás buscando puede que se haya eliminado o sea inaccesible temporalmente</p>
 
-        <a className="PageNotFoundbtn" onClick={() => {navigator("/")}}>Volver al Incio</a>
+        <a className="PageNotFoundbtn" onClick={() => {navigator("/app")}}>Volver al Incio</a>
       </div>
     </section>
   );
