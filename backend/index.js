@@ -63,7 +63,7 @@ app.get("/api/stripe-config", (req, res) => {
 });
 
 app.get("/.well-known/apple-developer-merchantid-domain-association", (req, res) => {
-  res.status(200).sendFile(resolve(process.env.STATIC_DIR + "/apple-developer-merchantid-domain-association.txt"));
+  res.status(200).sendFile(resolve(process.env.STATIC_DIR + "/apple-developer-merchantid-domain-association"));
 })
 
 // Sends firebase users list

@@ -2,9 +2,9 @@
   "name": "onionprint-backend",
   "version": "1.0.0",
   "description": "OnionPrint Backend.",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "dev": "node server.js",
+    "dev": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write \"**/*.{js,jsx}\""
   },
