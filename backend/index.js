@@ -64,8 +64,7 @@ app.get("/api/stripe-config", (req, res) => {
 });
 
 app.get("/.well-known/apple-developer-merchantid-domain-association", (req, res) => {
-  const filePath = path.resolve(__dirname, "assets/apple-developer-merchantid-domain-association");
-  res.status(200).sendFile(filePath);
+  res.status(200).sendFile("https://onionprint.es/.well-known/apple-developer-merchantid-domain-association");
 });
 
 // Sends firebase users list
