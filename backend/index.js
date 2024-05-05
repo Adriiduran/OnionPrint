@@ -81,7 +81,6 @@ app.post("/api/create-payment-intent", async (req, res) => {
         postalCode: data.user.postalCode,
         deliveryComments: data.user.deliveryComments,
       },
-      payment_method_types: ["card", "paypal", "apple_pay", "google_pay"],
     });
 
     res.send({
