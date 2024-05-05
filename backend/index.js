@@ -63,6 +63,39 @@ app.get("/api/stripe-config", (req, res) => {
   });
 });
 
+// Created payment intent based on final cart preferences
+app.post("/api/create-payment-intent", async (req, res) => {
+  const data = req.body;
+
+  try {
+    const paymentIntent = await stripe.paymentIntents.create({
+      currency: "eur",
+      amount: data.finalPrice * 100,
+      automatic_payment_methods: { enabled: true },
+      metadata: {
+        name: data.user.name,
+        email: data.user.email,
+        phoneNumber: data.user.phoneNumber,
+        dni: data.user.dni,
+        address: data.user.address,
+        postalCode: data.user.postalCode,
+        deliveryComments: data.user.deliveryComments,
+      },
+      payment_method_types: ["card", "paypal", "apple_pay", "google_pay"],
+    });
+
+    res.send({
+      clientSecret: paymentIntent.client_secret,
+    });
+  } catch (e) {
+    return res.status(400).send({
+      error: {
+        message: e.message,
+      },
+    });
+  }
+});
+
 // Sends firebase users list
 app.get("/api/users", async (req, res) => {
   const userUid = req.query.userUid;
@@ -199,42 +232,6 @@ app.put("/api/orders/:orderId", async (req, res) => {
   } else {
     console.log('Only admin can access to this endpoint')
     res.status(500).json({ error: "Only admin can access to this endpoint" });
-  }
-});
-
-// Created payment intent based on final cart preferences
-app.post("/api/create-payment-intent", async (req, res) => {
-  const data = req.body;
-
-  try {
-    const paymentIntent = await stripe.paymentIntents.create({
-      currency: "eur",
-      total: {
-        label: "Total",
-        amount: data.finalPrice * 100,
-      },
-      automatic_payment_methods: { enabled: true },
-      metadata: {
-        name: data.user.name,
-        email: data.user.email,
-        phoneNumber: data.user.phoneNumber,
-        dni: data.user.dni,
-        address: data.user.address,
-        postalCode: data.user.postalCode,
-        deliveryComments: data.user.deliveryComments,
-      },
-      payment_method_types: ["card", "paypal", "apple_pay", "google_pay"],
-    });
-
-    res.send({
-      clientSecret: paymentIntent.client_secret,
-    });
-  } catch (e) {
-    return res.status(400).send({
-      error: {
-        message: e.message,
-      },
-    });
   }
 });
 
