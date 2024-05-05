@@ -63,16 +63,6 @@ app.get("/api/stripe-config", (req, res) => {
   });
 });
 
-app.get("/.well-known/apple-developer-merchantid-domain-association", async (req, res) => {
-  try {
-    const response = await axios.get("https://onionprint.es/.well-known/apple-developer-merchantid-domain-association");
-    res.status(200).send(response.data);
-  } catch (error) {
-    console.error("Error al obtener el archivo:", error);
-    res.status(500).send("Error interno del servidor");
-  }
-});
-
 // Sends firebase users list
 app.get("/api/users", async (req, res) => {
   const userUid = req.query.userUid;
