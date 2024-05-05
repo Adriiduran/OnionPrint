@@ -209,7 +209,10 @@ app.post("/api/create-payment-intent", async (req, res) => {
   try {
     const paymentIntent = await stripe.paymentIntents.create({
       currency: "eur",
-      amount: data.finalPrice * 100,
+      total: {
+        label: "Total",
+        amount: data.finalPrice * 100,
+      },
       automatic_payment_methods: { enabled: true },
       metadata: {
         name: data.user.name,
@@ -220,6 +223,7 @@ app.post("/api/create-payment-intent", async (req, res) => {
         postalCode: data.user.postalCode,
         deliveryComments: data.user.deliveryComments,
       },
+      payment_method_types: ["card", "paypal", "apple_pay", "google_pay"],
     });
 
     res.send({
