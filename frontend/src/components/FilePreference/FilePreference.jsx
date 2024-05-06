@@ -36,6 +36,8 @@ const FilePreference = ({ preferenceType }) => {
         const updatedCounter = copiesValue + 1;
         setCopiesValue(updatedCounter);
         updateCurrentPreferences({ copies: updatedCounter })
+
+        console.log(currentPreferences)
     };
 
     const handleCopiesInputChange = (event) => {
@@ -52,8 +54,6 @@ const FilePreference = ({ preferenceType }) => {
         const updatedCounter = Math.max(1, copiesValue || 1);
         setCopiesValue(updatedCounter);
         updateCurrentPreferences({ copies: updatedCounter })
-
-        console.log(currentPreferences.copies)
     };
 
     const handleKeyDown = (event) => {
@@ -81,6 +81,13 @@ const FilePreference = ({ preferenceType }) => {
             currentPreferences.size === filePreferences.paperSize.A2) {
             updateCurrentPreferences({ thickness: filePreferences.paperThickness['80GR'] })
         }
+
+        if (currentPreferences.size === filePreferences.paperSize.A0 ||
+            currentPreferences.size === filePreferences.paperSize.A1 ||
+            currentPreferences.size === filePreferences.paperSize.A2 &&
+            currentPreferences.turnPageMode === null) {
+            updateCurrentPreferences({ turnPageMode: filePreferences.turnPageMode.longSide })
+        }
     }
 
     const handleA3Click = () => {
@@ -99,6 +106,13 @@ const FilePreference = ({ preferenceType }) => {
         if (currentPreferences.printPerFace !== filePreferences.printPerFace.normal) {
             updateCurrentPreferences({ printPerFace: filePreferences.printPerFace.normal })
         }
+
+        if (currentPreferences.size === filePreferences.paperSize.A0 ||
+            currentPreferences.size === filePreferences.paperSize.A1 ||
+            currentPreferences.size === filePreferences.paperSize.A2 &&
+            currentPreferences.turnPageMode === null) {
+            updateCurrentPreferences({ turnPageMode: filePreferences.turnPageMode.longSide })
+        }
     }
 
     const handleA5Click = () => {
@@ -112,6 +126,13 @@ const FilePreference = ({ preferenceType }) => {
 
         if (currentPreferences.thickness === filePreferences.paperThickness['280GR']) {
             updateCurrentPreferences({ thickness: filePreferences.paperThickness['80GR'] })
+        }
+
+        if (currentPreferences.size === filePreferences.paperSize.A0 ||
+            currentPreferences.size === filePreferences.paperSize.A1 ||
+            currentPreferences.size === filePreferences.paperSize.A2 &&
+            currentPreferences.turnPageMode === null) {
+            updateCurrentPreferences({ turnPageMode: filePreferences.turnPageMode.longSide })
         }
 
         if (currentPreferences.turnPageMode === filePreferences.turnPageMode.shortSide) {
@@ -142,6 +163,13 @@ const FilePreference = ({ preferenceType }) => {
             currentPreferences.printPerFace !== filePreferences.printPerFace.normal) {
             updateCurrentPreferences({ printPerFace: filePreferences.printPerFace.normal })
         }
+
+        if ((currentPreferences.size === filePreferences.paperSize.A3 ||
+            currentPreferences.size === filePreferences.paperSize.A4 ||
+            currentPreferences.size === filePreferences.paperSize.A5) &&
+            currentPreferences.printType === filePreferences.printType.dobleCara) {
+            updateCurrentPreferences({ printType: filePreferences.printType.unaCara })
+        }
     }
 
     const handleA1Click = () => {
@@ -158,6 +186,13 @@ const FilePreference = ({ preferenceType }) => {
             currentPreferences.size === filePreferences.paperSize.A5) &&
             currentPreferences.printPerFace !== filePreferences.printPerFace.normal) {
             updateCurrentPreferences({ printPerFace: filePreferences.printPerFace.normal })
+        }
+
+        if ((currentPreferences.size === filePreferences.paperSize.A3 ||
+            currentPreferences.size === filePreferences.paperSize.A4 ||
+            currentPreferences.size === filePreferences.paperSize.A5) &&
+            currentPreferences.printType === filePreferences.printType.dobleCara) {
+            updateCurrentPreferences({ printType: filePreferences.printType.unaCara })
         }
     }
 
@@ -176,6 +211,13 @@ const FilePreference = ({ preferenceType }) => {
             currentPreferences.printPerFace !== filePreferences.printPerFace.normal) {
             updateCurrentPreferences({ printPerFace: filePreferences.printPerFace.normal })
         }
+
+        if ((currentPreferences.size === filePreferences.paperSize.A3 ||
+            currentPreferences.size === filePreferences.paperSize.A4 ||
+            currentPreferences.size === filePreferences.paperSize.A5) &&
+            currentPreferences.printType === filePreferences.printType.dobleCara) {
+            updateCurrentPreferences({ printType: filePreferences.printType.unaCara })
+        }
     }
 
     const handle80GRClick = () => {
@@ -186,7 +228,7 @@ const FilePreference = ({ preferenceType }) => {
         updateCurrentPreferences({ thickness: filePreferences.paperThickness['160GR'] })
 
         if (currentPreferences.finishes !== filePreferences.finishes.noFinishes) {
-            updateCurrentPreferences({ finishes: filePreferences.finishes.noFinishes})
+            updateCurrentPreferences({ finishes: filePreferences.finishes.noFinishes })
         }
     }
 
@@ -194,7 +236,7 @@ const FilePreference = ({ preferenceType }) => {
         updateCurrentPreferences({ thickness: filePreferences.paperThickness['280GR'] })
 
         if (currentPreferences.finishes !== filePreferences.finishes.noFinishes) {
-            updateCurrentPreferences({ finishes: filePreferences.finishes.noFinishes})
+            updateCurrentPreferences({ finishes: filePreferences.finishes.noFinishes })
         }
     }
 
