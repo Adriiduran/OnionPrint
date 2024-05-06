@@ -75,7 +75,7 @@ export default function Footer() {
             <footer className="footer">
                 <div className="footer-main">
                     <div className="footer-main-logo">
-                        <img src={`${import.meta.env.VITE_ASSETS_URL}/logo_blanco.svg`} alt="Onion Print Logo" />
+                        <img src={`${import.meta.env.VITE_ASSETS_URL}/logo_blanco.svg`} alt="Onion Print Logo" loading="lazy" />
                         <p>Tu imprenta de confianza en un mundo online.</p>
                     </div>
                     <div className="footer-main-links">
@@ -109,25 +109,25 @@ export default function Footer() {
                             <>
                                 <p>2004-2024 onionprint.es |</p>
                                 <div>
-                                    <img src={`${import.meta.env.VITE_ASSETS_URL}/whatsappIcon.svg`} alt="Whatsapp Icon" />
+                                    <img src={`${import.meta.env.VITE_ASSETS_URL}/whatsappIcon.svg`} alt="Whatsapp Icon" loading="lazy"/>
                                     <p>644012942 ( Lunes a Viernes de 9:00 a 16:00 ) |</p>
                                 </div>
                             </>
                         ) : (
                             <>
                                 <p>2004-2024 onionprint.es |</p>
-                                <img src={`${import.meta.env.VITE_ASSETS_URL}/whatsappIcon.svg`} alt="Whatsapp Icon" />
+                                <img src={`${import.meta.env.VITE_ASSETS_URL}/whatsappIcon.svg`} alt="Whatsapp Icon" loading="lazy"/>
                                 <p>644012942 ( Lunes a Viernes de 9:00 a 16:00 ) |</p>
                             </>
     
                         )}
                     </div>
                     <div className="footer-secondary-icons">
-                        <img src={`${import.meta.env.VITE_ASSETS_URL}/googlePayIcon.svg`} alt="Google Pay Icon" />
-                        <img src={`${import.meta.env.VITE_ASSETS_URL}/applePayIcon.svg`} alt="Apple Pay Icon" />
-                        <img src={`${import.meta.env.VITE_ASSETS_URL}/paypalIcon.svg`} alt="PayPal Icon" />
-                        <img src={`${import.meta.env.VITE_ASSETS_URL}/visaIcon.svg`} alt="Visa Icon" />
-                        <img src={`${import.meta.env.VITE_ASSETS_URL}/mastercardIcon.svg`} alt="Mastercard Icon" />
+                        <img src={`${import.meta.env.VITE_ASSETS_URL}/googlePayIcon.svg`} alt="Google Pay Icon" loading="lazy"/>
+                        <img src={`${import.meta.env.VITE_ASSETS_URL}/applePayIcon.svg`} alt="Apple Pay Icon" loading="lazy"/>
+                        <img src={`${import.meta.env.VITE_ASSETS_URL}/paypalIcon.svg`} alt="PayPal Icon" loading="lazy"/>
+                        <img src={`${import.meta.env.VITE_ASSETS_URL}/visaIcon.svg`} alt="Visa Icon" loading="lazy"/>
+                        <img src={`${import.meta.env.VITE_ASSETS_URL}/mastercardIcon.svg`} alt="Mastercard Icon" loading="lazy"/>
                     </div>
                 </div>
             </footer>

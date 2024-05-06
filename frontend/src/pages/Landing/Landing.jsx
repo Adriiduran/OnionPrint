@@ -39,7 +39,7 @@ export default function Landing() {
 
             <section className='landingPaperPlane'>
                 <div className='landingPaperPlaneFirst'>
-                    <img src={`${import.meta.env.VITE_ASSETS_URL}/landingPaperPlane.svg`} alt="Landing Paper Plane" />
+                    <img src={`${import.meta.env.VITE_ASSETS_URL}/landingPaperPlane.svg`} alt="Landing Paper Plane" loading="lazy"/>
                 </div>
 
                 <div className='landingPaperPlaneSecond'>
@@ -51,7 +51,7 @@ export default function Landing() {
 
                     <Link to={'/app'}>
                         <button>
-                            <img src={`${import.meta.env.VITE_ASSETS_URL}/landingSmallPaperPlane.svg`} alt="Imagen para subir documentos" />
+                            <img src={`${import.meta.env.VITE_ASSETS_URL}/landingSmallPaperPlane.svg`} alt="Imagen para subir documentos" loading="lazy"/>
                             <p>Empieza a imprimir</p>
                         </button>
                     </Link>
@@ -108,7 +108,7 @@ export default function Landing() {
             <section className='landingBlueprints'>
                 {!isDesktop && (
                     <div className='landingBlueprintsFirst'>
-                        <img src={`${import.meta.env.VITE_ASSETS_URL}/landingBlueprints.png`} alt="Landing Blueprints" />
+                        <img src={`${import.meta.env.VITE_ASSETS_URL}/landingBlueprints.png`} alt="Landing Blueprints" loading="lazy"/>
                     </div>
                 )}
 
@@ -117,7 +117,7 @@ export default function Landing() {
                     <p>Nuestros plotter de impresión imprimen en alta calidad al <span>mejor precio y sin moverte</span> de tu casa u oficina</p>
                     <Link to={'/app'}>
                         <button>
-                            <img src={`${import.meta.env.VITE_ASSETS_URL}/landingSmallPaperPlane.svg`} alt="Imagen para subir documentos" />
+                            <img src={`${import.meta.env.VITE_ASSETS_URL}/landingSmallPaperPlane.svg`} alt="Imagen para subir documentos" loading="lazy"/>
                             <p>Empieza a imprimir</p>
                         </button>
                     </Link>
@@ -125,7 +125,7 @@ export default function Landing() {
 
                 {isDesktop && (
                     <div className='landingBlueprintsFirst'>
-                        <img src={`${import.meta.env.VITE_ASSETS_URL}/landingBlueprints.png`} alt="Landing Blueprints" />
+                        <img src={`${import.meta.env.VITE_ASSETS_URL}/landingBlueprints.png`} alt="Landing Blueprints" loading="lazy"/>
                     </div>
                 )}
             </section>
