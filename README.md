@@ -1,7 +1,5 @@
 ![OnionPrint](https://onionprint-frontend.vercel.app/assets/logo_blanco.svg)
 
-# OnionPrint
-
 OnionPrint es una plataforma de impresión en línea que ofrece un servicio excelente y rápido para satisfacer las necesidades de impresión de tus proyectos. Esta aplicación utiliza tecnologías modernas para garantizar una experiencia óptima tanto para los usuarios como para los administradores. Entre las tecnologías destacadas se incluyen React, Vite, Node.js con Express, Stripe para la gestión de pagos y Firebase para integración y almacenamiento de datos.
 
 ## Características
