@@ -56,7 +56,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 10px;
+  gap: 20px;
   border: 1px solid white;
   border-radius: 10px;
   -webkit-border-radius: 10px;
@@ -71,10 +71,11 @@
 
   form {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
-    gap: 10px;
+    align-items: start;
+    gap: 20px;
+    width: 100%;
   }
 
   form > input[type="email"] {
@@ -87,6 +88,7 @@
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
     padding: 10px 20px;
+    width: 90%;
   }
 
   form > input[type="submit"] {
@@ -193,10 +195,17 @@
       text-align: left;
       text-wrap: pretty;
     }
+  }
+}
 
+@media (min-width: 375px) {
+  .footer-main-newsletter {
     form {
-      flex-direction: column;
-      align-items: start;   
+      flex-direction: row;
+
+      input[type="email"] {
+        flex-grow: 1;
+      }
     }
   }
 }
