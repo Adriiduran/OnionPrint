@@ -20,7 +20,10 @@ export default function Landing() {
                 <div className='landingLogoSecond'>
                     <div>
                         <h1>La copisteria <span>online</span> directa a tu casa</h1>
-                        <p>Imprime <span>sin colas</span> sin perdidas de tiempo <span>y a la puerta de tú casa</span></p>
+                        <div>
+                            <p>Imprime <span>sin colas</span> sin perdidas de tiempo</p>
+                            <p><span>y a la puerta de tú casa</span></p>
+                        </div>
                     </div>
                     <Link to={'/app'}>
                         <button>
