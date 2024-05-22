@@ -56,17 +56,28 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 20px;
+  gap: 12px;
   border: 1px solid white;
   border-radius: 10px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
-  padding: 15px;
+  padding: 8px 10px;
 
   h2 {
     font-weight: 600;
+    font-size: 1.3rem;
+  }
+
+  & > p {
+    font-size: 0.8rem;
+  }
+
+  & > div {
+    & > p {
+      font-size: 0.6rem;
+    }
   }
 
   form {
@@ -74,7 +85,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: start;
-    gap: 20px;
+    gap: 10px;
     width: 100%;
   }
 
@@ -89,6 +100,19 @@
     -o-border-radius: 5px;
     padding: 10px 20px;
     width: 90%;
+    font-weight: 600;
+  }
+
+  /* Cambiar el estilo del placeholder en navegadores modernos */
+  form > input[type="email"]::placeholder {
+    color: white;
+    font-weight: 600;
+  }
+
+  /* WebKit (Chrome, Safari, Opera) */
+  form > input[type="email"]::-webkit-input-placeholder {
+    color: white;
+    font-weight: 600;
   }
 
   form > input[type="submit"] {
@@ -136,15 +160,36 @@
 
 .footer-secondary-icons {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
-  gap: 10px;
   flex-wrap: wrap;
+  gap: 5px;
 }
 
 .footer-secondary-icons > img {
   width: 60px;
   height: 60px;
+}
+
+@media (min-width: 375px) {
+  .footer-main-newsletter {
+    form {
+      flex-direction: row;
+
+      input[type="email"] {
+        flex-grow: 1;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-main-newsletter {
+    p {
+      text-align: left;
+      text-wrap: pretty;
+    }
+  }
 }
 
 @media (max-width: 1110px) {
@@ -187,25 +232,8 @@
       gap: 10px;
     }
   }
-}
 
-@media (max-width: 768px) {
-  .footer-main-newsletter {
-    p {
-      text-align: left;
-      text-wrap: pretty;
-    }
-  }
-}
-
-@media (min-width: 375px) {
-  .footer-main-newsletter {
-    form {
-      flex-direction: row;
-
-      input[type="email"] {
-        flex-grow: 1;
-      }
-    }
+  .footer-secondary-icons {
+    justify-content: center !important;
   }
 }
