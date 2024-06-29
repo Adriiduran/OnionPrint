@@ -42,19 +42,15 @@ export default function ForgotPassword() {
         // Si no hay errores, puedes enviar los datos al servidor aquí.
         if (emailError && emailError !== 'Este campo no puede estar vacío') {
             setLoading(true)
-            console.log('Datos válidos, enviando formulario...');
             try {
                 await resetPassword(formData.email, navigator);
             } catch (error) {
                 setErrors({
                     email: error.message
                 });
-                console.log("Reset Password: " + error.message);
             } finally {
                 setLoading(false)
             }
-        } else {
-            console.log('No entra')
         }
     };
 

@@ -52,7 +52,6 @@ export default function LoginAdmin() {
                     password: "",
                     login: error.message
                 });
-                console.log("login: " + error.message);
             }
         }
     };
@@ -89,7 +88,7 @@ export default function LoginAdmin() {
                             autoComplete='email'
                         />
                         <div className='errorAuth' style={{ display: errors.email === '' ? 'none' : 'flex' }}>
-                            <img src={exclamationIcon`${import.meta.env.VITE_ASSETS_URL}/exclamationIcon.png`} alt='exclamationIcon' />
+                            <img src={`${import.meta.env.VITE_ASSETS_URL}/exclamationIcon.png`} alt='exclamationIcon' />
                             <p>{errors.email}</p>
                         </div>
                     </div>

@@ -48,7 +48,6 @@ export default function Login() {
             try {
                 await signInWithEmailPassword(formData.email, formData.password, navigator);
             } catch (error) {
-                console.log(error)
                 setErrors({
                     email: "",
                     password: "",

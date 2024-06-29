@@ -50,7 +50,6 @@ export default function Register() {
 
         // Si no hay errores, puedes enviar los datos al servidor aquí.
         if (!emailError && !passwordError && !passwordRepetitionError) {
-            console.log('Datos válidos, enviando formulario...');
             registerUser(formData.email, formData.password, navigator)
         }
     };

@@ -87,8 +87,6 @@ const saveFinalCartOnFirebase = async (
         }
       })
     );
-
-    console.log("Pedido añadido a Firestore con archivos relacionados");
   } catch (error) {
     console.error("Error al guardar el objeto en Firebase:", error);
   }

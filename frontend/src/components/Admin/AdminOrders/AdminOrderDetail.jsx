@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { useAuth } from "../../auth/AuthContext";
+import { useAuth } from "../../../auth/AuthContext";
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -11,7 +11,7 @@ import TableRow from '@mui/material/TableRow';
 import { Box, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import PropTypes from 'prop-types';
 
-import ConfirmOrderActionDialog from './ConfirmOrderActionDialog';
+import ConfirmOrderActionDialog from '../ConfirmOrderActionDialog';
 
 export default function AdminOrderDetail({ setOrderId }) {
     const { orderId } = useParams();
@@ -41,7 +41,6 @@ export default function AdminOrderDetail({ setOrderId }) {
             setOrderId(newOrder.id);
 
         } catch (error) {
-            console.log('Ha ocurrido un error al obtener la información del pedido' + error);
         }
     }
 
@@ -145,7 +144,6 @@ export default function AdminOrderDetail({ setOrderId }) {
             });
             order.estado = orderStatus;
         } catch (error) {
-            console.log('Ha ocurrido un error al actualizar el estado del pedido' + error);
         }
     }
 

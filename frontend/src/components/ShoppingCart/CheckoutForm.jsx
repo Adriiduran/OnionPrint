@@ -31,7 +31,6 @@ export default function CheckoutForm() {
     setIsProcessing(true);
 
     const newOrderRef = getNewOrderRef();
-    console.log(newOrderRef)
     finalShoppingCartPreferences.id = newOrderRef.id
 
     const { error, paymentIntent } = await stripe.confirmPayment({
@@ -66,7 +65,6 @@ export default function CheckoutForm() {
 
         navigator('/')
       } catch (error) {
-        console.log('Ha ocurrido un error al guardar o enviar el email de pedido')
       }
     }
 

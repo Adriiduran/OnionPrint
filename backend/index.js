@@ -265,16 +265,24 @@ app.get("/api/discounts", async (req, res) => {
         .firestore()
         .collection("discounts")
         .get();
-      const discountsArray = discounts.docs.map((doc) => doc.data());
+
+      const discountsArray = discounts.docs.map((doc) => {
+        return {
+          ...doc.data(),
+          id: doc.id,
+        };
+      });
+
       res.json(discountsArray);
     } catch (error) {
       console.error("Error al obtener los descuentos:", error);
       res.status(500).json({ error: "Error al obtener los descuentos" });
     }
   } else {
-    res.status(500).json({ error: "Only admin can access to this endpoint" });
+    res.status(403).json({ error: "Only admin can access this endpoint" });
   }
-})
+});
+
 
 // Get discount by id
 app.get("/api/discounts/:discountId", async (req, res) => {
@@ -303,36 +311,37 @@ app.post("/api/discounts", async (req, res) => {
   const userUid = req.body.userUid;
   const discount = req.body.discount;
 
+  console.log("UID del usuario:", userUid);
+  console.log("Descuento:", discount);
+
   if (userUid === process.env.ADMIN_UID) {
-    try {
-      await adminFirebaseApp
-        .firestore()
-        .collection("discounts")
-        .add(discount);
-      res.json({ message: "Descuento creado correctamente" });
-    } catch (error) {
-      console.error("Error al crear el descuento:", error);
-      res
-        .status(500)
-        .json({ error: "Error al crear el descuento" });
-    }
+      try {
+          await adminFirebaseApp.firestore().collection("discounts").add(discount);
+          res.json({ message: "Descuento creado correctamente" });
+      } catch (error) {
+          console.error("Error al crear el descuento:", error);
+          res.status(500).json({ error: "Error al crear el descuento" });
+      }
   } else {
-    res.status(500).json({ error: "Only admin can access to this endpoint" });
+      res.status(403).json({ error: "Only admin can access to this endpoint" });
   }
-})
+});
 
 // Update discount
-app.put("/api/discounts/:discountId", async (req, res) => {
+app.put("/api/discounts", async (req, res) => {
   const userUid = req.body.userUid;
-  const discountId = req.params.discountId;
   const discount = req.body.discount;
+
+  console.log("ACTUALIZAR DESCUENTO");
+  console.log("UID del usuario:", userUid);
+  console.log("Descuento:", discount);
 
   if (userUid === process.env.ADMIN_UID) {
     try {
       await adminFirebaseApp
         .firestore()
         .collection("discounts")
-        .doc(discountId)
+        .doc(discount.id)
         .update(discount);
       res.json({ message: "Descuento actualizado correctamente" });
     } catch (error) {
@@ -347,28 +356,30 @@ app.put("/api/discounts/:discountId", async (req, res) => {
 })
 
 // Delete discount
-app.delete("/api/discounts/:discountId", async (req, res) => {
+app.delete("/api/discounts", async (req, res) => {
   const userUid = req.body.userUid;
-  const discountId = req.params.discountId;
+  const discount = req.body.discount;
+
+  console.log("ELIMINAR DESCUENTO");
+  console.log("UID del usuario:", userUid);
+  console.log("Descuento:", discount);
 
   if (userUid === process.env.ADMIN_UID) {
-    try {
-      await adminFirebaseApp
-        .firestore()
-        .collection("discounts")
-        .doc(discountId)
-        .delete();
-      res.json({ message: "Descuento eliminado correctamente" });
-    } catch (error) {
-      console.error("Error al eliminar el descuento:", error);
-      res
-        .status(500)
-        .json({ error: "Error al eliminar el descuento" });
-    }
+      try {
+          await adminFirebaseApp
+              .firestore()
+              .collection("discounts")
+              .doc(discount.id)
+              .delete();
+          res.json({ message: "Descuento eliminado correctamente" });
+      } catch (error) {
+          console.error("Error al eliminar el descuento:", error);
+          res.status(500).json({ error: "Error al eliminar el descuento" });
+      }
   } else {
-    res.status(500).json({ error: "Only admin can access to this endpoint" });
+      res.status(403).json({ error: "Only admin can access to this endpoint" });
   }
-})
+});
 
 // Send email when order status is changed
 async function sendEmailWhenOrderStatusIsChanged(orderStatus, order) {

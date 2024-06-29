@@ -10,12 +10,12 @@ import { useNavigate } from 'react-router-dom';
 import './AdminDashboard.css';
 
 // Components
-import AdminNavbar from '../../components/Admin/AdminNavbar.jsx';
+import AdminNavbar from '../../components/Admin/AdminNavbar/AdminNavbar.jsx';
 import AdminHome from '../../components/Admin/AdminHome.jsx';
 import AdminUsers from '../../components/Admin/AdminUsers.jsx';
-import AdminOrders from '../../components/Admin/AdminOrders.jsx';
-import AdminDiscounts from '../../components/Admin/AdminDiscounts.jsx';
-import AdminOrderDetail from '../../components/Admin/AdminOrderDetail.jsx';
+import AdminOrders from '../../components/Admin/AdminOrders/AdminOrders.jsx';
+import AdminDiscounts from '../../components/Admin/AdminDiscounts/AdminDiscounts.jsx';
+import AdminOrderDetail from '../../components/Admin/AdminOrders/AdminOrderDetail.jsx';
 
 export const PageEnum = {
   HOME: {

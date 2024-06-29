@@ -36,15 +36,12 @@ const FilePreference = ({ preferenceType }) => {
         const updatedCounter = copiesValue + 1;
         setCopiesValue(updatedCounter);
         updateCurrentPreferences({ copies: updatedCounter })
-
-        console.log(currentPreferences)
     };
 
     const handleCopiesInputChange = (event) => {
         if (event.target.value === null || event.target.value === 0) {
             updateCurrentPreferences({ copies: 1 })
         } else {
-            console.log(event.target.value)
             updateCurrentPreferences({ copies: event.target.value })
             setCopiesValue(event.target.value)
         }
