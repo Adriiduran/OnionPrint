@@ -10,10 +10,10 @@ import { formatDate } from '../../../utils/Date';
 const columns = [
     { id: 'id', label: 'ID', minWidth: 50 },
     { id: 'name', label: 'Nombre', minWidth: 100 },
-    { id: 'discount', label: 'Descuento', minWidth: 100 },
-    { id: 'duration', label: 'Tipo de duración', minWidth: 100 },
-    { id: 'startDate', label: 'Fecha de incio', minWidth: 100 },
-    { id: 'endDate', label: 'Fecha de finalización', minWidth: 100 },
+    { id: 'discount', label: 'Descuento', minWidth: 50 },
+    { id: 'duration', label: 'Tipo de duración', minWidth: 50 },
+    { id: 'startDate', label: 'Fecha de incio', minWidth: 250 },
+    { id: 'endDate', label: 'Fecha de finalización', minWidth: 250 },
     { id: 'uses', label: 'Usos', minWidth: 50 },
     { id: 'maxUses', label: 'Usos maximos', minWidth: 50 },
     { id: 'active', label: 'Activo', minWidth: 50 },
@@ -120,7 +120,7 @@ export default function AdminUsers() {
         const searchTerm = event.target.value.toLowerCase();
         setSearchTerm(searchTerm);
         const filtered = discounts.filter((discount) => {
-            return discount.uid.toLowerCase().includes(searchTerm) ||
+            return discount.id.toLowerCase().includes(searchTerm) ||
                 discount.name.toLowerCase().includes(searchTerm);
         }
         );
