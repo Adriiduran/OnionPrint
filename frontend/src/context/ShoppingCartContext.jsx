@@ -51,6 +51,8 @@ export const ShoppingCartProvider = ({ children }) => {
         billingMethod: billingMethod.card,
         itemsPrice: 0,
         finalPrice: 0,
+        discount: null,
+        discountPrice: 0,
         creation_date: '',
         state: stateEnum.recived,
         stripe_payment_intent: {},
@@ -79,7 +81,7 @@ export const ShoppingCartProvider = ({ children }) => {
         if (finalShoppingCartPreferences.items.length > 0) {
             calculateFinalShoppingCartPrice();
         }
-    }, [finalShoppingCartPreferences.items, finalShoppingCartPreferences.shipping]);
+    }, [finalShoppingCartPreferences.items, finalShoppingCartPreferences.shipping, finalShoppingCartPreferences.discount]);
 
     useEffect(() => {
         if (user != undefined) {
@@ -203,22 +205,51 @@ export const ShoppingCartProvider = ({ children }) => {
         }));
     }
 
-    //Funcion para calcular el precio final de todos los items que se hayan añadido al carrito
+    // Función para calcular la diferencia de descuento
+    const calculateDiscountDifference = () => {
+        const { itemsPrice, discount } = finalShoppingCartPreferences;
+        const discountRate = discount.discount / 100;
+        return Number((itemsPrice * discountRate).toFixed(2));
+    };
+
+    // Función para establecer el descuento final en el carrito de compras
+    const setFinalShoppingCartDiscount = (discount) => {
+        if (discount === null) {
+            setFinalShoppingCartPreferences(prevPreferences => ({
+                ...prevPreferences,
+                discount: null,
+                discountPrice: 0
+            }));
+            return;
+        }
+
+        setFinalShoppingCartPreferences(prevPreferences => ({
+            ...prevPreferences,
+            discount: discount
+        }));
+    };
+
+    // Función para calcular el precio final de todos los items en el carrito
     const calculateFinalShoppingCartPrice = () => {
-        let calculatedFinalPrice = 0;
         let calculatedItemsPrice = 0;
 
-        finalShoppingCartPreferences.items.forEach(element => {
-            calculatedItemsPrice += element.finalPrice;
-            setFinalShoppingCartPreferences((prevPreferences) => ({
-                ...prevPreferences,
-                itemsPrice: Number(calculatedItemsPrice.toFixed(2))
-            }));
-
-            calculatedFinalPrice = calculatedItemsPrice
+        finalShoppingCartPreferences.items.forEach(item => {
+            calculatedItemsPrice += item.finalPrice;
         });
 
-        if (finalShoppingCartPreferences.shipping === shippingMethod.standard) {
+        let calculatedFinalPrice = calculatedItemsPrice;
+        let discountDifference = 0;
+
+        // Verificar si existe un descuento y aplicarlo
+        if (finalShoppingCartPreferences.discount !== null) {
+            discountDifference = calculateDiscountDifference();
+            calculatedFinalPrice = Number((calculatedItemsPrice - discountDifference).toFixed(2));
+        }
+
+        // Calcular costos de envío
+        const { shipping } = finalShoppingCartPreferences;
+
+        if (shipping === shippingMethod.standard) {
             if (calculatedItemsPrice < 50) {
                 calculatedFinalPrice += 3.9;
             }
@@ -230,9 +261,9 @@ export const ShoppingCartProvider = ({ children }) => {
             }
         }
 
-        let fechaHoraActual = new Date();
-
-        let opcionesFormato = {
+        // Formatear la fecha y hora actual
+        const fechaHoraActual = new Date();
+        const opcionesFormato = {
             day: '2-digit',
             month: '2-digit',
             year: 'numeric',
@@ -241,16 +272,18 @@ export const ShoppingCartProvider = ({ children }) => {
             second: '2-digit',
             timeZone: 'Europe/Madrid'
         };
+        const formatoEspaña = new Intl.DateTimeFormat('es-ES', opcionesFormato);
+        const fechaHoraFormateada = formatoEspaña.format(fechaHoraActual);
 
-        let formatoEspaña = new Intl.DateTimeFormat('es-ES', opcionesFormato);
-        let fechaHoraFormateada = formatoEspaña.format(fechaHoraActual);
-
-        setFinalShoppingCartPreferences((prevPreferences) => ({
+        // Actualizar todas las propiedades necesarias en una sola llamada
+        setFinalShoppingCartPreferences(prevPreferences => ({
             ...prevPreferences,
+            itemsPrice: Number(calculatedItemsPrice.toFixed(2)),
+            discountPrice: Number(discountDifference.toFixed(2)),
             creation_date: fechaHoraFormateada,
             finalPrice: Number(calculatedFinalPrice.toFixed(2))
         }));
-    }
+    };
 
     //Añadir item actual al carrito final
     const addCurrentShoppingCartToFinal = () => {
@@ -334,7 +367,7 @@ export const ShoppingCartProvider = ({ children }) => {
     };
 
     return (
-        <ShoppingCartContext.Provider value={{ finalShoppingCartPreferences, shoppingCartPreferences, updateCurrentShoppingCartPages, resetCurrentShoppingCart, resetFinalShoppingCart, addCurrentFileToCurrentCart, resetCurrentShoppingCartPages, removeFileFromPositionInCurrentCart, addCurrentShoppingCartToFinal, getTotalPages, removeItemFromFinalShoppingCart, updateBillingMethodFinalShoppingCart, billingMethod, stateEnum, shippingMethod, updateShippingMethodFinalShoppingCart, assignOrderIdToFinalCart }}>
+        <ShoppingCartContext.Provider value={{ finalShoppingCartPreferences, shoppingCartPreferences, updateCurrentShoppingCartPages, resetCurrentShoppingCart, resetFinalShoppingCart, addCurrentFileToCurrentCart, resetCurrentShoppingCartPages, removeFileFromPositionInCurrentCart, addCurrentShoppingCartToFinal, getTotalPages, removeItemFromFinalShoppingCart, updateBillingMethodFinalShoppingCart, billingMethod, stateEnum, shippingMethod, updateShippingMethodFinalShoppingCart, assignOrderIdToFinalCart, setFinalShoppingCartDiscount }}>
             {children}
         </ShoppingCartContext.Provider>
     );

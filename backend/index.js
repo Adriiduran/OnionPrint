@@ -53,7 +53,6 @@ const transporter = nodemailer.createTransport({
 app.get("/", (req, res) => {
   const path = resolve(process.env.STATIC_DIR + "/index.html");
   res.sendFile(path);
-  res.json({ message: "Esto funciona ma nigga" })
 });
 
 // Sends the publishable stripe key to the frontend
@@ -152,7 +151,6 @@ app.get("/api/orders", async (req, res) => {
   }
 });
 
-
 // Get order by id
 app.get("/api/orders/:orderId", async (req, res) => {
   const orderId = req.params.orderId;
@@ -193,11 +191,11 @@ app.put("/api/orders/:orderId", async (req, res) => {
   const orderId = req.params.orderId;
   const orderStatus = req.body.orderStatus;
   const userUid = req.body.userUid;
-  const order = req.body.order
+  const order = req.body.order;
 
   if (userUid === process.env.ADMIN_UID) {
     try {
-      console.log(order)
+      console.log(order);
 
       const orderRef = adminFirebaseApp
         .firestore()
@@ -210,13 +208,17 @@ app.put("/api/orders/:orderId", async (req, res) => {
 
       // Elimina los archivos de imagen asociados al pedido cuando el estado sea 'completed'
       if (orderStatus === "completed") {
-        const bucket = adminFirebaseApp.storage().bucket("gs://onionprint-49a4e.appspot.com");
+        const bucket = adminFirebaseApp
+          .storage()
+          .bucket("gs://onionprint-49a4e.appspot.com");
         const folderPath = `files/${orderId}`;
         const [files] = await bucket.getFiles({ prefix: folderPath });
 
-        await Promise.all(files.map(file => file.delete()));
+        await Promise.all(files.map((file) => file.delete()));
 
-        console.log(`Se han eliminado los archivos asociados a la orderId '${orderId}'`);
+        console.log(
+          `Se han eliminado los archivos asociados a la orderId '${orderId}'`
+        );
       }
 
       await sendEmailWhenOrderStatusIsChanged(orderStatus, order);
@@ -229,35 +231,14 @@ app.put("/api/orders/:orderId", async (req, res) => {
         .json({ error: "Error al actualizar el estado del pedido" });
     }
   } else {
-    console.log('Only admin can access to this endpoint')
+    console.log("Only admin can access to this endpoint");
     res.status(500).json({ error: "Only admin can access to this endpoint" });
   }
 });
 
-// Send new email with user data
-app.post("/api/send-order-creation-email", (req, res) => {
-  const mailOptions = {
-    from: process.env.EMAIL_USER,
-    to: req.body.user.email,
-    subject: "PEDIDO REALIZADO 😎",
-    text:
-      "Se ha realizado un pedido con un precio final de: " +
-      req.body.finalPrice,
-  };
-
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error("Error al enviar el correo electrónico:", error);
-    } else {
-      console.log("Correo electrónico enviado:", info.response);
-      res.status(200);
-    }
-  });
-});
-
 // Get all discounts
 app.get("/api/discounts", async (req, res) => {
-  const userUid = req.query.userUid; 
+  const userUid = req.query.userUid;
 
   if (userUid === process.env.ADMIN_UID) {
     try {
@@ -283,7 +264,6 @@ app.get("/api/discounts", async (req, res) => {
   }
 });
 
-
 // Get discount by id
 app.get("/api/discounts/:discountId", async (req, res) => {
   const userUid = req.query.userUid;
@@ -304,7 +284,7 @@ app.get("/api/discounts/:discountId", async (req, res) => {
   } else {
     res.status(500).json({ error: "Only admin can access to this endpoint" });
   }
-})
+});
 
 // Create discount
 app.post("/api/discounts", async (req, res) => {
@@ -315,15 +295,15 @@ app.post("/api/discounts", async (req, res) => {
   console.log("Descuento:", discount);
 
   if (userUid === process.env.ADMIN_UID) {
-      try {
-          await adminFirebaseApp.firestore().collection("discounts").add(discount);
-          res.json({ message: "Descuento creado correctamente" });
-      } catch (error) {
-          console.error("Error al crear el descuento:", error);
-          res.status(500).json({ error: "Error al crear el descuento" });
-      }
+    try {
+      await adminFirebaseApp.firestore().collection("discounts").add(discount);
+      res.json({ message: "Descuento creado correctamente" });
+    } catch (error) {
+      console.error("Error al crear el descuento:", error);
+      res.status(500).json({ error: "Error al crear el descuento" });
+    }
   } else {
-      res.status(403).json({ error: "Only admin can access to this endpoint" });
+    res.status(403).json({ error: "Only admin can access to this endpoint" });
   }
 });
 
@@ -346,14 +326,12 @@ app.put("/api/discounts", async (req, res) => {
       res.json({ message: "Descuento actualizado correctamente" });
     } catch (error) {
       console.error("Error al actualizar el descuento:", error);
-      res
-        .status(500)
-        .json({ error: "Error al actualizar el descuento" });
+      res.status(500).json({ error: "Error al actualizar el descuento" });
     }
   } else {
     res.status(500).json({ error: "Only admin can access to this endpoint" });
   }
-})
+});
 
 // Delete discount
 app.delete("/api/discounts", async (req, res) => {
@@ -365,35 +343,157 @@ app.delete("/api/discounts", async (req, res) => {
   console.log("Descuento:", discount);
 
   if (userUid === process.env.ADMIN_UID) {
-      try {
-          await adminFirebaseApp
-              .firestore()
-              .collection("discounts")
-              .doc(discount.id)
-              .delete();
-          res.json({ message: "Descuento eliminado correctamente" });
-      } catch (error) {
-          console.error("Error al eliminar el descuento:", error);
-          res.status(500).json({ error: "Error al eliminar el descuento" });
-      }
+    try {
+      await adminFirebaseApp
+        .firestore()
+        .collection("discounts")
+        .doc(discount.id)
+        .delete();
+      res.json({ message: "Descuento eliminado correctamente" });
+    } catch (error) {
+      console.error("Error al eliminar el descuento:", error);
+      res.status(500).json({ error: "Error al eliminar el descuento" });
+    }
   } else {
-      res.status(403).json({ error: "Only admin can access to this endpoint" });
+    res.status(403).json({ error: "Only admin can access to this endpoint" });
   }
 });
 
-// Send email when order status is changed
+// Check discount code
+app.post("/api/discounts/check", async (req, res) => {
+  const { discountName } = req.body;
+
+  console.log("CHECK DISCOUNT CODE");
+  console.log("Nombre del descuento:", discountName);
+
+  if (!discountName || typeof discountName !== "string") {
+    return res.json({
+      success: false,
+      error: "Invalid discount name provided",
+    });
+  }
+
+  try {
+    const discountsCollection = adminFirebaseApp
+      .firestore()
+      .collection("discounts");
+    const querySnapshot = await discountsCollection
+      .where("name", "==", discountName)
+      .get();
+
+    if (querySnapshot.empty) {
+      console.error(`No existe un descuento con el nombre: ${discountName}`);
+      return res.json({
+        success: false,
+        error: `No existe un descuento con el nombre: ${discountName}`,
+      });
+    }
+
+    const discounts = [];
+    let validationError = null;
+
+    querySnapshot.forEach((doc) => {
+      const discount = doc.data();
+      discount.id = doc.id;
+
+      // Comprobación de fecha de validez
+      const currentDate = new Date();
+      if (discount.startDate && discount.endDate) {
+        const startDate = new Date(discount.startDate);
+        const endDate = new Date(discount.endDate);
+        if (currentDate < startDate || currentDate > endDate) {
+          validationError = "El descuento no está vigente";
+        }
+      }
+
+      // Comprobación del límite de usos
+      if (discount.usageCount >= discount.usageLimit) {
+        validationError = "El cupón ha alcanzado el límite máximo de usos";
+      }
+
+      if (!discount.active) {
+        validationError = "El descuento no está activo";
+      }
+
+      if (!validationError) {
+        discounts.push(discount);
+      }
+    });
+
+    if (validationError) {
+      console.error(validationError);
+      return res.json({ success: false, error: validationError });
+    }
+
+    console.log("Discounts found:", discounts);
+    return res.json({ success: true, discounts: discounts });
+  } catch (error) {
+    console.error("Error fetching discount:", error);
+    return res
+      .status(500)
+      .json({ error: "Internal server error", details: error.message });
+  }
+});
+
+// Incrementar contador de uso del descuento
+app.post("/api/discounts/increment-usage-count", async (req, res) => {
+  const discount = req.body.discount;
+
+  console.log("INCREMENTAR CONTADOR DE USO DEL DESCUENTO");
+  console.log(discount);
+
+  if (!discount.id) {
+    return res.status(400).json({ error: "Invalid discount ID provided" });
+  }
+
+  try {
+    const discountRef = adminFirebaseApp
+      .firestore()
+      .collection("discounts")
+      .doc(discount.id);
+
+    await discountRef.update({ uses: admin.firestore.FieldValue.increment(1) });
+
+    return res.status(200).json({ success: true });
+  } catch (error) {
+    console.error("Error al incrementar el uso del descuento:", error);
+    return res.status(500).json({ error: "Error al incrementar el uso del descuento" });
+  }
+});
+
+// MARK: Email
+// [Email] Send email when order is created
+app.post("/api/send-order-creation-email", (req, res) => {
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    to: req.body.user.email,
+    subject: "PEDIDO REALIZADO 😎",
+    text:
+      "Se ha realizado un pedido con un precio final de: " +
+      req.body.finalPrice,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error("Error al enviar el correo electrónico:", error);
+    } else {
+      console.log("Correo electrónico enviado:", info.response);
+      res.status(200);
+    }
+  });
+});
+
+// [Email] Send email when order status is changed
 async function sendEmailWhenOrderStatusIsChanged(orderStatus, order) {
   if (orderStatus === "received") {
-    return
+    return;
   }
 
   const mailOptions = {
     from: process.env.EMAIL_USER,
     to: order.usuario.email,
     subject: "ACTUALIZACIÓN DE ESTADO DE PEDIDO 😎",
-    text:
-      "Se ha actualizado el estado del pedido a: " +
-      orderStatus,
+    text: "Se ha actualizado el estado del pedido a: " + orderStatus,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
@@ -406,6 +506,4 @@ async function sendEmailWhenOrderStatusIsChanged(orderStatus, order) {
   });
 }
 
-app.listen(3000, () =>
-  console.log(`Node server listening at PORT 3000`)
-);
+app.listen(3000, () => console.log(`Node server listening at PORT 3000`));

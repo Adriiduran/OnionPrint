@@ -25,7 +25,7 @@ export default function Footer() {
         setIsAdminRoute(location.pathname.includes('/admin') ? true : false)
     }, [location])
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (email === "" || !validateEmail(email)) {
@@ -39,7 +39,7 @@ export default function Footer() {
         setEmailError("")
         setCheckboxError("")
 
-        axios.post(`${import.meta.env.VITE_API_URL}/send-discount`, { email })
+        await axios.post(`${import.meta.env.VITE_API_URL}/send-discount`, { email })
             .then(() => {
                 toast.success('Codigo de descuento enviado!', {
                     position: 'top-right',

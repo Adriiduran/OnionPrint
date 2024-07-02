@@ -41,6 +41,7 @@ export default function AdminOrderDetail({ setOrderId }) {
             setOrderId(newOrder.id);
 
         } catch (error) {
+            console.log(error)
         }
     }
 
@@ -52,6 +53,8 @@ export default function AdminOrderDetail({ setOrderId }) {
             envio: order.data.shipping,
             'precio sin envío': order.data.itemsPrice,
             'precio final': order.data.finalPrice,
+            'descuento aplicado': order.data.discountPrice,
+            'descuento': order.data.discount,
             'método de pago': order.data.billingMethod,
             'stripe': order.data.stripe_payment_intent.id,
             'fecha creación': order.data.creation_date,
@@ -144,6 +147,7 @@ export default function AdminOrderDetail({ setOrderId }) {
             });
             order.estado = orderStatus;
         } catch (error) {
+            console.log(error);
         }
     }
 

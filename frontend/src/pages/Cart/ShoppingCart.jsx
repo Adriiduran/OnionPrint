@@ -7,15 +7,16 @@ import './ShoppingCart.css';
 import { useShoppingCart } from '../../context/ShoppingCartContext.jsx';
 // Components
 import Payment from '../../components/ShoppingCart/Payment.jsx'
+import axios from 'axios';
 
 function ShoppingCart() {
-    const { finalShoppingCartPreferences, getTotalPages, removeItemFromFinalShoppingCart, shippingMethod, updateShippingMethodFinalShoppingCart } = useShoppingCart();
+    const { finalShoppingCartPreferences, getTotalPages, removeItemFromFinalShoppingCart, shippingMethod, updateShippingMethodFinalShoppingCart, setFinalShoppingCartDiscount } = useShoppingCart();
     const [openFileIndex, setOpenFileIndex] = useState(null);
     const isMobile = useMediaQuery('(max-width:830px)');
     const [userConfirmedInfo, setUserConfirmedInfo] = useState(false)
     const [loading, setLoading] = useState(false);
-    
-
+    const [discountName, setDiscountName] = useState('');
+    const [discountError, setDiscountError] = useState('');
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -25,7 +26,6 @@ function ShoppingCart() {
         postalCode: '',
         deliveryComments: ''
     });
-
     const [errors, setErrors] = useState({
         nameError: '',
         emailError: '',
@@ -168,6 +168,32 @@ function ShoppingCart() {
         }
     }
 
+    const handleDiscountVerification = async () => {
+        if (discountName === "") {
+            setDiscountError("Debes introducir un descuento")
+            return
+        } else {
+            setDiscountError("")
+        }
+
+        try {
+            const discount = await axios.post(`${import.meta.env.VITE_API_URL}/discounts/check`, {
+                discountName: discountName
+            })
+
+            if (discount.data.success === false) {
+                setFinalShoppingCartDiscount(null)
+                setDiscountError(discount.data.error)
+                return
+            }
+
+            setFinalShoppingCartDiscount(discount.data.discounts[0])
+        } catch (error) {
+            setFinalShoppingCartDiscount(null)
+            setDiscountError("Error al comprobar el cupón")
+        }
+    }
+
     // UseEffect para rellenar automaticamente los campos del formulario del usuario si ya ha 
     // rellenado los campos anteriormente o si se ha iniciado sesión se rellena su email
     useEffect(() => {
@@ -243,6 +269,17 @@ function ShoppingCart() {
                             ))}
                         </div>
 
+                        <div className='shoppingCartDiscount'>
+                            <div>
+                                <input type="text" name="discount" id="discount" placeholder='Escribe el código de tu cupón' onChange={e => setDiscountName(e.target.value)} value={discountName} />
+                                <button onClick={handleDiscountVerification}>Aplicar</button>
+                            </div>
+
+                            {discountError ? (
+                                <p>{discountError}</p>
+                            ) : null}
+                        </div>
+
                         <div className='shoppingCartInfoDisplay'>
                             <div className='shoppingCartInfoDisplayFirst'>
                                 <span>Resumen del pedido:</span>
@@ -255,6 +292,14 @@ function ShoppingCart() {
                                 <span>Subtotal:</span>
                                 <span>{finalShoppingCartPreferences.itemsPrice}€</span>
                             </div>
+
+                            {finalShoppingCartPreferences.discount !== null && (
+                                <div className='shoppingCartInfoSubtotalDetails'>
+                                    <span>{`Descuento (${finalShoppingCartPreferences.discount.discount}%):`}</span>
+                                    <span>-{finalShoppingCartPreferences.discountPrice}€</span>
+                                </div>
+                            )}
+
                             {finalShoppingCartPreferences.items.length != 0 && (
                                 <div className='shoppingCartInfoSubtotalDetails'>
                                     <span>Gastos de envío:</span>
@@ -552,6 +597,17 @@ function ShoppingCart() {
                                 ))}
                             </div>
 
+                            <div className='shoppingCartDiscount'>
+                                <div>
+                                    <input type="text" name="discount" id="discount" placeholder='Escribe el código de tu cupón' onChange={e => setDiscountName(e.target.value)} value={discountName} />
+                                    <button onClick={handleDiscountVerification}>Aplicar</button>
+                                </div>
+
+                                {discountError ? (
+                                    <p>{discountError}</p>
+                                ) : null}
+                            </div>
+
                             <div className='shoppingCartInfoDisplay'>
                                 <div className='shoppingCartInfoDisplayFirst'>
                                     <span>Resumen del pedido:</span>
@@ -564,6 +620,14 @@ function ShoppingCart() {
                                     <span>Subtotal:</span>
                                     <span>{finalShoppingCartPreferences.itemsPrice}€</span>
                                 </div>
+
+                                {finalShoppingCartPreferences.discount !== null && (
+                                    <div className='shoppingCartInfoSubtotalDetails'>
+                                        <span>{`Descuento (${finalShoppingCartPreferences.discount.discount}%):`}</span>
+                                        <span>-{finalShoppingCartPreferences.discountPrice}€</span>
+                                    </div>
+                                )}
+
                                 {finalShoppingCartPreferences.items.length != 0 && (
                                     <div className='shoppingCartInfoSubtotalDetails'>
                                         <span>Gastos de envío:</span>

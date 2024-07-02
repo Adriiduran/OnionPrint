@@ -46,6 +46,8 @@ const saveFinalCartOnFirebase = async (
       billingMethod: finalShoppingCartPreferences.billingMethod,
       itemsPrice: finalShoppingCartPreferences.itemsPrice,
       finalPrice: finalShoppingCartPreferences.finalPrice,
+      discountPrice: finalShoppingCartPreferences.discountPrice ? finalShoppingCartPreferences.discountPrice : 0,
+      discount: finalShoppingCartPreferences.discount ? finalShoppingCartPreferences.discount : null,
       creation_date: finalShoppingCartPreferences.creation_date,
       state: finalShoppingCartPreferences.state,
       filesInfo: {}, // Inicializar la propiedad filesURL como un objeto vacío

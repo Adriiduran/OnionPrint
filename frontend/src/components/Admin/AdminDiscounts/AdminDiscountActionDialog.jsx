@@ -89,7 +89,7 @@ const DiscountForm = ({ type, discount, handleChange, handleSubmit, buttonText, 
         id="discountActiveSelect"
         value={discount.active}
         label="Activo"
-        onChange={(e) => handleChange("active", e.target.value === 'true')}
+        onChange={(e) => handleChange("active", e.target.value === true)}
       >
         <MenuItem value={false}>Inactivo</MenuItem>
         <MenuItem value={true}>Activo</MenuItem>
@@ -164,6 +164,8 @@ export default function AdminDiscountActionDialog(props) {
       newDiscount.endDate = dayjs(discount.endDate);
 
       setNewDiscount(newDiscount);
+    } else {
+      setNewDiscount(AdminDiscountItem);
     }
   }, [type, discount]);
 
@@ -233,7 +235,7 @@ export default function AdminDiscountActionDialog(props) {
   const renderDialogContentByType = () => {
     switch (type) {
       case DiscountDialogType.create:
-        return <DiscountForm type={type} discount={AdminDiscountItem} handleChange={handleChange} handleSubmit={handleCreateDiscount} buttonText="CREAR" errors={errors} />;
+        return <DiscountForm type={type} discount={newDiscount} handleChange={handleChange} handleSubmit={handleCreateDiscount} buttonText="CREAR" errors={errors} />;
       case DiscountDialogType.update:
         return <DiscountForm type={type} discount={newDiscount} handleChange={handleChange} handleSubmit={handleUpdateDiscount} buttonText="ACTUALIZAR" errors={errors} />;
       case DiscountDialogType.delete:
