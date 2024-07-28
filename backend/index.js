@@ -8,6 +8,7 @@ const nodemailer = require("nodemailer");
 const admin = require("firebase-admin");
 const { error } = require("console");
 const axios = require("axios");
+const path = require("path");
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2022-08-01",
@@ -35,9 +36,12 @@ const adminFirebaseApp = admin.initializeApp(
   "admin"
 );
 
+const frontendPath = path.join(__dirname, `${process.env.STATIC_DIR}/dist`);
+
 app.use(express.static(process.env.STATIC_DIR));
 app.use(bodyParser.json());
 app.use(cors());
+app.use('/.well-known', express.static(path.join(frontendPath, '.well-known')));
 
 // SMTP transporter configuration
 const transporter = nodemailer.createTransport({

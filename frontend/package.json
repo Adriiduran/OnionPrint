@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && mkdir -p ./build/.well-known && cp ./applepay/apple-developer-merchantid-domain-association ./build/.well-known/",
+    "build": "vite build",
+    "postbuild": "cp -r public/.well-known dist/.well-known",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
