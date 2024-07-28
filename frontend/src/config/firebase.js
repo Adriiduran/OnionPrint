@@ -30,12 +30,13 @@ const saveFinalCartOnFirebase = async (
   finalShoppingCartPreferences,
   newOrderRef
 ) => {
-  const cleanItems = finalShoppingCartPreferences.items.map((item) => {
-    const { files, ...cleanedItem } = item;
-    return cleanedItem;
-  });
-
   try {
+    const cleanItems = finalShoppingCartPreferences.items.map((item) => {
+      // Crear un nuevo objeto con todos los campos excepto 'files'
+      const { files, ...cleanedItem } = item;
+      return cleanedItem;
+    });
+
     await setDoc(newOrderRef, {
       // ...otros campos del objeto (sin archivos)
       id: newOrderRef.id,
@@ -52,17 +53,13 @@ const saveFinalCartOnFirebase = async (
       filesInfo: {}, // Inicializar la propiedad filesURL como un objeto vacío
       stripe_payment_intent: finalShoppingCartPreferences.stripe_payment_intent,
     });
-  } catch (error) {
-    console.log("SetDoc error:", error);
-  }
 
-  // Subir cada archivo a Firebase Storage con el mismo ID como referencia
-  try {
+    // Subir cada archivo a Firebase Storage con el mismo ID como referencia
     await Promise.all(
       finalShoppingCartPreferences.items.map(async (item, itemIndex) => {
         if (item.files && item.files.length > 0) {
           const filesInfo = {}; // Crear un objeto para almacenar las URLs de los archivos
-  
+
           await Promise.all(
             item.files.map(async (archivo, archivoIndex) => {
               const storageRef = ref(
@@ -71,9 +68,9 @@ const saveFinalCartOnFirebase = async (
               );
               await uploadBytes(storageRef, archivo);
               const downloadURL = await getDownloadURL(storageRef);
-  
+
               const fileName = archivo.name;
-  
+
               // Agregar la URL del archivo al objeto filesURL
               if (!filesInfo[itemIndex]) {
                 filesInfo[itemIndex] = [];
@@ -81,7 +78,7 @@ const saveFinalCartOnFirebase = async (
               filesInfo[itemIndex].push({ name: fileName, url: downloadURL });
             })
           );
-  
+
           // Actualizar el objeto con las URLs de los archivos en Firestore
           const fieldPath = "filesInfo";
           await setDoc(
@@ -93,7 +90,7 @@ const saveFinalCartOnFirebase = async (
       })
     );
   } catch (error) {
-    console.log("Upload error:", error);
+    console.error("Error al guardar el objeto en Firebase:", error);
   }
 };
 
