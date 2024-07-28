@@ -55,6 +55,12 @@ app.get("/", (req, res) => {
   res.sendFile(path);
 });
 
+// Ruta para servir el documento de verificación de Apple Pay
+app.get('/.well-known/apple-developer-merchantid-domain-association', (req, res) => {
+  const filePath = path.join(__dirname, '../frontend/public/.well-known/apple-developer-merchantid-domain-association');
+  res.sendFile(filePath);
+});
+
 // Sends the publishable stripe key to the frontend
 app.get("/api/stripe-config", (req, res) => {
   res.send({
