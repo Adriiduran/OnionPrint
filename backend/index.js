@@ -56,10 +56,16 @@ app.get("/", (req, res) => {
 });
 
 // Ruta para servir el documento de verificación de Apple Pay
-app.get('/.well-known/apple-developer-merchantid-domain-association', (req, res) => {
-  const filePath = path.join(__dirname, '../frontend/public/.well-known/apple-developer-merchantid-domain-association');
-  res.sendFile(filePath);
-});
+app.get(
+  "/.well-known/apple-developer-merchantid-domain-association",
+  (req, res) => {
+    const filePath = path.join(
+      __dirname,
+      "../frontend/public/.well-known/apple-developer-merchantid-domain-association"
+    );
+    res.sendFile(filePath);
+  }
+);
 
 // Sends the publishable stripe key to the frontend
 app.get("/api/stripe-config", (req, res) => {
@@ -201,8 +207,6 @@ app.put("/api/orders/:orderId", async (req, res) => {
 
   if (userUid === process.env.ADMIN_UID) {
     try {
-      console.log(order);
-
       const orderRef = adminFirebaseApp
         .firestore()
         .collection("orders")
@@ -227,14 +231,12 @@ app.put("/api/orders/:orderId", async (req, res) => {
         );
       }
 
-      await sendEmailWhenOrderStatusIsChanged(orderStatus, order);
+      await sendEmailWhenOrderStatusChanged(order);
 
-      res.json({ message: "Estado del pedido actualizado correctamente" });
+      res.status(200);
     } catch (error) {
       console.error("Error al actualizar el estado del pedido:", error);
-      res
-        .status(500)
-        .json({ error: "Error al actualizar el estado del pedido" });
+      res.status(500)
     }
   } else {
     console.log("Only admin can access to this endpoint");
@@ -297,9 +299,6 @@ app.post("/api/discounts", async (req, res) => {
   const userUid = req.body.userUid;
   const discount = req.body.discount;
 
-  console.log("UID del usuario:", userUid);
-  console.log("Descuento:", discount);
-
   if (userUid === process.env.ADMIN_UID) {
     try {
       await adminFirebaseApp.firestore().collection("discounts").add(discount);
@@ -317,10 +316,6 @@ app.post("/api/discounts", async (req, res) => {
 app.put("/api/discounts", async (req, res) => {
   const userUid = req.body.userUid;
   const discount = req.body.discount;
-
-  console.log("ACTUALIZAR DESCUENTO");
-  console.log("UID del usuario:", userUid);
-  console.log("Descuento:", discount);
 
   if (userUid === process.env.ADMIN_UID) {
     try {
@@ -344,10 +339,6 @@ app.delete("/api/discounts", async (req, res) => {
   const userUid = req.body.userUid;
   const discount = req.body.discount;
 
-  console.log("ELIMINAR DESCUENTO");
-  console.log("UID del usuario:", userUid);
-  console.log("Descuento:", discount);
-
   if (userUid === process.env.ADMIN_UID) {
     try {
       await adminFirebaseApp
@@ -368,9 +359,6 @@ app.delete("/api/discounts", async (req, res) => {
 // Check discount code
 app.post("/api/discounts/check", async (req, res) => {
   const { discountName } = req.body;
-
-  console.log("CHECK DISCOUNT CODE");
-  console.log("Nombre del descuento:", discountName);
 
   if (!discountName || typeof discountName !== "string") {
     return res.json({
@@ -445,9 +433,6 @@ app.post("/api/discounts/check", async (req, res) => {
 app.post("/api/discounts/increment-usage-count", async (req, res) => {
   const discount = req.body.discount;
 
-  console.log("INCREMENTAR CONTADOR DE USO DEL DESCUENTO");
-  console.log(discount);
-
   if (!discount.id) {
     return res.status(400).json({ error: "Invalid discount ID provided" });
   }
@@ -471,13 +456,9 @@ app.post("/api/discounts/increment-usage-count", async (req, res) => {
 
 // MARK: Email
 // [Email] Send email when order is created
-app.post("/api/send-order-creation-email", (req, res) => {
+app.post("/api/send-order-creation-email", async (req, res) => {
   const order = req.body.order;
   const currentDate = new Date();
-
-  console.log("SEND ORDER CREATION EMAIL");
-  console.log(order);
-  console.log(order.user);
 
   // Contenido HTML para el correo electrónico
   const htmlContent = `
@@ -554,19 +535,36 @@ app.post("/api/send-order-creation-email", (req, res) => {
                     </tr>
                 </thead>
                 <tbody>
-                    ${order.items.map((item, index) => `<tr><td>${index + 1}</td><td>${item.pages}</td><td>${item.pricePerCopy}</td><td>${item.finalPrice}</td></tr>`).join('')}
+                    ${order.items
+                      .map(
+                        (item, index) =>
+                          `<tr><td>${index + 1}</td><td>${item.pages}</td><td>${
+                            item.pricePerCopy
+                          }</td><td>${item.finalPrice}</td></tr>`
+                      )
+                      .join("")}
                 </tbody>
             </table>
             <p><strong>Total del Pedido:</strong> ${order.finalPrice}</p>
             
             <h2>Información de Envío</h2>
-            <p><strong>Dirección de Envío:</strong> ${order.user.address}, ${order.user.postalCode}, España</p>
-            <p><strong>Método de Envío:</strong> ${order.shipping == "standard" ? "Estandar" : "Prioritario"}</p>
-            <p><strong>Estimación de Entrega:</strong> ${getEstimatedDeliveryDate(order)}</p>
+            <p><strong>Dirección de Envío:</strong> ${order.user.address}, ${
+    order.user.postalCode
+  }, España</p>
+            <p><strong>Método de Envío:</strong> ${
+              order.shipping == "standard" ? "Estandar" : "Prioritario"
+            }</p>
+            <p><strong>Estimación de Entrega:</strong> ${getEstimatedDeliveryDate(
+              order
+            )}</p>
             
             <h2>Información de Facturación</h2>
-            <p><strong>Método de Pago:</strong> ${order.billingMethod == "card" ? "Tarjeta" : order.billingMethod}</p>
-            <p><strong>Dirección de Facturación:</strong> ${order.user.address}</p>
+            <p><strong>Método de Pago:</strong> ${
+              order.billingMethod == "card" ? "Tarjeta" : order.billingMethod
+            }</p>
+            <p><strong>Dirección de Facturación:</strong> ${
+              order.user.address
+            }</p>
             
             <h2>Seguimiento del Pedido</h2>
             <p>Una vez que tu pedido haya sido enviado, te enviaremos un correo electrónico con la información de seguimiento para que puedas rastrear tu paquete en tiempo real.</p>
@@ -604,41 +602,124 @@ app.post("/api/send-order-creation-email", (req, res) => {
     html: htmlContent,
   };
 
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error("Error al enviar el correo electrónico:", error);
-    } else {
-      console.log("Correo electrónico enviado:", info.response);
-    }
-  });
+  try {
+    await Promise.all([
+      transporter.sendMail(mailOptions),
+      transporter.sendMail(mailOptions2),
+    ]);
 
-  transporter.sendMail(mailOptions2, (error, info) => {
-    if (error) {
-      console.error("Error al enviar el correo electrónico:", error);
-    } else {
-      console.log("Correo electrónico enviado:", info.response);
-    }
-  });
-
-  res.status(200);
+    res.status(200).send({ message: "Correos enviados exitosamente" });
+  } catch (error) {
+    console.error("Error al enviar el correo electrónico:", error);
+    res
+      .status(500)
+      .send({ message: "Error al enviar los correos electrónicos" });
+  }
 });
 
-// [Email] Send email when order status is changed
-async function sendEmailWhenOrderStatusIsChanged(orderStatus, order) {
-  if (orderStatus === "received") {
+async function sendEmailWhenOrderStatusChanged(order) {
+  if (order.estado === "recived") {
     return;
   }
+
+  const currentDate = new Date();
+
+  const htmlContent = `
+    <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actualización de Estado de Pedido</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .header {
+      text-align: center;
+      padding-bottom: 20px;
+    }
+    .header img {
+      max-width: 150px;
+    }
+    .content {
+      margin-bottom: 20px;
+    }
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #888888;
+    }
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 16px;
+      color: #ffffff;
+      background-color: #007bff;
+      text-decoration: none;
+      border-radius: 4px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="https://www.onionprint.online/assets/logo.svg" alt="Logo de OnionPrint">
+    </div>
+    <div class="content">
+      <h1>¡Tu pedido ha sido actualizado!</h1>
+      <p>Hola ${order.usuario.name},</p>
+      <p>Queríamos informarte que el estado de tu pedido ha cambiado. Aquí están los detalles:</p>
+      <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+        <tr>
+          <td style="padding: 8px; border: 1px solid #dddddd;">Número de Pedido:</td>
+          <td style="padding: 8px; border: 1px solid #dddddd;">${order.id}</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px; border: 1px solid #dddddd;">Estado Actual:</td>
+          <td style="padding: 8px; border: 1px solid #dddddd;">${localizeOrderStatus(order.estado)}</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px; border: 1px solid #dddddd;">Fecha de Actualización:</td>
+          <td style="padding: 8px; border: 1px solid #dddddd;">${currentDate.toLocaleString()}</td>
+        </tr>
+      </table>
+      <p>Si tienes alguna pregunta o necesitas más información, no dudes en contactarnos.</p>
+    </div>
+    <div class="footer">
+      <p>Gracias por comprar con nosotros.</p>
+      <p>&copy; ${currentDate.getFullYear()} ONIONPRINT. Todos los derechos reservados.</p>
+      <p>hola@onionprint.es | 644012942</p>
+    </div>
+  </div>
+</body>
+</html>
+  `
 
   const mailOptions = {
     from: process.env.EMAIL_USER,
     to: order.usuario.email,
-    subject: "ACTUALIZACIÓN DE ESTADO DE PEDIDO 😎",
-    text: "Se ha actualizado el estado del pedido a: " + orderStatus,
+    subject: "ACTUALIZACIÓN DE ESTADO",
+    html: htmlContent,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       console.error("Error al enviar el correo electrónico:", error);
+      res.status(500);
     } else {
       console.log("Correo electrónico enviado:", info.response);
       res.status(200);
@@ -649,7 +730,7 @@ async function sendEmailWhenOrderStatusIsChanged(orderStatus, order) {
 // Función para añadir días a una fecha dada en formato "dd/MM/yyyy"
 function addDaysToDate(dateString, daysToAdd) {
   // Dividir la fecha
-  const [day, month, year] = dateString.split('/').map(Number);
+  const [day, month, year] = dateString.split("/").map(Number);
 
   // Crear un nuevo objeto Date con los componentes extraídos
   const date = new Date(year, month - 1, day);
@@ -658,8 +739,8 @@ function addDaysToDate(dateString, daysToAdd) {
   date.setDate(date.getDate() + daysToAdd);
 
   // Formatear la nueva fecha en el formato "dd/MM/yyyy"
-  const newDay = String(date.getDate()).padStart(2, '0');
-  const newMonth = String(date.getMonth() + 1).padStart(2, '0');
+  const newDay = String(date.getDate()).padStart(2, "0");
+  const newMonth = String(date.getMonth() + 1).padStart(2, "0");
   const newYear = date.getFullYear();
 
   return `${newDay}/${newMonth}/${newYear}`;
@@ -667,10 +748,31 @@ function addDaysToDate(dateString, daysToAdd) {
 
 function getEstimatedDeliveryDate(order) {
   if (order.shipping === "standard") {
-    return `${addDaysToDate(order.creation_date, 2)} - addDaysToDate(order.creation_date, 3)`
+    return `${addDaysToDate(
+      order.creation_date,
+      2
+    )} - addDaysToDate(order.creation_date, 3)`;
   }
 
-  return `${addDaysToDate(order.creation_date, 1)} - addDaysToDate(order.creation_date, 2)`
+  return `${addDaysToDate(
+    order.creation_date,
+    1
+  )} - addDaysToDate(order.creation_date, 2)`;
+}
+
+function localizeOrderStatus(status) {
+  switch (status) {
+    case "recived":
+      return "Recibido";
+    case "accepted":
+      return "Aceptado";
+    case "delivered":
+      return "Enviado";
+    case "completed":
+      return "Completado";
+    default:
+      return "Desconocido";
+  }
 }
 
 app.listen(3000, () => console.log(`Node server listening at PORT 3000`));

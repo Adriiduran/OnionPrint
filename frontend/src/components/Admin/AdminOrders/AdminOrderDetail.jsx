@@ -145,6 +145,7 @@ export default function AdminOrderDetail({ setOrderId }) {
                 userUid: user.uid,
                 order: order
             });
+
             order.estado = orderStatus;
         } catch (error) {
             console.log(error);

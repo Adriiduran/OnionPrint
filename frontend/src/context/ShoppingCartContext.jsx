@@ -34,6 +34,30 @@ export const ShoppingCartProvider = ({ children }) => {
     const { currentPreferences, filePreferences, resetCurrentPreferences } = useFilePreferences();
     const { user } = useAuth();
 
+    const getInitialShoppingCartPreferences = (user) => ({
+        id: '',
+        items: [],
+        user: {
+            uid: user ? user.uid : '',
+            name: '',
+            email: '',
+            phoneNumber: '',
+            dni: '',
+            address: '',
+            postalCode: '',
+            deliveryComments: '',
+        },
+        shipping: shippingMethod.standard,
+        billingMethod: billingMethod.card,
+        itemsPrice: 0,
+        finalPrice: 0,
+        discount: null,
+        discountPrice: 0,
+        creation_date: '',
+        state: stateEnum.recived,
+        stripe_payment_intent: {},
+    });
+
     const [finalShoppingCartPreferences, setFinalShoppingCartPreferences] = useState({
         id: '',
         items: [],
@@ -316,8 +340,8 @@ export const ShoppingCartProvider = ({ children }) => {
 
     //Resetear carrito final
     const resetFinalShoppingCart = () => {
-        setFinalShoppingCartPreferences({ items: [], files: [], finalPrice: 0, itemsPrice: 0, shipping: shippingMethod.delivery, premium: false, billingMethod: billingMethod.card })
-    }
+        setFinalShoppingCartPreferences(getInitialShoppingCartPreferences(user));
+    };
 
     //Obtener las páginas totales
     const getTotalPages = () => {
