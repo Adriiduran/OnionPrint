@@ -514,7 +514,7 @@ app.post("/api/send-order-creation-email", async (req, res) => {
 <body>
     <div class="container">
         <div class="header">
-            <img src="https://www.onionprint.online/assets/logo_negro.svg" alt="OnionPrint Logo">
+            <img src="https://www.onionprint.online/assets/logo.svg" alt="OnionPrint Logo">
         </div>
         <div class="content">
             <p>Hola ${order.user.name},</p>
@@ -569,15 +569,14 @@ app.post("/api/send-order-creation-email", async (req, res) => {
             <h2>Seguimiento del Pedido</h2>
             <p>Una vez que tu pedido haya sido enviado, te enviaremos un correo electrónico con la información de seguimiento para que puedas rastrear tu paquete en tiempo real.</p>
             
-            <p>Si tienes alguna pregunta o necesitas asistencia adicional, no dudes en contactarnos a través de <a href="mailto:[Correo de Atención al Cliente]">[Correo de Atención al Cliente]</a> o llamarnos al [Número de Teléfono].</p>
+            <p>Si tienes alguna pregunta o necesitas asistencia adicional, no dudes en contactarnos a través de <a href="mailto:hola@onionprint.es">hola@onionprint.es</a> o llamarnos al 644012942.</p>
             
             <p>Gracias por confiar en <strong>OnionPrint</strong>. Esperamos que disfrutes de tus productos.</p>
             
             <p>Saludos cordiales,</p>
             <p>OnionPrint<br>
-               [Dirección de la Empresa]<br>
-               <a href="mailto:[Correo Electrónico de la Empresa]">[Correo Electrónico de la Empresa]</a><br>
-               [Número de Teléfono de la Empresa]<br>
+               <a href="mailto:hola@onionprint.es">hola@onionprint.es</a><br>
+               644012942<br>
                <a href="https://www.onionprint.online">www.onionprint.online</a></p>
         </div>
         <div class="footer">
