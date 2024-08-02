@@ -107,7 +107,7 @@ export default function Footer() {
                     <div className="footer-secondary-info">
                         {isMobile ? (
                             <>
-                                <p>© 2004-2024 onionprint.es</p>
+                                <p>© 2004-2024 onionprint.online</p>
                                 <div>
                                     <img src={`${import.meta.env.VITE_ASSETS_URL}/whatsappIcon.svg`} alt="Whatsapp Icon" loading="lazy"/>
                                     <p>644012942</p>
@@ -116,7 +116,7 @@ export default function Footer() {
                             </>
                         ) : (
                             <>
-                                <p>© 2004-2024 onionprint.es | </p>
+                                <p>© 2004-2024 onionprint.online | </p>
                                 <img src={`${import.meta.env.VITE_ASSETS_URL}/whatsappIcon.svg`} alt="Whatsapp Icon" loading="lazy"/>
                                 <p>644012942 ( Lunes a Viernes de 9:00 a 16:00 ) |</p>
                             </>
