@@ -13,7 +13,7 @@ function Header() {
     const navigator = useNavigate();
     const location = useLocation();
     const [isAdminRoute, setIsAdminRoute] = useState(false)
-    
+
 
     const toggleMobileMenu = () => {
         setMobileMenuOpen(!isMobileMenuOpen);
@@ -51,14 +51,19 @@ function Header() {
                                     <img src={`${import.meta.env.VITE_ASSETS_URL}/loginIcon.png`} alt="User Icon Button" />
                                 </span>
                             </Link></li>
-                            <li style={{ display: user ? 'block' : 'none' }}>
-                                <Link to={isAdmin && ("/admin/home")}>
-                                    <span className='buttonHeader primaryHeader'>
-                                        <p>{isAdmin ? ("ADMIN") : ("PERFIL")}</p>
-                                        <img src={`${import.meta.env.VITE_ASSETS_URL}/profileIcon.png`} alt="User Icon Button" />
-                                    </span>
-                                </Link>
-                            </li>
+                            {isAdmin && (
+                                <li style={{ display: 'block' }}>
+                                    <Link to="/admin/home">
+                                        <span className="buttonHeader primaryHeader">
+                                            <p>ADMIN</p>
+                                            <img
+                                                src={`${import.meta.env.VITE_ASSETS_URL}/profileIcon.png`}
+                                                alt="Admin Icon"
+                                            />
+                                        </span>
+                                    </Link>
+                                </li>
+                            )}
                             <li style={{ display: user ? 'block' : 'none' }} onClick={() => { logout(navigator) }}>
                                 <span className='buttonHeader logoutHeader'>
                                     <p>CERRAR SESIÓN</p>
