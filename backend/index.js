@@ -726,37 +726,40 @@ async function sendEmailWhenOrderStatusChanged(order) {
   });
 }
 
-// Función para añadir días a una fecha dada en formato "dd/MM/yyyy"
-function addDaysToDate(dateString, daysToAdd) {
-  // Dividir la fecha
-  const [day, month, year] = dateString.split("/").map(Number);
+function getEstimatedDeliveryDate(order) {
+  if (!order || !order.creation_date) {
+    throw new Error("La orden debe incluir una fecha de creación válida.");
+  }
 
-  // Crear un nuevo objeto Date con los componentes extraídos
+  if (order.shipping === "standard") {
+    return `${addDaysToDate(order.creation_date, 2)} - ${addDaysToDate(order.creation_date, 3)}`;
+  }
+
+  return `${addDaysToDate(order.creation_date, 1)} - ${addDaysToDate(order.creation_date, 2)}`;
+}
+
+function addDaysToDate(dateString, daysToAdd) {
+  if (!dateString) {
+    throw new Error("El string de la fecha no puede ser nulo o indefinido.");
+  }
+
+  const datePart = dateString.split(",")[0];
+
+  const [day, month, year] = datePart.split("/").map(Number);
+
+  if (isNaN(day) || isNaN(month) || isNaN(year)) {
+    throw new Error(`Fecha inválida: ${dateString}`);
+  }
+
   const date = new Date(year, month - 1, day);
 
-  // Añadir los días especificados
   date.setDate(date.getDate() + daysToAdd);
 
-  // Formatear la nueva fecha en el formato "dd/MM/yyyy"
   const newDay = String(date.getDate()).padStart(2, "0");
   const newMonth = String(date.getMonth() + 1).padStart(2, "0");
   const newYear = date.getFullYear();
 
   return `${newDay}/${newMonth}/${newYear}`;
-}
-
-function getEstimatedDeliveryDate(order) {
-  if (order.shipping === "standard") {
-    return `${addDaysToDate(
-      order.creation_date,
-      2
-    )} - addDaysToDate(order.creation_date, 3)`;
-  }
-
-  return `${addDaysToDate(
-    order.creation_date,
-    1
-  )} - addDaysToDate(order.creation_date, 2)`;
 }
 
 function localizeOrderStatus(status) {
