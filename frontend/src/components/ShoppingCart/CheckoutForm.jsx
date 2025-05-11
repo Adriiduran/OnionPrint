@@ -73,7 +73,19 @@ export default function CheckoutForm() {
         theme: 'light',
       });
       resetFinalShoppingCart();
-      navigate("/order-confirmation");
+
+      if (window.gtag && finalShoppingCartPreferences.finalPrice && finalShoppingCartPreferences.id) {
+        window.gtag('event', 'conversion', {
+          send_to: 'AW-16943886635/UE0JCOCimLQaEKvivI8_',
+          value: finalShoppingCartPreferences.finalPrice,
+          currency: 'EUR',
+          transaction_id: finalShoppingCartPreferences.id,
+        });
+      }
+
+      setTimeout(() => {
+        navigate("/app");
+      }, 300);
     } catch (error) {
       console.error('Error en el manejo del pago:', error);
       handlePaymentError(error);
