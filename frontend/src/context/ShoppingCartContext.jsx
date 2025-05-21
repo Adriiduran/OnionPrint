@@ -274,11 +274,11 @@ export const ShoppingCartProvider = ({ children }) => {
         const { shipping } = finalShoppingCartPreferences;
 
         if (shipping === shippingMethod.standard) {
-            if (calculatedItemsPrice < 50) {
+            if (calculatedItemsPrice < 39) {
                 calculatedFinalPrice += 3.9;
             }
         } else {
-            if (calculatedItemsPrice < 50) {
+            if (calculatedItemsPrice < 39) {
                 calculatedFinalPrice += 8.8;
             } else {
                 calculatedFinalPrice += 4.9;

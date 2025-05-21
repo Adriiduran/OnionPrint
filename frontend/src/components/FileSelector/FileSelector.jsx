@@ -119,11 +119,11 @@ export default function FileSelector() {
                                     )}
                                 </div>
                             </div>
-                            {(finalShoppingCartPreferences.itemsPrice + shoppingCartPreferences.finalPrice) <= 50 ? (
+                            {(finalShoppingCartPreferences.itemsPrice + shoppingCartPreferences.finalPrice) <=39 ? (
                                 <>
                                     <div className='fileShippingPriceFileSelector'>
                                         <img src={`${import.meta.env.VITE_ASSETS_URL}/warningIcon.png`} alt="Warning Icon" />
-                                        <span>Añade solo <span>{(50 - (finalShoppingCartPreferences.itemsPrice + shoppingCartPreferences.finalPrice)).toFixed(2)}€</span> para conseguir tu <span>ENVÍO GRATIS</span></span>
+                                        <span>Añade solo <span>{(39 - (finalShoppingCartPreferences.itemsPrice + shoppingCartPreferences.finalPrice)).toFixed(2)}€</span> para conseguir tu <span>ENVÍO GRATIS</span></span>
                                     </div>
                                 </>
                             ) :

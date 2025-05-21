@@ -24,7 +24,7 @@ export default function ProductionShipment() {
 
             <div className='info-block'>
                 <h2>ENVÍOS A ESPAÑA PENINSULAR</h2>
-                <p>Los envíos con <strong>método de producción estándar</strong> a España peninsular se entregan en un plazo de 24h a 72h laborables y tienen un coste de 3,90€. Si tú compra supera los 50 € de importe, los gastos de envío serán gratuitos.</p>
+                <p>Los envíos con <strong>método de producción estándar</strong> a España peninsular se entregan en un plazo de 24h a 72h laborables y tienen un coste de 3,90€. Si tú compra supera los 39 € de importe, los gastos de envío serán gratuitos.</p>
                 <p>Por su parte, el envío con <strong>método de producción prioritario</strong> garantiza la entrega al día siguiente de la realización de la compra (siempre que confirmes esta antes de las 11h) y tiene un coste extra de 4,95 €.</p>
                 <p>Utilizaremos de manera preferente  GLS como empresas de transporte para estos envíos.</p>
             </div>

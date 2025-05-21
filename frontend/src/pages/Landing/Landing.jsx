@@ -47,7 +47,7 @@ export default function Landing() {
 
                 <div className='landingPaperPlaneSecond'>
                     <div>
-                        <h1>Envío <span>gratis</span> si tu pedido alcanza 49€</h1>
+                        <h1>Envío <span>gratis</span> si tu pedido alcanza 39€</h1>
                         <span>... y si no, tenemos los mejores precios de envío</span>
                         <p>Imprime online desde cualquier dispositivo, ordenador, tablet o móvil</p>
                     </div>
