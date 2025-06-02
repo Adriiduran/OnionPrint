@@ -205,13 +205,13 @@ export default function AdminUsers() {
                                                     } else if (column.id === 'editAction') {
                                                         return (
                                                             <TableCell key={column.id} align="left">
-                                                                <img src={`${import.meta.env.VITE_ASSETS_URL}/editIcon.png`} alt="Edit Button Icon" onClick={() => handleOpenDiscountActionDialog(discount, DiscountDialogType.update)} style={{ cursor: 'pointer', width: '24px', height: '24px' }} />
+                                                                <img src={`${import.meta.env.VITE_ASSETS_URL}/editIcon.webp`} alt="Edit Button Icon" onClick={() => handleOpenDiscountActionDialog(discount, DiscountDialogType.update)} style={{ cursor: 'pointer', width: '24px', height: '24px' }} />
                                                             </TableCell>
                                                         )
                                                     } else if (column.id === 'deleteAction') {
                                                         return (
                                                             <TableCell key={column.id} align="left">
-                                                                <img src={`${import.meta.env.VITE_ASSETS_URL}/trashIcon.png`} alt="Delete Button Icon" onClick={() => handleOpenDiscountActionDialog(discount, DiscountDialogType.delete)} style={{ cursor: 'pointer', width: '24px', height: '24px' }} />
+                                                                <img src={`${import.meta.env.VITE_ASSETS_URL}/trashIcon.webp`} alt="Delete Button Icon" onClick={() => handleOpenDiscountActionDialog(discount, DiscountDialogType.delete)} style={{ cursor: 'pointer', width: '24px', height: '24px' }} />
                                                             </TableCell>
                                                         )
                                                     } else {

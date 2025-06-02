@@ -67,7 +67,7 @@ export default function ForgotPassword() {
             <div className="registerAuth">
                 <div className="titleAuth">
                     <span className='titleSpanAuth'>
-                        <img src={`${import.meta.env.VITE_ASSETS_URL}/exclamationIcon.png`} alt="Imagen del título de la página de registro" />
+                        <img src={`${import.meta.env.VITE_ASSETS_URL}/exclamationIcon.webp`} alt="Imagen del título de la página de registro" />
                     </span>
                     <h1>Recuperar Contraseña</h1>
                 </div>
@@ -85,7 +85,7 @@ export default function ForgotPassword() {
                             autoComplete='email'
                         />
                         <div className='errorAuth' style={{ display: errors.email === '' ? 'none' : 'flex' }}>
-                            <img src={`${import.meta.env.VITE_ASSETS_URL}/exclamationIcon.png`} alt='exclamationIcon' />
+                            <img src={`${import.meta.env.VITE_ASSETS_URL}/exclamationIcon.webp`} alt='exclamationIcon' />
                             <p>{errors.email}</p>
                         </div>
                     </div>

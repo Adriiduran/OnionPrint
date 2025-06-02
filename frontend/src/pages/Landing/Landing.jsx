@@ -13,7 +13,7 @@ export default function Landing() {
             <section className="landingLogo">
                 {!isDesktop && (
                     <div className='landingLogoFirst'>
-                        <img src={`${import.meta.env.VITE_ASSETS_URL}/landingWomen.png`} alt="Landing Logo" />
+                        <img src={`${import.meta.env.VITE_ASSETS_URL}/landingWomen.webp`} alt="Landing Logo" />
                     </div>
                 )}
 
@@ -35,7 +35,7 @@ export default function Landing() {
 
                 {isDesktop && (
                     <div className='landingLogoFirst'>
-                        <img src={`${import.meta.env.VITE_ASSETS_URL}/landingWomen.png`} alt="Landing Logo" />
+                        <img src={`${import.meta.env.VITE_ASSETS_URL}/landingWomen.webp`} alt="Landing Logo" />
                     </div>
                 )}
             </section>
@@ -111,7 +111,7 @@ export default function Landing() {
             <section className='landingBlueprints'>
                 {!isDesktop && (
                     <div className='landingBlueprintsFirst'>
-                        <img src={`${import.meta.env.VITE_ASSETS_URL}/landingBlueprints.png`} alt="Landing Blueprints" loading="lazy" />
+                        <img src={`${import.meta.env.VITE_ASSETS_URL}/landingBlueprints.webp`} alt="Landing Blueprints" loading="lazy" />
                     </div>
                 )}
 
@@ -130,7 +130,7 @@ export default function Landing() {
 
                 {isDesktop && (
                     <div className='landingBlueprintsFirst'>
-                        <img src={`${import.meta.env.VITE_ASSETS_URL}/landingBlueprints.png`} alt="Landing Blueprints" loading="lazy" />
+                        <img src={`${import.meta.env.VITE_ASSETS_URL}/landingBlueprints.webp`} alt="Landing Blueprints" loading="lazy" />
                     </div>
                 )}
             </section>

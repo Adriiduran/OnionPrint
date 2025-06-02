@@ -75,7 +75,7 @@ export default function FileSelector() {
                     <img className='imageFileSelector' src={`${import.meta.env.VITE_ASSETS_URL}/selectFileImage.svg`} alt="File Selector Image" style={{ display: selectedFiles.length > 0 ? 'none' : 'block' }} />
                     <h2 className='titleFileSelector' style={{ display: selectedFiles.length > 0 ? 'none' : 'block' }}>Pulsa el botón para subir tus documentos</h2>
                     <span className='buttonFileSelector primaryFileSelector' onClick={() => fileInput.click()}>
-                        <img src={`${import.meta.env.VITE_ASSETS_URL}/folderIcon.png`} alt="User Icon Button" />
+                        <img src={`${import.meta.env.VITE_ASSETS_URL}/folderIcon.webp`} alt="User Icon Button" />
                         <p>SUBIR DOCUMENTOS</p>
                     </span>
                 </div>
@@ -85,15 +85,15 @@ export default function FileSelector() {
                         <div className='fileSelectorHeader'>
                             <div className='firstFileDetailsFileSelector'>
                                 <span>
-                                    <img src={`${import.meta.env.VITE_ASSETS_URL}/copiesIcon.png`} alt="Copy Number Icon" />
+                                    <img src={`${import.meta.env.VITE_ASSETS_URL}/copiesIcon.webp`} alt="Copy Number Icon" />
                                     <p>{shoppingCartPreferences.preference.copies}</p>
                                 </span>
                                 <span>
-                                    <img src={`${import.meta.env.VITE_ASSETS_URL}/pagesIcon.png`} alt="Pages Number Icon" />
+                                    <img src={`${import.meta.env.VITE_ASSETS_URL}/pagesIcon.webp`} alt="Pages Number Icon" />
                                     <p>{shoppingCartPreferences.pages}</p>
                                 </span>
                                 <span>
-                                    <img src={`${import.meta.env.VITE_ASSETS_URL}/fileConfiguration.png`} alt="Price per Copy Icon" />
+                                    <img src={`${import.meta.env.VITE_ASSETS_URL}/fileConfiguration.webp`} alt="Price per Copy Icon" />
                                     <p>{shoppingCartPreferences.pricePerCopy}€</p>
                                 </span>
                                 <div className='fileFinishesFileSelector'>
@@ -122,23 +122,23 @@ export default function FileSelector() {
                             {(finalShoppingCartPreferences.itemsPrice + shoppingCartPreferences.finalPrice) <=39 ? (
                                 <>
                                     <div className='fileShippingPriceFileSelector'>
-                                        <img src={`${import.meta.env.VITE_ASSETS_URL}/warningIcon.png`} alt="Warning Icon" />
+                                        <img src={`${import.meta.env.VITE_ASSETS_URL}/warningIcon.webp`} alt="Warning Icon" />
                                         <span>Añade solo <span>{(39 - (finalShoppingCartPreferences.itemsPrice + shoppingCartPreferences.finalPrice)).toFixed(2)}€</span> para conseguir tu <span>ENVÍO GRATIS</span></span>
                                     </div>
                                 </>
                             ) :
                                 <div className='fileShippingPriceFileSelector'>
-                                    <img src={`${import.meta.env.VITE_ASSETS_URL}/shippingMethod.png`} alt="Free shipping icon" />
+                                    <img src={`${import.meta.env.VITE_ASSETS_URL}/shippingMethod.webp`} alt="Free shipping icon" />
                                     <span>ENVÍO GRATIS</span>
                                 </div>
                             }
                             <div className='secondFileDetailsFileSelector'>
                                 <div className='buttonFileSelector secondaryFileSelector' onClick={removeFiles}>
-                                    <img src={`${import.meta.env.VITE_ASSETS_URL}/trashIcon.png`} alt="Trash Button Icon" />
+                                    <img src={`${import.meta.env.VITE_ASSETS_URL}/trashIcon.webp`} alt="Trash Button Icon" />
                                     <p>ELIMINAR DOCUMENTOS</p>
                                 </div>
                                 <span className='buttonFileSelector primaryFileSelector' onClick={() => fileInput.click()}>
-                                    <img src={`${import.meta.env.VITE_ASSETS_URL}/folderIcon.png`} alt="User Icon Button" />
+                                    <img src={`${import.meta.env.VITE_ASSETS_URL}/folderIcon.webp`} alt="User Icon Button" />
                                     <p>SELECCIONAR DOCUMENTOS</p>
                                 </span>
                             </div>

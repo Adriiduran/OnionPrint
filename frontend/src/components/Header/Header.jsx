@@ -42,13 +42,13 @@ function Header() {
                             <li style={{ display: user ? 'none' : 'block' }}><Link to="/register">
                                 <span className='buttonHeader'>
                                     <p>REGISTRARSE</p>
-                                    <img src={`${import.meta.env.VITE_ASSETS_URL}/registerIcon.png`} alt="User Icon Button" />
+                                    <img src={`${import.meta.env.VITE_ASSETS_URL}/registerIcon.webp`} alt="User Icon Button" />
                                 </span>
                             </Link></li>
                             <li style={{ display: user ? 'none' : 'block' }}><Link to="/login">
                                 <span className='buttonHeader primaryHeader'>
                                     <p>IDENTIFICARSE</p>
-                                    <img src={`${import.meta.env.VITE_ASSETS_URL}/loginIcon.png`} alt="User Icon Button" />
+                                    <img src={`${import.meta.env.VITE_ASSETS_URL}/loginIcon.webp`} alt="User Icon Button" />
                                 </span>
                             </Link></li>
                             {isAdmin && (
@@ -57,7 +57,7 @@ function Header() {
                                         <span className="buttonHeader primaryHeader">
                                             <p>ADMIN</p>
                                             <img
-                                                src={`${import.meta.env.VITE_ASSETS_URL}/profileIcon.png`}
+                                                src={`${import.meta.env.VITE_ASSETS_URL}/profileIcon.webp`}
                                                 alt="Admin Icon"
                                             />
                                         </span>
@@ -67,11 +67,11 @@ function Header() {
                             <li style={{ display: user ? 'block' : 'none' }} onClick={() => { logout(navigator) }}>
                                 <span className='buttonHeader logoutHeader'>
                                     <p>CERRAR SESIÓN</p>
-                                    <img src={`${import.meta.env.VITE_ASSETS_URL}/loginIcon.png`} alt="User Icon Button" />
+                                    <img src={`${import.meta.env.VITE_ASSETS_URL}/loginIcon.webp`} alt="User Icon Button" />
                                 </span></li>
                             <li><Link to="/cart">
                                 <span className='buttonHeader primaryHeader'>
-                                    <img src={`${import.meta.env.VITE_ASSETS_URL}/cartIcon.png`} alt="User Icon Button" />
+                                    <img src={`${import.meta.env.VITE_ASSETS_URL}/cartIcon.webp`} alt="User Icon Button" />
                                     <p>{finalShoppingCartPreferences.items.length !== undefined ? finalShoppingCartPreferences.items.length : 0}</p>
                                 </span>
                             </Link></li>
@@ -82,38 +82,38 @@ function Header() {
                 <article className='mobileHeader'>
                     <div className="mainHeader">
                         <Link to='/' onClick={() => { setMobileMenuOpen(false) }}><img src={`${import.meta.env.VITE_ASSETS_URL}/logo.svg`} alt="Logo" className='logoHeader' /></Link>
-                        <img className='hamburguerIconHeader' src={`${isMobileMenuOpen ? `${import.meta.env.VITE_ASSETS_URL}/closeIcon.png` : `${import.meta.env.VITE_ASSETS_URL}/burgerMenu.png`}`} alt="Hamburguer Menu Button" onClick={toggleMobileMenu} />
+                        <img className='hamburguerIconHeader' src={`${isMobileMenuOpen ? `${import.meta.env.VITE_ASSETS_URL}/closeIcon.webp` : `${import.meta.env.VITE_ASSETS_URL}/burgerMenu.webp`}`} alt="Hamburguer Menu Button" onClick={toggleMobileMenu} />
                     </div>
                     <nav className={`${isMobileMenuOpen ? 'elementsHeader' : 'mobileMenuCloseHeader'}`}>
                         <ul>
                             <li style={{ display: user ? 'none' : 'block' }}><Link to="/register" onClick={() => { setMobileMenuOpen(false) }}>
                                 <span className='buttonHeader'>
                                     <p>REGISTRARSE</p>
-                                    <img src={`${import.meta.env.VITE_ASSETS_URL}/registerIcon.png`} alt="User Icon Button" />
+                                    <img src={`${import.meta.env.VITE_ASSETS_URL}/registerIcon.webp`} alt="User Icon Button" />
                                 </span>
                             </Link></li>
                             <li style={{ display: user ? 'none' : 'block' }}><Link to="/login" onClick={() => { setMobileMenuOpen(false) }}>
                                 <span className='buttonHeader primaryHeader'>
                                     <p>IDENTIFICARSE</p>
-                                    <img src={`${import.meta.env.VITE_ASSETS_URL}/loginIcon.png`} alt="User Icon Button" />
+                                    <img src={`${import.meta.env.VITE_ASSETS_URL}/loginIcon.webp`} alt="User Icon Button" />
                                 </span>
                             </Link></li>
                             <li style={{ display: user ? 'block' : 'none' }}>
                                 <Link to={isAdmin && "/admin/home"}>
                                     <span className='buttonHeader primaryHeader'>
                                         <p>{isAdmin ? ("ADMIN") : ("PERFIL")}</p>
-                                        <img src={`${import.meta.env.VITE_ASSETS_URL}/profileIcon.png`} alt="User Icon Button" />
+                                        <img src={`${import.meta.env.VITE_ASSETS_URL}/profileIcon.webp`} alt="User Icon Button" />
                                     </span>
                                 </Link>
                             </li>
                             <li style={{ display: user ? 'block' : 'none' }} onClick={handleLogout}>
                                 <span className='buttonHeader logoutHeader'>
                                     <p>CERRAR SESIÓN</p>
-                                    <img src={`${import.meta.env.VITE_ASSETS_URL}/loginIcon.png`} alt="User Icon Button" />
+                                    <img src={`${import.meta.env.VITE_ASSETS_URL}/loginIcon.webp`} alt="User Icon Button" />
                                 </span></li>
                             <li><Link to="/cart">
                                 <span className='buttonHeader primaryHeader'>
-                                    <img src={`${import.meta.env.VITE_ASSETS_URL}/cartIcon.png`} alt="User Icon Button" />
+                                    <img src={`${import.meta.env.VITE_ASSETS_URL}/cartIcon.webp`} alt="User Icon Button" />
                                     <p>{finalShoppingCartPreferences.items.length !== undefined ? finalShoppingCartPreferences.items.length : 0}</p>
                                 </span>
                             </Link></li>

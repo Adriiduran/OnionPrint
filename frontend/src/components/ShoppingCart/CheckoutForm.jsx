@@ -128,7 +128,7 @@ export default function CheckoutForm() {
         <span>
           {isProcessing ? "PROCESANDO PAGO... " : `PAGAR ${finalShoppingCartPreferences.finalPrice}€`}
         </span>
-        { isProcessing ? <Loader /> : <img src={`${import.meta.env.VITE_ASSETS_URL}/lock.png`} alt="Icono de pago seguro" /> }
+        { isProcessing ? <Loader /> : <img src={`${import.meta.env.VITE_ASSETS_URL}/lock.webp`} alt="Icono de pago seguro" /> }
       </button>
     </form>
   );

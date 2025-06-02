@@ -8,7 +8,7 @@ export default function PageNotFound() {
   return (
     <section className="PageNotFoundhome">
       <div className="PageNotFoundimage">
-        <img src={`${import.meta.env.VITE_ASSETS_URL}/Scarecrow.png`} alt="Scarecrow" width="100px" />
+        <img src={`${import.meta.env.VITE_ASSETS_URL}/Scarecrow.webp`} alt="Scarecrow" width="100px" />
       </div>
 
       <div className="PageNotFoundcontent">

@@ -69,7 +69,7 @@ export default function LoginAdmin() {
             <div className="registerAuth">
                 <div className="titleAuth">
                     <span className='titleSpanAuth'>
-                        <img src={`${import.meta.env.VITE_ASSETS_URL}/lockIcon.png`} alt="Imagen del título de la página de registro" />
+                        <img src={`${import.meta.env.VITE_ASSETS_URL}/lockIcon.webp`} alt="Imagen del título de la página de registro" />
                     </span >
                     <h1>Iniciar Sesión</h1>
                     <span className='loginErrorAuth' style={{ display: errors.login === "" ? 'none' : 'block' }}>El correo electrónico o la contraseña son incorrectos</span>
@@ -88,7 +88,7 @@ export default function LoginAdmin() {
                             autoComplete='email'
                         />
                         <div className='errorAuth' style={{ display: errors.email === '' ? 'none' : 'flex' }}>
-                            <img src={`${import.meta.env.VITE_ASSETS_URL}/exclamationIcon.png`} alt='exclamationIcon' />
+                            <img src={`${import.meta.env.VITE_ASSETS_URL}/exclamationIcon.webp`} alt='exclamationIcon' />
                             <p>{errors.email}</p>
                         </div>
                     </div>
@@ -105,7 +105,7 @@ export default function LoginAdmin() {
                             onChange={handleChange}
                         />
                         <div className='errorAuth' style={{ display: errors.password === '' ? 'none' : 'flex' }}>
-                            <img src={`${import.meta.env.VITE_ASSETS_URL}/exclamationIcon.png`} alt='exclamationIcon' />
+                            <img src={`${import.meta.env.VITE_ASSETS_URL}/exclamationIcon.webp`} alt='exclamationIcon' />
                             <p>{errors.password}</p>
                         </div>
                     </div>

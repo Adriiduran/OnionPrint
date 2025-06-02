@@ -67,7 +67,7 @@ export default function Register() {
             <div className="registerAuth">
                 <div className="titleAuth">
                     <span className='titleSpanAuth'>
-                        <img src={`${import.meta.env.VITE_ASSETS_URL}/lockIcon.png`} alt="Imagen del título de la página de registro" />
+                        <img src={`${import.meta.env.VITE_ASSETS_URL}/lockIcon.webp`} alt="Imagen del título de la página de registro" />
                     </span>
                     <h1>Crear cuenta</h1>
                 </div>
@@ -85,7 +85,7 @@ export default function Register() {
                             autoComplete='email'
                         />
                         <div className='errorAuth' style={{ display: errors.email === '' ? 'none' : 'flex' }}>
-                            <img src={`${import.meta.env.VITE_ASSETS_URL}/exclamationIcon.png`} alt='exclamationIcon' />
+                            <img src={`${import.meta.env.VITE_ASSETS_URL}/exclamationIcon.webp`} alt='exclamationIcon' />
                             <p>{errors.email}</p>
                         </div>
                     </div>
@@ -100,7 +100,7 @@ export default function Register() {
                             onChange={handleChange}
                         />
                         <div className='errorAuth' style={{ display: errors.password === '' ? 'none' : 'flex' }}>
-                            <img src={`${import.meta.env.VITE_ASSETS_URL}/exclamationIcon.png`} alt='exclamationIcon' />
+                            <img src={`${import.meta.env.VITE_ASSETS_URL}/exclamationIcon.webp`} alt='exclamationIcon' />
                             <p>{errors.password}</p>
                         </div>
                     </div>
@@ -115,7 +115,7 @@ export default function Register() {
                             onChange={handleChange}
                         />
                         <div className='errorAuth' style={{ display: errors.passwordRepetition === '' ? 'none' : 'flex' }}>
-                            <img src={`${import.meta.env.VITE_ASSETS_URL}/exclamationIcon.png`} alt='exclamationIcon' />
+                            <img src={`${import.meta.env.VITE_ASSETS_URL}/exclamationIcon.webp`} alt='exclamationIcon' />
                             <p>{errors.passwordRepetition}</p>
                         </div>
                     </div>
@@ -125,7 +125,7 @@ export default function Register() {
 
                 <div className='loginSocialAuth'>
                     <span onClick={() => signInWithGoogle(navigator)}>
-                        <img src={`${import.meta.env.VITE_ASSETS_URL}/googleIcon.png`} alt="Imagen para iniciar sesión con Google" />
+                        <img src={`${import.meta.env.VITE_ASSETS_URL}/googleIcon.webp`} alt="Imagen para iniciar sesión con Google" />
                     </span>
                 </div>
 

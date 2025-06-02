@@ -19,26 +19,26 @@ export default function AdminNavbar() {
       <div className='aside-logo'>
         <img src={`${import.meta.env.VITE_ASSETS_URL}/logo_blanco.svg`} alt="OnionPrint Logo" className='logo' />
         {isMobile && (
-          <img src={`${import.meta.env.VITE_ASSETS_URL}/burgerIconWhite.png`} alt="Burger Menu Icon" className='burgerMenu' onClick={() => { setIsMobileMenuOpen(!isMobileMenuOpen) }} />
+          <img src={`${import.meta.env.VITE_ASSETS_URL}/burgerIconWhite.webp`} alt="Burger Menu Icon" className='burgerMenu' onClick={() => { setIsMobileMenuOpen(!isMobileMenuOpen) }} />
         )}
       </div>
       {(isMobileMenuOpen || !isMobile) && (
         <div className='aside-items'>
           <ul className='aside-items-list'>
             <li className='aside-items-list-item' onClick={() => { handleClick('/admin/home') }}>
-              <img src={`${import.meta.env.VITE_ASSETS_URL}/homeIcon.png`} alt="Home image" />
+              <img src={`${import.meta.env.VITE_ASSETS_URL}/homeIcon.webp`} alt="Home image" />
               <p>Inicio</p>
             </li>
             <li className='aside-items-list-item' onClick={() => { handleClick('/admin/users') }}>
-              <img src={`${import.meta.env.VITE_ASSETS_URL}/profileIcon.png`} alt="Users image" />
+              <img src={`${import.meta.env.VITE_ASSETS_URL}/profileIcon.webp`} alt="Users image" />
               <p>Usuarios</p>
             </li>
             <li className='aside-items-list-item' onClick={() => { handleClick('/admin/orders') }}>
-              <img src={`${import.meta.env.VITE_ASSETS_URL}/orderIcon.png`} alt="Orders image" />
+              <img src={`${import.meta.env.VITE_ASSETS_URL}/orderIcon.webp`} alt="Orders image" />
               <p>Pedidos</p>
             </li>
             <li className='aside-items-list-item' onClick={() => { handleClick('/admin/discounts') }}>
-              <img src={`${import.meta.env.VITE_ASSETS_URL}/discountIcon.png`} alt="Discount image" />
+              <img src={`${import.meta.env.VITE_ASSETS_URL}/discountIcon.webp`} alt="Discount image" />
               <p>Cupones</p>
             </li>
           </ul>

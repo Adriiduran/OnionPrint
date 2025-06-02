@@ -222,7 +222,7 @@ function ShoppingCart() {
                     <div className='shoppingCartItemList'>
                         <div className='shoppingCartItemListTitle'>
                             <div className='shoppingCartItemListTitleFirst'>
-                                <img src={`${import.meta.env.VITE_ASSETS_URL}/tasks.png`} alt="Task items" />
+                                <img src={`${import.meta.env.VITE_ASSETS_URL}/tasks.webp`} alt="Task items" />
                                 <h3>Información de tu pedido</h3>
                             </div>
                             <span>Listado de configuraciones de impresión para imprimir.</span>
@@ -235,7 +235,7 @@ function ShoppingCart() {
                                 <div className="shoppingCartItemListDetailsItem" key={index}>
                                     <div className='shoppingCartItemListDetailsItemData'>
                                         <div className='shoppingCartItemListDetailsItemDataFirst'>
-                                            <img src={`${import.meta.env.VITE_ASSETS_URL}/pageSetupIcon.png`} alt="Page Setup" />
+                                            <img src={`${import.meta.env.VITE_ASSETS_URL}/pageSetupIcon.webp`} alt="Page Setup" />
                                             <p onClick={() => removeItemFromFinalShoppingCart(index)}>×</p>
                                         </div>
                                         <span>Impresión en {element.preference.color.description.toLowerCase()} en folios {element.preference.size.title} de {element.preference.thickness.title} a {element.preference.printType.title.toLowerCase()}</span>
@@ -254,7 +254,7 @@ function ShoppingCart() {
 
                                         <div className='itemFiles' onClick={() => handleToggleFile(index)}>
                                             <div className='itemFilesTitle'>
-                                                <img src={`${import.meta.env.VITE_ASSETS_URL}/chevronDown.png`} alt="Documentos adjuntos" />
+                                                <img src={`${import.meta.env.VITE_ASSETS_URL}/chevronDown.webp`} alt="Documentos adjuntos" />
                                                 <h3>Documentos adjuntos</h3>
                                             </div>
 
@@ -402,13 +402,13 @@ function ShoppingCart() {
                                     </div>
                                     <div className='shoppingCartShippingMethods'>
                                         <div className={finalShoppingCartPreferences.shipping === shippingMethod.standard ? 'shoppingCartShippingMethodsItemActive' : 'shoppingCartShippingMethodsItem'} onClick={() => updateShippingMethodFinalShoppingCart(shippingMethod.standard)}>
-                                            <img src={`${import.meta.env.VITE_ASSETS_URL}/shippingMethod.png`} alt="Imagen de envío estandar" />
+                                            <img src={`${import.meta.env.VITE_ASSETS_URL}/shippingMethod.webp`} alt="Imagen de envío estandar" />
                                             <span>ENVÍO ESTANDAR</span>
                                             <span>2 a 3 días laborables</span>
                                         </div>
 
                                         <div className={finalShoppingCartPreferences.shipping === shippingMethod.premium ? 'shoppingCartShippingMethodsItemActive' : 'shoppingCartShippingMethodsItem'} onClick={() => updateShippingMethodFinalShoppingCart(shippingMethod.premium)}>
-                                            <img src={`${import.meta.env.VITE_ASSETS_URL}/premiumDelivery.png`} alt="Imagen de envío premium" />
+                                            <img src={`${import.meta.env.VITE_ASSETS_URL}/premiumDelivery.webp`} alt="Imagen de envío premium" />
                                             <span>ENVÍO PRIORITARIO</span>
                                             <span>1 a 2 días laborables</span>
                                         </div>
@@ -423,7 +423,7 @@ function ShoppingCart() {
                             handleConfirmUserData()
                         }}>
                             <span>CONTINUAR AL MÉTODO DE PAGO</span>
-                            <img src={`${import.meta.env.VITE_ASSETS_URL}/arrowRight.png`} alt="Imagen flecha derecha" />
+                            <img src={`${import.meta.env.VITE_ASSETS_URL}/arrowRight.webp`} alt="Imagen flecha derecha" />
                         </div>
                     )}
 
@@ -516,13 +516,13 @@ function ShoppingCart() {
                                         </div>
                                         <div className='shoppingCartShippingMethods'>
                                             <div className={finalShoppingCartPreferences.shipping === shippingMethod.standard ? 'shoppingCartShippingMethodsItemActive' : 'shoppingCartShippingMethodsItem'} onClick={() => updateShippingMethodFinalShoppingCart(shippingMethod.standard)}>
-                                                <img src={`${import.meta.env.VITE_ASSETS_URL}/shippingMethod.png`} alt="Imagen de envío estandar" />
+                                                <img src={`${import.meta.env.VITE_ASSETS_URL}/shippingMethod.webp`} alt="Imagen de envío estandar" />
                                                 <span>ENVÍO ESTANDAR</span>
                                                 <span>2 a 3 días laborables</span>
                                             </div>
 
                                             <div className={finalShoppingCartPreferences.shipping === shippingMethod.premium ? 'shoppingCartShippingMethodsItemActive' : 'shoppingCartShippingMethodsItem'} onClick={() => updateShippingMethodFinalShoppingCart(shippingMethod.premium)}>
-                                                <img src={`${import.meta.env.VITE_ASSETS_URL}/premiumDelivery.png`} alt="Imagen de envío premium" />
+                                                <img src={`${import.meta.env.VITE_ASSETS_URL}/premiumDelivery.webp`} alt="Imagen de envío premium" />
                                                 <span>ENVÍO PRIORITARIO</span>
                                                 <span>1 día laborable</span>
                                             </div>
@@ -537,7 +537,7 @@ function ShoppingCart() {
                                 handleConfirmUserData()
                             }}>
                                 <span>CONTINUAR AL MÉTODO DE PAGO</span>
-                                <img src={`${import.meta.env.VITE_ASSETS_URL}/arrowRight.png`} alt="Imagen flecha derecha" />
+                                <img src={`${import.meta.env.VITE_ASSETS_URL}/arrowRight.webp`} alt="Imagen flecha derecha" />
                             </div>
                         )}
 
@@ -550,7 +550,7 @@ function ShoppingCart() {
                         <div className='shoppingCartItemList'>
                             <div className='shoppingCartItemListTitle'>
                                 <div className='shoppingCartItemListTitleFirst'>
-                                    <img src={`${import.meta.env.VITE_ASSETS_URL}/tasks.png`} alt="Task items" />
+                                    <img src={`${import.meta.env.VITE_ASSETS_URL}/tasks.webp`} alt="Task items" />
                                     <h3>Información de tu pedido</h3>
                                 </div>
                                 <span>Listado de configuraciones de impresión para imprimir.</span>
@@ -563,7 +563,7 @@ function ShoppingCart() {
                                     <div className="shoppingCartItemListDetailsItem" key={index}>
                                         <div className='shoppingCartItemListDetailsItemData'>
                                             <div className='shoppingCartItemListDetailsItemDataFirst'>
-                                                <img src={`${import.meta.env.VITE_ASSETS_URL}/pageSetupIcon.png`} alt="Page Setup" />
+                                                <img src={`${import.meta.env.VITE_ASSETS_URL}/pageSetupIcon.webp`} alt="Page Setup" />
                                                 <p onClick={() => removeItemFromFinalShoppingCart(index)}>×</p>
                                             </div>
                                             <span>Impresión en {element.preference.color.description.toLowerCase()} en folios {element.preference.size.title} de {element.preference.thickness.title} a {element.preference.printType.title.toLowerCase()}</span>
@@ -582,7 +582,7 @@ function ShoppingCart() {
 
                                             <div className='itemFiles' onClick={() => handleToggleFile(index)}>
                                                 <div className='itemFilesTitle'>
-                                                    <img src={`${import.meta.env.VITE_ASSETS_URL}/chevronDown.png`} alt="Documentos adjuntos" />
+                                                    <img src={`${import.meta.env.VITE_ASSETS_URL}/chevronDown.webp`} alt="Documentos adjuntos" />
                                                     <h3>Documentos adjuntos</h3>
                                                 </div>
 
@@ -662,7 +662,7 @@ function ShoppingCart() {
                     <p>Cuando hayas añadido algo al carrito, aparecerá aquí</p>
                     <Link to="/app" className='noItemsDescriptionButton'>
                         <span>CONTINUAR IMPRIMIENDO</span>
-                        <img src={`${import.meta.env.VITE_ASSETS_URL}/arrowRight.png`} alt="Imagen flecha derecha" />
+                        <img src={`${import.meta.env.VITE_ASSETS_URL}/arrowRight.webp`} alt="Imagen flecha derecha" />
                     </Link>
                 </div>
             </div>
