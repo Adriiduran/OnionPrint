@@ -1,22 +1,25 @@
+# Bloqueo general
 User-agent: *
 Disallow: /admin/
 Disallow: /private/
 Disallow: /temp/
-
-User-agent: BadBot
-Disallow: /
-
-User-agent: Googlebot
-Disallow: /admin/
-Allow: /
-
-User-agent: Bingbot
-Disallow: /private/
-Allow: /
-
-User-agent: *
 Disallow: /secret-page.html
 Disallow: /hidden-section/
 Allow: /
 
-Sitemap: http://www.onionprint.online/sitemap.xml
+# Bloquear bots conocidos por scrapping o spam
+User-agent: BadBot
+Disallow: /
+
+# Googlebot - solo bloquear admin
+User-agent: Googlebot
+Disallow: /admin/
+Allow: /
+
+# Bingbot - solo bloquear private
+User-agent: Bingbot
+Disallow: /private/
+Allow: /
+
+# Sitemap para facilitar el rastreo
+Sitemap: https://www.onionprint.online/sitemap.xml

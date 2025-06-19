@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from './auth/AuthContext.jsx';
 import { ToastContainer } from "react-toastify";
 import { pdfjs } from "react-pdf";
+import { HelmetProvider } from 'react-helmet-async';
 
 //Contexts
 import { FilePreferencesProvider } from "./context/FilePreferencesContext.jsx";
@@ -39,31 +40,37 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/b
 export default function App() {
     return (
         <div className="App">
-            <AuthProvider>
-                <FilePreferencesProvider>
-                    <ShoppingCartProvider>
-                        <BrowserRouter>
-                            <Header />
-                            <Routes>
-                                <Route path="/" element={<Landing />} />
-                                <Route path="/app" element={<Home />} />
-                                <Route path="/register" element={<Register />} />
-                                <Route path="/login" element={<Login />} />
-                                <Route path="/forgotpassword" element={<ForgotPassword />} />
-                                <Route path="/cart" element={<ShoppingCart />} />
-                                <Route path="/admin" element={<LoginAdmin />} />
-                                <Route path="/admin/*" element={<AdminDashboard />} />
-                                <Route path="/payment-methods" element={<PaymentMethods />} />
-                                <Route path="/cookies" element={<Cookies />} />
-                                <Route path="/warranty-returns" element={<WarrantyReturns />} />
-                                <Route path="/production-shipment" element={<ProductionShipment />} />
-                                <Route path="*" element={<PageNotFound />} />
-                            </Routes>
-                            <Footer />
-                        </BrowserRouter>
-                    </ShoppingCartProvider>
-                </FilePreferencesProvider>
-            </AuthProvider>
+            <HelmetProvider>
+                <AuthProvider>
+                    <FilePreferencesProvider>
+                        <ShoppingCartProvider>
+                            <BrowserRouter>
+                                <Header />
+                                <Routes>
+                                    <Route path="/" element={<Landing />} />
+                                    <Route path="/imprimir-apuntes-online" element={<Landing />} />
+                                    <Route path="/copisteria-online" element={<Landing />} />
+                                    <Route path="/fotocopias-online" element={<Landing />} />
+                                    <Route path="/universitarios" element={<Landing />} />
+                                    <Route path="/app" element={<Home />} />
+                                    <Route path="/register" element={<Register />} />
+                                    <Route path="/login" element={<Login />} />
+                                    <Route path="/forgotpassword" element={<ForgotPassword />} />
+                                    <Route path="/cart" element={<ShoppingCart />} />
+                                    <Route path="/admin" element={<LoginAdmin />} />
+                                    <Route path="/admin/*" element={<AdminDashboard />} />
+                                    <Route path="/payment-methods" element={<PaymentMethods />} />
+                                    <Route path="/cookies" element={<Cookies />} />
+                                    <Route path="/warranty-returns" element={<WarrantyReturns />} />
+                                    <Route path="/production-shipment" element={<ProductionShipment />} />
+                                    <Route path="*" element={<PageNotFound />} />
+                                </Routes>
+                                <Footer />
+                            </BrowserRouter>
+                        </ShoppingCartProvider>
+                    </FilePreferencesProvider>
+                </AuthProvider>
+            </HelmetProvider>
             <ToastContainer />
         </div>
     )
