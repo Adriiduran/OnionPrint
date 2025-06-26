@@ -133,7 +133,7 @@ export default function Landing() {
 
                     <div className='landingPaperPlaneSecond'>
                         <div>
-                            <h1>Envío <span>gratis</span> si tu pedido alcanza 39€</h1>
+                            <h2>Envío <span>gratis</span> si tu pedido alcanza 39€</h2>
                             <span>... y si no, tenemos los mejores precios de envío</span>
                             <p>Imprime online desde cualquier dispositivo, ordenador, tablet o móvil</p>
                         </div>
@@ -184,7 +184,7 @@ export default function Landing() {
                     </div>
 
                     <div className='landingBusinessInfo'>
-                        <h1>Descuentos <span>Business</span></h1>
+                        <h2>Descuentos <span>Business</span></h2>
                         <span>¿Academia, Centro educativo o Empresa?</span>
                         <p><span>Si imprimes un gran volumen</span> o tienes una empresa y necesitas imprimir una gran cantidad de documentos o plotear tus planos para mandarlos a la obra <span>de forma recurrente</span>, mandanos un email y disfruta de <span>descuentos y ventajas preferentes</span></p>
                         <div className='landingBusinessInfoForm'>
@@ -203,7 +203,7 @@ export default function Landing() {
 
                     <div className='landingBlueprintsSecond'>
                         <div>
-                            <h1>Imprime tus <span>planos</span> en b/n o en <p>color.</p></h1>
+                            <h2>Imprime tus <span>planos</span> en b/n o en <p>color.</p></h2>
                             <p>Nuestros plotter de impresión imprimen en alta calidad al <span>mejor precio y sin moverte</span> de tu casa u oficina</p>
                         </div>
                         <Link to={'/app'}>

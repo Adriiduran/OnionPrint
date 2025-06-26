@@ -69,7 +69,7 @@
       gap: 30px;
       flex-grow: 1;
 
-      & > h1 {
+      & > h1,h2 {
         font-size: 3.5rem;
         font-weight: 600;
         letter-spacing: -0.4rem;
@@ -152,7 +152,7 @@
       text-wrap: wrap;
       gap: 30px;
 
-      & > h1 {
+      & > h1,h2 {
         font-size: 3.5rem;
         font-weight: 600;
         letter-spacing: -0.4rem;
@@ -268,7 +268,7 @@
     max-width: 600px;
     text-align: left;
 
-    & > h1 {
+    & > h1,h2 {
       font-size: 3.5rem;
       font-weight: 600;
       letter-spacing: -0.4rem;
@@ -358,7 +358,7 @@
       text-wrap: wrap;
       gap: 30px;
 
-      & > h1 {
+      & > h1,h2 {
         font-size: 3.5rem;
         font-weight: 600;
         letter-spacing: -0.4rem;
@@ -506,7 +506,7 @@
     padding-left: 50px;
 
     & > div {
-      & > h1 {
+      & > h1,h2 {
         font-size: 3.9rem !important;
       }
     }
@@ -529,7 +529,7 @@
     align-items: start !important;
 
     & > div {
-      & > h1 {
+      & > h1,h2 {
         font-size: 3.9rem !important;
       }
 
@@ -583,7 +583,7 @@
     align-items: end !important;
     justify-content: center !important;
 
-    & > h1 {
+    & > h1,h2 {
       font-size: 4rem !important;
     }
 
@@ -611,7 +611,7 @@
     justify-content: start !important;
 
     & > div {
-      & > h1 {
+      & > h1,h2 {
         font-size: 4.4rem !important;
       }
     }
@@ -623,7 +623,7 @@
     max-width: 753px !important;
 
     & > div {
-      & > h1 {
+      & > h1,h2 {
         font-size: 5rem !important;
       }
 
@@ -639,7 +639,7 @@
     max-width: 748px !important;
 
     & > div {
-      & > h1 {
+      & > h1,h2 {
         font-size: 4.5rem !important;
       }
 
@@ -668,7 +668,7 @@
   .landingBusinessInfo {
     max-width: 800px !important;
 
-    & > h1 {
+    & > h1,h2 {
       font-size: 5rem !important;
     }
 
@@ -689,7 +689,7 @@
     max-width: 820px !important;
 
     & > div {
-      & > h1 {
+      & > h1,h2 {
         font-size: 5.3rem !important;
       }
     }
