@@ -329,7 +329,7 @@ export const ShoppingCartProvider = ({ children }) => {
     const removeFileFromPositionInCurrentCart = (position) => {
         setShoppingCartPreferences((prevPreferences) => ({
             ...prevPreferences,
-            files: prevPreferences.files.splice(position, 1),
+            files: prevPreferences.files.filter((_, index) => index !== position),
         }));
     }
 
@@ -361,7 +361,7 @@ export const ShoppingCartProvider = ({ children }) => {
         } else {
             setFinalShoppingCartPreferences((prevPreferences) => ({
                 ...prevPreferences,
-                items: prevPreferences.items.splice(position, 1),
+                items: prevPreferences.items.filter((_, index) => index !== position),
             }));
         }
     }
