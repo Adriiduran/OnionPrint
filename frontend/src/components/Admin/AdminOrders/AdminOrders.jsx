@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../../../auth/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -31,8 +31,22 @@ export default function AdminOrders() {
     const { user } = useAuth();
     const navigator = useNavigate();
     const isMobile = useMediaQuery('(max-width:767px)');
+    const parseCustomDate = (dateString) => {
+        if (!dateString) return new Date(0);
+        
+        const parts = dateString.split(', ');
+        if (parts.length !== 2) return new Date(0);
+        
+        const [datePart, timePart] = parts;
+        const [day, month, year] = datePart.split('/');
+        const [hours, minutes, seconds] = timePart.split(':');
+        
+        const isoString = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}T${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}:${seconds.padStart(2, '0')}`;
+        
+        return new Date(isoString);
+    };
 
-    const fetchUsers = async () => {
+    const fetchUsers = useCallback(async () => {
         try {
             const ordersData = await axios.get(`${import.meta.env.VITE_API_URL}/orders`, {
                 params: {
@@ -40,18 +54,24 @@ export default function AdminOrders() {
                 }
             });
 
-            setOrders(ordersData.data);
-            setFilteredOrders(ordersData.data);
+            const sortedOrders = ordersData.data.sort((a, b) => {
+                const dateA = parseCustomDate(a.data.creation_date);
+                const dateB = parseCustomDate(b.data.creation_date);
+                return dateB - dateA;
+            });
+
+            setOrders(sortedOrders);
+            setFilteredOrders(sortedOrders);
         } catch (error) {
             console.error('Error al obtener usuarios:', error);
         }
-    }
+    }, [user.uid]);
 
     useEffect(() => {
         if (user) {
             fetchUsers();
         }
-    }, [user]);
+    }, [user, fetchUsers]);
 
     const handleSearch = (event) => {
         const searchTerm = event.target.value.toLowerCase();
@@ -59,7 +79,15 @@ export default function AdminOrders() {
         const filtered = orders.filter((order) =>
             order.id.toLowerCase().includes(searchTerm) || order.data.state.toLowerCase().includes(searchTerm) || order.data.creation_date.toLowerCase().includes(searchTerm) || order.data.user.name.toLowerCase().includes(searchTerm) || order.data.user.email.toLowerCase().includes(searchTerm) || order.data.user.phoneNumber.toLowerCase().includes(searchTerm)
         );
-        setFilteredOrders(filtered);
+        
+        // Ordenar por fecha de creación (más nuevos primero)
+        const sortedFiltered = filtered.sort((a, b) => {
+            const dateA = parseCustomDate(a.data.creation_date);
+            const dateB = parseCustomDate(b.data.creation_date);
+            return dateB - dateA; // Orden descendente (más nuevos primero)
+        });
+        
+        setFilteredOrders(sortedFiltered);
     };
 
     const handleChangePage = (event, newPage) => {
