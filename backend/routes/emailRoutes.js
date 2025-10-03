@@ -111,14 +111,14 @@ router.post('/send-order-creation-email', async (req, res) => {
             <h2>Seguimiento del Pedido</h2>
             <p>Una vez que tu pedido haya sido enviado, te enviaremos un correo electrónico con la información de seguimiento para que puedas rastrear tu paquete en tiempo real.</p>
 
-            <p>Si tienes alguna pregunta o necesitas asistencia adicional, no dudes en contactarnos a través de <a href="mailto:hola@onionprint.es">hola@onionprint.es</a> o llamarnos al 644012942.</p>
+            <p>Si tienes alguna pregunta o necesitas asistencia adicional, no dudes en contactarnos a través de <a href="mailto:hola@onionprint.es">hola@onionprint.es</a> o llamarnos al 955832649.</p>
 
             <p>Gracias por confiar en <strong>OnionPrint</strong>. Esperamos que disfrutes de tus productos.</p>
 
             <p>Saludos cordiales,</p>
             <p>OnionPrint<br>
                <a href="mailto:hola@onionprint.es">hola@onionprint.es</a><br>
-               644012942<br>
+               955832649<br>
                <a href="https://www.onionprint.online">www.onionprint.online</a></p>
         </div>
         <div class="footer">

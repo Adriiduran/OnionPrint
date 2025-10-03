@@ -85,7 +85,7 @@ async function sendEmailWhenOrderStatusChanged(order) {
     <div class="footer">
       <p>Gracias por comprar con nosotros.</p>
       <p>&copy; ${currentDate.getFullYear()} ONIONPRINT. Todos los derechos reservados.</p>
-      <p>hola@onionprint.es | 644012942</p>
+      <p>hola@onionprint.es | 955832649</p>
     </div>
   </div>
 </body>
