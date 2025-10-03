@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo, memo } from 'react';
 import { useAuth } from '../../../auth/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -12,41 +12,34 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import TextField from '@mui/material/TextField';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
+import { parseCustomDate, formatOrderValue } from '../../../utils/orderUtils';
+import { useDebounce } from '../../../hooks/useDebounce';
+import { orderColumns } from '../../../constants/tableColumns';
 
-const columns = [
-    { id: 'id', label: 'ID'},
-    { id: 'finalPrice', label: 'Precio final'},
-    { id: 'billingMethod', label: 'Método de pago'},
-    { id: 'creation_date', label: 'Fecha de creación'},
-    { id: 'shipping', label: 'Tipo de envío'},
-    { id: 'state', label: 'Estado'},
-];
 
-export default function AdminOrders() {
+const AdminOrders = () => {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [orders, setOrders] = useState([]);
-    const [filteredOrders, setFilteredOrders] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const { user } = useAuth();
     const navigator = useNavigate();
     const isMobile = useMediaQuery('(max-width:767px)');
-    const parseCustomDate = (dateString) => {
-        if (!dateString) return new Date(0);
-        
-        const parts = dateString.split(', ');
-        if (parts.length !== 2) return new Date(0);
-        
-        const [datePart, timePart] = parts;
-        const [day, month, year] = datePart.split('/');
-        const [hours, minutes, seconds] = timePart.split(':');
-        
-        const isoString = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}T${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}:${seconds.padStart(2, '0')}`;
-        
-        return new Date(isoString);
-    };
+    
+    const debouncedSearchTerm = useDebounce(searchTerm, 300);
 
     const fetchUsers = useCallback(async () => {
+        if (!user || !user.uid) {
+            setLoading(false);
+            return;
+        }
+        
+        setLoading(true);
+        setError(null);
         try {
             const ordersData = await axios.get(`${import.meta.env.VITE_API_URL}/orders`, {
                 params: {
@@ -61,74 +54,91 @@ export default function AdminOrders() {
             });
 
             setOrders(sortedOrders);
-            setFilteredOrders(sortedOrders);
         } catch (error) {
             console.error('Error al obtener usuarios:', error);
+            setError('Error al cargar las órdenes. Por favor, inténtalo de nuevo.');
+        } finally {
+            setLoading(false);
         }
-    }, [user.uid]);
+    }, [user]);
 
     useEffect(() => {
-        if (user) {
-            fetchUsers();
-        }
-    }, [user, fetchUsers]);
+        fetchUsers();
+    }, [fetchUsers]);
 
-    const handleSearch = (event) => {
-        const searchTerm = event.target.value.toLowerCase();
-        setSearchTerm(searchTerm);
+    const filteredOrders = useMemo(() => {
+        if (!debouncedSearchTerm.trim()) {
+            return orders;
+        }
+
+        const searchLower = debouncedSearchTerm.toLowerCase();
         const filtered = orders.filter((order) =>
-            order.id.toLowerCase().includes(searchTerm) || order.data.state.toLowerCase().includes(searchTerm) || order.data.creation_date.toLowerCase().includes(searchTerm) || order.data.user.name.toLowerCase().includes(searchTerm) || order.data.user.email.toLowerCase().includes(searchTerm) || order.data.user.phoneNumber.toLowerCase().includes(searchTerm)
+            order.id.toLowerCase().includes(searchLower) ||
+            order.data.state.toLowerCase().includes(searchLower) ||
+            order.data.creation_date.toLowerCase().includes(searchLower) ||
+            order.data.user.name.toLowerCase().includes(searchLower) ||
+            order.data.user.email.toLowerCase().includes(searchLower) ||
+            order.data.user.phoneNumber.toLowerCase().includes(searchLower)
         );
         
-        // Ordenar por fecha de creación (más nuevos primero)
-        const sortedFiltered = filtered.sort((a, b) => {
+        return filtered.sort((a, b) => {
             const dateA = parseCustomDate(a.data.creation_date);
             const dateB = parseCustomDate(b.data.creation_date);
-            return dateB - dateA; // Orden descendente (más nuevos primero)
+            return dateB - dateA;
         });
-        
-        setFilteredOrders(sortedFiltered);
+    }, [orders, debouncedSearchTerm]);
+
+    const handleSearch = (event) => {
+        setSearchTerm(event.target.value);
     };
 
-    const handleChangePage = (event, newPage) => {
+    const handleChangePage = useCallback((event, newPage) => {
         setPage(newPage);
-    };
+    }, []);
 
-    const handleChangeRowsPerPage = (event) => {
+    const handleChangeRowsPerPage = useCallback((event) => {
         setRowsPerPage(+event.target.value);
         setPage(0);
-    };
+    }, []);
 
-    const handleShowInfo = (order, prop) => {
-        if (prop !== 'id') {
-            var value = order['data'][prop];
+    const handleRowClick = useCallback((orderId) => {
+        navigator(`/admin/orders/${orderId}`);
+    }, [navigator]);
 
-            if (prop === 'finalPrice') {
-                value += '€'
-            } else if (prop === 'billingMethod') {
-                if (value === 'card') {
-                    value = 'TARJETA'
-                } else {
-                    value = value.toUpperCase();
-                }
-            } else if (prop === 'shipping') {
-                value = value === 'standard' ? 'ESTANDAR' : 'PRIORITARIO'
-            } else if (prop === 'state') {
-                if (value === 'recived') {
-                    value = 'RECIBIDO'
-                } else if (value === 'accepted') {
-                    value = 'ACEPTADO'
-                } else if (value === 'delivered') {
-                    value = 'ENVIADO'
-                } else {
-                    value = 'COMPLETADO'
-                }
-            }
 
-            return value
-        }
+    const paginatedOrders = useMemo(() => {
+        return filteredOrders.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+    }, [filteredOrders, page, rowsPerPage]);
 
-        return order[prop]
+    if (loading) {
+        return (
+            <Box display="flex" justifyContent="center" alignItems="center" minHeight="400px">
+                <CircularProgress />
+            </Box>
+        );
+    }
+
+    if (error) {
+        return (
+            <Box display="flex" justifyContent="center" alignItems="center" minHeight="400px">
+                <div style={{ textAlign: 'center' }}>
+                    <p style={{ color: 'red', marginBottom: '16px' }}>{error}</p>
+                    <button 
+                        onClick={fetchUsers}
+                        style={{ 
+                            padding: '8px 16px', 
+                            backgroundColor: '#1e0342', 
+                            color: 'white', 
+                            border: 'none', 
+                            borderRadius: '4px',
+                            cursor: 'pointer'
+                        }}
+                    >
+                        Reintentar
+                    </button>
+                </div>
+            </Box>
+        );
     }
 
     return (
@@ -146,7 +156,7 @@ export default function AdminOrders() {
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead>
                             <TableRow>
-                                {columns.map((column) => (
+                                {orderColumns.map((column) => (
                                     <TableCell
                                         key={column.id}
                                         align="left"
@@ -158,23 +168,26 @@ export default function AdminOrders() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {filteredOrders
-                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map((order) => {
-                                    return (
-                                        <TableRow hover role="checkbox" tabIndex={-1} key={order.id} onClick={() => {navigator(`/admin/orders/${order.id}`)}} style={{cursor: 'pointer'}}>
-                                            {columns.map((column) => {
-                                                const value = handleShowInfo(order, column.id);
-                                                
-                                                return (
-                                                    <TableCell key={column.id} align="left">
-                                                        {value}
-                                                    </TableCell>
-                                                );
-                                            })}
-                                        </TableRow>
-                                    );
-                                })}
+                            {paginatedOrders.map((order) => (
+                                <TableRow 
+                                    hover 
+                                    role="checkbox" 
+                                    tabIndex={-1} 
+                                    key={order.id} 
+                                    onClick={() => handleRowClick(order.id)} 
+                                    style={{cursor: 'pointer'}}
+                                >
+                                    {orderColumns.map((column) => {
+                                        const value = formatOrderValue(order, column.id);
+                                        
+                                        return (
+                                            <TableCell key={column.id} align="left">
+                                                {value}
+                                            </TableCell>
+                                        );
+                                    })}
+                                </TableRow>
+                            ))}
                         </TableBody>
                     </Table>
                 </TableContainer>
@@ -192,4 +205,9 @@ export default function AdminOrders() {
         </div>
 
     );
-}
+};
+
+const MemoizedAdminOrders = memo(AdminOrders);
+MemoizedAdminOrders.displayName = 'AdminOrders';
+
+export default MemoizedAdminOrders;
